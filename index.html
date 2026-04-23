@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Процесс обслуживания пациентов - ВнеОчереди + МИС</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="./assets/index-C9BVKr4B.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BImZH985.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="step3-overlay" style="display:none;position:fixed;inset:0;z-index:9999;overflow-y:auto;background:#0B1120;font-family:'Inter',sans-serif;">
+      <div style="max-width:1200px;margin:0 auto;padding:40px 20px;">
+        <button onclick="history.back()" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#fff;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px;margin-bottom:24px;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">← Назад к процессу</button>
+        <h1 style="font-size:28px;font-weight:700;color:#fff;margin-bottom:8px;">Шаг 3 — Уведомление пациента</h1>
+        <p style="color:rgba(255,255,255,0.6);font-size:16px;margin-bottom:40px;max-width:700px;">Когда регистратор нажимает «Вызвать», пациент мгновенно получает push-уведомление в мобильном приложении. Также вызов отображается на экране ТВ в зале ожидания.</p>
+
+        <h2 style="font-size:20px;font-weight:600;color:#3A9BD9;margin-bottom:20px;">Мобильное приложение пациента</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:24px;margin-bottom:48px;">
+          <div style="flex:1;min-width:280px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+            <div style="width:260px;height:480px;border-radius:24px;overflow:hidden;background:#0F1D2A;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+              <img src="./images/step3/mp-awaiting.jpg" alt="Ожидание вызова" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <span style="color:rgba(255,255,255,0.7);font-size:14px;text-align:center;">Экран ожидания вызова</span>
+          </div>
+          <div style="flex:1;min-width:280px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+            <div style="width:260px;height:480px;border-radius:24px;overflow:hidden;background:#0F1D2A;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+              <img src="./images/step3/mp-notification.png" alt="Уведомление о вызове" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <span style="color:rgba(255,255,255,0.7);font-size:14px;text-align:center;">Push-уведомление о вызове</span>
+          </div>
+        </div>
+
+        <h2 style="font-size:20px;font-weight:600;color:#E67E22;margin-bottom:20px;">Экран вызова в зале ожидания (ТВ)</h2>
+        <div style="display:flex;justify-content:center;">
+          <div style="max-width:900px;width:100%;border-radius:16px;overflow:hidden;background:#0F1D2A;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+            <video controls autoplay muted loop playsinline style="width:100%;height:auto;display:block;">
+              <source src="./images/step3/tv-call.mp4" type="video/mp4">
+              <source src="./images/step3/tv-call.mov" type="video/quicktime">
+              Ваш браузер не поддерживает воспроизведение видео.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        document.addEventListener('click', function(e) {
+          var a = e.target.closest('a[href*="/step/"]');
+          if (a) {
+            sessionStorage.setItem('miac_scroll_pos', window.scrollY);
+          }
+        });
+        function restoreScroll() {
+          var hash = location.hash;
+          if (hash === '#/' || hash === '') {
+            var pos = sessionStorage.getItem('miac_scroll_pos');
+            if (pos) {
+              setTimeout(function() {
+                window.scrollTo(0, parseInt(pos));
+                sessionStorage.removeItem('miac_scroll_pos');
+              }, 100);
+            }
+          }
+        }
+        window.addEventListener('popstate', restoreScroll);
+        restoreScroll();
+      })();
+    </script>
+    <script>
+      (function() {
+        var overlay = document.getElementById('step3-overlay');
+        function checkHash() {
+          if (location.hash === '#/step/3') {
+            overlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+          } else {
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+          }
+        }
+        window.addEventListener('hashchange', checkHash);
+        window.addEventListener('load', checkHash);
+        checkHash();
+      })();
+    </script>
+  </body>
+</html>
