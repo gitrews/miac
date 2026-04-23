@@ -1,71 +1,67 @@
 import { useState, useCallback } from 'react'
-import Layout from './components/Layout'
-import Hero from './components/Hero'
 import ProcessOverview from './components/ProcessOverview'
-import RolesInteractions from './components/RolesInteractions'
-import StepTimeline from './components/StepTimeline'
-import KPICards from './components/KPICards'
-import CasesSection from './components/CasesSection'
-import FinalCTA from './components/FinalCTA'
+import ProcessScheme from './components/sections/ProcessScheme'
 import StepModal from './components/StepModal'
 
 function App() {
-  const [activeStep, setActiveStep] = useState<number | null>(null)
+  const [activeStep, setActiveStep] = useState<number | null>(() => {
+    const params = new URLSearchParams(window.location.search)
+    const step = parseInt(params.get('step') || '', 10)
+    return isNaN(step) ? null : step
+  })
 
-  const openStep = useCallback((step: number) => {
+  const handleOpenStep = useCallback((step: number) => {
     setActiveStep(step)
     const url = new URL(window.location.href)
     url.searchParams.set('step', String(step))
-    window.history.replaceState({ step }, '', url.toString())
+    window.history.replaceState({}, '', url)
   }, [])
 
-  const closeStep = useCallback(() => {
+  const handleCloseStep = useCallback(() => {
     setActiveStep(null)
     const url = new URL(window.location.href)
     url.searchParams.delete('step')
-    window.history.replaceState({}, '', url.pathname + url.search)
+    window.history.replaceState({}, '', url)
   }, [])
 
-  const nextStep = useCallback(() => {
+  const handleNextStep = useCallback(() => {
     setActiveStep((prev) => {
       const next = prev !== null && prev < 10 ? prev + 1 : prev
-      if (next !== prev && next !== null) {
+      if (next !== null && next !== prev) {
         const url = new URL(window.location.href)
         url.searchParams.set('step', String(next))
-        window.history.replaceState({ step: next }, '', url.toString())
+        window.history.replaceState({}, '', url)
       }
       return next
     })
   }, [])
 
-  const prevStep = useCallback(() => {
+  const handlePrevStep = useCallback(() => {
     setActiveStep((prev) => {
-      const next = prev !== null && prev > 1 ? prev - 1 : prev
-      if (next !== prev && next !== null) {
+      const prevStep = prev !== null && prev > 1 ? prev - 1 : prev
+      if (prevStep !== null && prevStep !== prev) {
         const url = new URL(window.location.href)
-        url.searchParams.set('step', String(next))
-        window.history.replaceState({ step: next }, '', url.toString())
+        url.searchParams.set('step', String(prevStep))
+        window.history.replaceState({}, '', url)
       }
-      return next
+      return prevStep
     })
   }, [])
 
   return (
-    <Layout>
-      <Hero />
-      <ProcessOverview onOpenStep={openStep} />
-      <RolesInteractions />
-      <StepTimeline onOpenStep={openStep} />
-      <KPICards />
-      <CasesSection />
-      <FinalCTA />
+    <div className="min-h-screen bg-light">
+      <main>
+        <ProcessOverview onOpenStep={handleOpenStep} />
+        <ProcessScheme />
+      </main>
+
       <StepModal
         step={activeStep}
-        onClose={closeStep}
-        onNext={nextStep}
-        onPrev={prevStep}
+        onClose={handleCloseStep}
+        onNext={handleNextStep}
+        onPrev={handlePrevStep}
       />
-    </Layout>
+    </div>
   )
 }
 
