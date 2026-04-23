@@ -502,11 +502,11 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                   </div>
                   <div className="overflow-hidden rounded-xl bg-slate-50 border border-slate-200">
                     <video
-                      src="./images/step3/tv-call.mp4"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
+                      src="./images/step3/tv-call.gif"
+                      
+                      
+                      
+                      
                       className="w-full h-auto object-contain mx-auto"
                       style={{ maxHeight: '480px' }}
                     />
@@ -735,11 +735,11 @@ Content-Type: application/json
                   </div>
                   <div className="overflow-hidden rounded-xl bg-slate-50 border border-slate-200">
                     <video
-                      src="./images/step3/tv-call.mp4"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
+                      src="./images/step3/tv-call.gif"
+                      
+                      
+                      
+                      
                       className="w-full h-auto object-contain mx-auto"
                       style={{ maxHeight: '480px' }}
                     />
