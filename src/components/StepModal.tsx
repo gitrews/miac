@@ -213,7 +213,7 @@ function Carousel({ slides, width }: { slides: { src: string; caption: string }[
           <ChevronLeft size={16} />
         </button>
 
-        <div className="overflow-hidden rounded-xl bg-slate-50 border border-slate-200 flex-1 max-w-full" style={{ maxWidth: width }}>
+        <div className="overflow-hidden rounded-xl bg-slate-50 border border-slate-200 flex-1 min-w-0 w-full" style={{ maxWidth: width }}>
           <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${current * 100}%)` }}>
             {slides.map((slide, index) => (
               <div key={index} className="flex-shrink-0 w-full">
@@ -407,7 +407,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                           <line x1="12" y1="17" x2="12" y2="21" />
                         </svg>
                       </div>
-                      <h3 className="text-base font-semibold text-[#3A9BD9]">Терминал самозаписи</h3>
+                          <h3 className="text-base font-semibold text-[#3A9BD9]">Терминал самозаписи</h3>
                     </div>
                     <Carousel slides={terminalSlides} width={820} />
                   </div>
