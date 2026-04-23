@@ -27,10 +27,11 @@ const stepLabels: Record<number, { text: string; color: string; bg: string; bord
   10: { text: 'ВнеОчереди', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
 }
 
+// Updated images using new screens from /root/Скрины
 const stepImages: Record<number, string[]> = {
   1: ['./images/step1-mp-1.png', './images/step1-mp-2.png', './images/step1-mp-3.png', './images/step1-mp-4.png'],
-  2: ['./images/step2-widget-1.jpg', './images/step2-widget-2.jpg', './images/step2-widget-3.jpg', './images/step2-mis-bg.png'],
-  3: ['./images/step3/mp-awaiting.jpg', './images/step3/mp-notification.png'],
+  2: ['./images/screens/step2-widget-awaiting.jpg', './images/screens/step2-widget-calling.jpg', './images/screens/step2-widget-serving.jpg'],
+  3: ['./images/screens/step3-mp-waiting.jpg', './images/screens/step3-mp-notification.png', './images/screens/step3-tv-calling.jpg'],
   4: ['./images/step4/page-3.png', './images/step4/page-4.png', './images/step4/page-5.png', './images/step4/page-6.png'],
   5: ['./images/mis-registrar-queue-success.jpg', './images/widget-serving.png'],
   6: ['./images/mis-registrar-schedule.jpg', './images/mis-registrar-exam-form.jpg'],
@@ -41,29 +42,29 @@ const stepImages: Record<number, string[]> = {
 }
 
 const stepDescriptions: Record<number, string> = {
-  1: 'Пациент записывается на профосмотр через систему «ВнеОчереди». Создаётся электронный талон с уникальным номером. Регистратор видит новую запись в рабочем месте оператора.',
-  2: 'Регистратор вызывает пациента в окно через рабочее место оператора. Информация о вызове отображается на ТВ-экране в зале ожидания.',
-  3: 'Пациент получает уведомление о вызове через ТВ-экран в зале ожидания и SMS-оповещение на мобильный телефон.',
-  4: 'Регистратор оформляет услуги в МИС ЕЦП, привязывает талон к медицинской карте пациента, формирует направления на исследования.',
+  1: 'Пациент записывается в очередь регистратуры с помощью мобильного приложения «МИАЦ ЯНАО» или терминала самозаписи, установленного в медицинской организации.',
+  2: 'Регистратор через виджет «ВнеОчереди» на рабочем столе вызывает пациента в окно. Система отображает вызов на ТВ-экране в зале ожидания и отправляет push-уведомление.',
+  3: 'Пациент получает уведомление о вызове через push в мобильном приложении «ВнеОчереди» и видит свой вызов на ТВ-экране в зале ожидания.',
+  4: 'Регистратор оформляет услуги в МИС ЕЦП, привязывает электронный талон к медицинской карте пациента, формирует направления на исследования и профосмотр.',
   5: 'Завершение первичного этапа обслуживания в регистратуре. Пациент направляется в кабинет врача для прохождения профосмотра.',
-  6: 'Данные о записи на профосмотр синхронизируются из МИС ЕЦП в систему «ВнеОчереди» для управления очередью в кабинетах врачей.',
-  7: 'Врач вызывает пациента в кабинет через систему «ВнеОчереди». Статус обновляется на ТВ-экране и в мобильном приложении.',
-  8: 'Пациент получает уведомление о готовности к приёму врача через ТВ-экран и push-уведомление в мобильном приложении.',
+  6: 'Интеграция через API: МИС ЕЦП передаёт данные о маршруте пациента во «ВнеОчередь» — создаётся предварительная запись в очередь к врачу через endpoint /integration/api/v1/customer/appointments/create.',
+  7: 'Врач через виджет «ВнеОчереди» вызывает пациента в кабинет. Статус обновляется на ТВ-экране и в мобильном приложении пациента.',
+  8: 'Пациент получает push-уведомление в мобильном приложении «ВнеОчереди» и видит вызов на ТВ-экране в зале ожидания перед кабинетом врача.',
   9: 'Врач проводит осмотр пациента, вносит данные в МИС ЕЦП, оформляет заключение профосмотра и назначения.',
-  10: 'Врач завершает обслуживание пациента. Система обновляет статус в очереди, архивирует талон и формирует отчётность.',
+  10: 'Врач завершает обслуживание пациента через виджет «ВнеОчереди». Система архивирует талон, обновляет статус в очереди и формирует отчётность.',
 }
 
-// Step 1 custom content data
+// Step 1 data
 const mobileSlides = [
   { src: './images/step1-mp-1.png', caption: 'Главный экран регистратуры с кнопкой «ЗАНЯТЬ ОЧЕРЕДЬ»' },
-  { src: './images/step1-mp-2.png', caption: 'Ввод ФИО пациента (Гончаров Андрей Сергеевич)' },
-  { src: './images/step1-mp-3.png', caption: 'Модальное окно подтверждения «Отлично!» с оставшимся временем ожидания' },
-  { src: './images/step1-mp-4.png', caption: 'Экран талона в очереди: номер Н62, прогнозируемое время ожидания' },
+  { src: './images/step1-mp-2.png', caption: 'Ввод ФИО пациента' },
+  { src: './images/step1-mp-3.png', caption: 'Подтверждение записи с прогнозируемым временем ожидания' },
+  { src: './images/step1-mp-4.png', caption: 'Экран талона в очереди с номером и временем ожидания' },
 ]
 
 const terminalSlides = [
   { src: './images/step1-term-1.jpg', caption: 'Выбор услуги (диспансеризация, профосмотр, справки)' },
-  { src: './images/step1-term-2.jpg', caption: 'Ввод ФИО через экранную клавиатуру (Иванов Иван Иванович)' },
+  { src: './images/step1-term-2.jpg', caption: 'Ввод ФИО через экранную клавиатуру' },
   { src: './images/step1-term-3.jpg', caption: 'Экран успешной записи с QR-кодом и временем ожидания' },
 ]
 
@@ -79,6 +80,49 @@ const terminalBenefits = [
   'Ввод своих персональных данных (опционально)',
   'Печать талона с кодом записи (опционально)',
   'Вызов пациента отобразится на экране вызова (ТВ)',
+]
+
+// Step 2 data — Widget screenshots
+const step2Slides = [
+  { src: './images/screens/step2-widget-awaiting.jpg', caption: 'Виджет оператора — список пациентов, ожидающих вызова' },
+  { src: './images/screens/step2-widget-calling.jpg', caption: 'Вызов пациента — виджет показывает текущий талон и время вызова' },
+  { src: './images/screens/step2-widget-serving.jpg', caption: 'Обслуживание пациента — статус «В кабинете» и таймер приёма' },
+]
+
+const step2Benefits = [
+  'Виджет на рабочем столе — не нужно открывать браузер',
+  'Один клик для вызова пациента в окно',
+  'Автоматическое обновление статуса на ТВ-экране',
+  'Синхронизация с мобильным приложением пациента',
+]
+
+// Step 3 data — Notifications
+const step3Slides = [
+  { src: './images/screens/step3-mp-waiting.jpg', caption: 'Мобильное приложение — статус «Ожидание вызова» с прогнозируемым временем' },
+  { src: './images/screens/step3-mp-notification.png', caption: 'Push-уведомление «Ваша очередь!» — призыв подойти к окну' },
+  { src: './images/screens/step3-tv-calling.jpg', caption: 'ТВ-экран в зале ожидания — голосовой и экранный вызов пациента по имени' },
+]
+
+const step3Benefits = [
+  'Push-уведомление на смартфон при вызове',
+  'Голосовой вызов по имени-отчеству на ТВ-экране',
+  'Экранное отображение номера окна и имени пациента',
+  'Возможность ответить «Я иду» прямо из уведомления',
+]
+
+// Step 6 — Integration API info
+const integrationSteps = [
+  { label: '1. МИС ЕЦП формирует маршрут пациента', desc: 'Система определяет кабинет, врача и услуги для профосмотра.' },
+  { label: '2. API-запрос во «ВнеОчередь»', desc: 'POST /integration/api/v1/customer/appointments/create с параметрами officeId, lineId, serviceId, timeSlotId.' },
+  { label: '3. Создание предварительной записи', desc: 'ВнеОчередь создаёт электронный талон с shortCode (например, С7Я6) и возвращает appointment.id.' },
+  { label: '4. Синхронизация статусов', desc: 'При изменении статуса в МИС — обновление через API в реальном времени.' },
+]
+
+const integrationBenefits = [
+  'Автоматическая запись в нужную очередь без участия регистратора',
+  'Единый талон от регистратуры до кабинета врача',
+  'Прогнозируемое время ожидания для каждого этапа',
+  'Снижение человеческого фактора и ошибок маршрутизации',
 ]
 
 interface StepModalProps {
@@ -154,6 +198,68 @@ function Carousel({ slides, width }: { slides: { src: string; caption: string }[
 
       <p className="text-sm text-slate-500 text-center min-h-[20px] max-w-md">
         {slides[current]?.caption}
+      </p>
+    </div>
+  )
+}
+
+function ImageGrid({ images, title }: { images: string[]; title: string }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+      {images.map((src, i) => (
+        <div key={i} className="rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-sm">
+          <div className="aspect-video bg-slate-100">
+            <img
+              src={src}
+              alt={`${title} — изображение ${i + 1}`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div className="px-4 py-3 text-xs text-slate-500 font-medium">
+            Макет экрана {i + 1}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function BenefitsCard({ title, color, benefits }: { title: string; color: string; benefits: string[] }) {
+  return (
+    <div className="rounded-xl bg-white border p-6" style={{ borderColor: `${color}40` }}>
+      <div className="flex items-center gap-2 mb-4">
+        <div className="w-5 h-5 rounded flex items-center justify-center" style={{ backgroundColor: `${color}20` }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+        <h3 className="text-base font-semibold" style={{ color }}>{title}</h3>
+      </div>
+      <ul className="space-y-3">
+        {benefits.map((benefit, i) => (
+          <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
+            <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: color }} />
+            {benefit}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+function InfoNote({ color, title, children }: { color: string; title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: `${color}15`, border: `1px solid ${color}40` }}>
+      <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: `${color}20` }}>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="16" x2="12" y2="12" />
+          <line x1="12" y1="8" x2="12.01" y2="8" />
+        </svg>
+      </div>
+      <p className="text-sm text-slate-700 leading-relaxed">
+        <span className="font-semibold" style={{ color }}>{title}:</span>{' '}{children}
       </p>
     </div>
   )
@@ -240,17 +346,12 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
         {/* Body */}
         <div className="flex-1 overflow-y-auto bg-slate-50">
           <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-10">
-            {step === 1 ? (
-              /* Custom Step 1 Layout */
+            {step === 1 && (
               <div className="space-y-10">
-                {/* Description */}
                 <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
                   Пациент записывается в очередь регистратуры с помощью мобильного приложения «МИАЦ ЯНАО» или с помощью терминала, установленного в медицинской организации.
                 </p>
-
-                {/* Two-column carousel layout */}
                 <div className="flex flex-col lg:flex-row gap-8">
-                  {/* Left — Mobile app */}
                   <div className="flex-1 flex flex-col">
                     <div className="flex items-center gap-2 mb-4">
                       <div className="w-6 h-6 rounded-md bg-[#E91E8C] flex items-center justify-center">
@@ -259,17 +360,11 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                           <line x1="12" y1="18" x2="12.01" y2="18" />
                         </svg>
                       </div>
-                      <h3 className="text-base font-semibold text-[#E91E8C]">
-                        Мобильное приложение «МИАЦ ЯНАО»
-                      </h3>
+                      <h3 className="text-base font-semibold text-[#E91E8C]">Мобильное приложение «МИАЦ ЯНАО»</h3>
                     </div>
                     <Carousel slides={mobileSlides} width={250} />
                   </div>
-
-                  {/* Vertical divider */}
                   <div className="hidden lg:block w-px bg-slate-200 self-stretch" />
-
-                  {/* Right — Terminal */}
                   <div className="flex-1 flex flex-col">
                     <div className="flex items-center gap-2 mb-4">
                       <div className="w-6 h-6 rounded-md bg-[#3A9BD9] flex items-center justify-center">
@@ -279,39 +374,88 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                           <line x1="12" y1="17" x2="12" y2="21" />
                         </svg>
                       </div>
-                      <h3 className="text-base font-semibold text-[#3A9BD9]">
-                        Терминал самозаписи
-                      </h3>
+                      <h3 className="text-base font-semibold text-[#3A9BD9]">Терминал самозаписи</h3>
                     </div>
                     <Carousel slides={terminalSlides} width={820} />
                   </div>
                 </div>
-
-                {/* Advantages grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Mobile app benefits */}
-                  <div className="rounded-xl bg-white border border-[#E91E8C]/20 p-6">
+                  <BenefitsCard title="Мобильное приложение «МИАЦ ЯНАО»" color="#E91E8C" benefits={mobileBenefits} />
+                  <BenefitsCard title="Терминал самозаписи" color="#3A9BD9" benefits={terminalBenefits} />
+                </div>
+                <InfoNote color="#E91E8C" title="Примечание">
+                  Указание при записи своих персональных данных является необязательной опцией, но позволяет избавиться от бумажных талонов.
+                </InfoNote>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div className="space-y-10">
+                <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
+                  Регистратор через виджет «ВнеОчереди» на рабочем столе вызывает пациента в окно. Система автоматически обновляет статус на ТВ-экране и отправляет push-уведомление в мобильное приложение пациента.
+                </p>
+                <div className="max-w-4xl mx-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 rounded-md bg-[#E91E8C] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-semibold text-[#E91E8C]">Виджет оператора «ВнеОчереди»</h3>
+                  </div>
+                  <Carousel slides={step2Slides} width={700} />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <BenefitsCard title="Виджет оператора" color="#E91E8C" benefits={step2Benefits} />
+                  <div className="rounded-xl bg-white border border-[#0052CC]/20 p-6">
                     <div className="flex items-center gap-2 mb-4">
-                      <div className="w-5 h-5 rounded bg-[#E91E8C]/20 flex items-center justify-center">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E91E8C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <div className="w-5 h-5 rounded bg-[#0052CC]/20 flex items-center justify-center">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0052CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
                       </div>
-                      <h3 className="text-base font-semibold text-[#E91E8C]">
-                        Мобильное приложение «МИАЦ ЯНАО»
-                      </h3>
+                      <h3 className="text-base font-semibold text-[#0052CC]">API интеграции</h3>
                     </div>
                     <ul className="space-y-3">
-                      {mobileBenefits.map((benefit, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#E91E8C] mt-1.5 flex-shrink-0" />
-                          {benefit}
-                        </li>
-                      ))}
+                      <li className="flex items-start gap-3 text-sm text-slate-700">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0052CC] mt-1.5 flex-shrink-0" />
+                        POST /process/activeTalon — получение текущего талона оператора
+                      </li>
+                      <li className="flex items-start gap-3 text-sm text-slate-700">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0052CC] mt-1.5 flex-shrink-0" />
+                        Автоматическая смена статуса: ожидание → вызов → обслуживание
+                      </li>
+                      <li className="flex items-start gap-3 text-sm text-slate-700">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0052CC] mt-1.5 flex-shrink-0" />
+                        Синхронизация с ТВ-экраном и мобильным приложением
+                      </li>
                     </ul>
                   </div>
+                </div>
+              </div>
+            )}
 
-                  {/* Terminal benefits */}
+            {step === 3 && (
+              <div className="space-y-10">
+                <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
+                  Пациент получает уведомление о вызове через push в мобильном приложении «ВнеОчереди» и видит свой вызов на ТВ-экране в зале ожидания. Голосовой вызов производится по имени и отчеству.
+                </p>
+                <div className="max-w-4xl mx-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 rounded-md bg-[#E91E8C] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                        <line x1="12" y1="18" x2="12.01" y2="18" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-semibold text-[#E91E8C]">Мобильное приложение и ТВ-экран</h3>
+                  </div>
+                  <Carousel slides={step3Slides} width={700} />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <BenefitsCard title="Уведомления пациенту" color="#E91E8C" benefits={step3Benefits} />
                   <div className="rounded-xl bg-white border border-[#3A9BD9]/20 p-6">
                     <div className="flex items-center gap-2 mb-4">
                       <div className="w-5 h-5 rounded bg-[#3A9BD9]/20 flex items-center justify-center">
@@ -319,66 +463,98 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
                       </div>
-                      <h3 className="text-base font-semibold text-[#3A9BD9]">
-                        Терминал самозаписи
-                      </h3>
+                      <h3 className="text-base font-semibold text-[#3A9BD9]">ТВ-экран вызова</h3>
                     </div>
                     <ul className="space-y-3">
-                      {terminalBenefits.map((benefit, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#3A9BD9] mt-1.5 flex-shrink-0" />
-                          {benefit}
-                        </li>
-                      ))}
+                      <li className="flex items-start gap-3 text-sm text-slate-700">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#3A9BD9] mt-1.5 flex-shrink-0" />
+                        Персонализированный вызов по имени-отчеству (без номеров талонов)
+                      </li>
+                      <li className="flex items-start gap-3 text-sm text-slate-700">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#3A9BD9] mt-1.5 flex-shrink-0" />
+                        Голосовое оповещение с номером окна и именем пациента
+                      </li>
+                      <li className="flex items-start gap-3 text-sm text-slate-700">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#3A9BD9] mt-1.5 flex-shrink-0" />
+                        Отображение очереди и прогнозируемого времени ожидания
+                      </li>
                     </ul>
                   </div>
                 </div>
-
-                {/* Pink info note */}
-                <div className="rounded-xl bg-[#E91E8C]/10 border border-[#E91E8C]/30 p-5 flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-[#E91E8C]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E91E8C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="12" y1="16" x2="12" y2="12" />
-                      <line x1="12" y1="8" x2="12.01" y2="8" />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-slate-700 leading-relaxed">
-                    <span className="font-semibold text-[#E91E8C]">Примечание:</span>{' '}
-                    Указание при записи своих персональных данных является необязательной опцией, но позволяет избавиться от бумажных талонов.
-                  </p>
-                </div>
               </div>
-            ) : (
-              /* Default layout for steps 2-10 */
-              <>
-                <p className="text-slate-700 leading-relaxed mb-8 max-w-3xl">
-                  {stepDescriptions[step]}
+            )}
+
+            {step === 6 && (
+              <div className="space-y-10">
+                <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
+                  Интеграция через API ВнеОчереди: МИС ЕЦП автоматически передаёт данные о маршруте пациента — кабинет врача, услуги профосмотра и временной слот — создавая предварительную запись в электронную очередь без участия регистратора.
                 </p>
 
-                {stepImages[step] && stepImages[step].length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                    {stepImages[step].map((src, i) => (
-                      <div
-                        key={i}
-                        className="rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-sm"
-                      >
-                        <div className="aspect-video bg-slate-100">
-                          <img
-                            src={src}
-                            alt={`${stepTitles[step]} — изображение ${i + 1}`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
-                        <div className="px-4 py-3 text-xs text-slate-500 font-medium">
-                          Макет экрана {i + 1}
+                <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
+                  <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Пример API-запроса (МИС → ВнеОчередь)</h3>
+                  <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+{`POST /integration/api/v1/customer/appointments/create
+Content-Type: application/json
+
+{
+  "apiKey": "3dfdc1ed-ce72-46d1-89c9-376df0f83237",
+  "customerId": "e3c53333-2552-46ce-b2de-752c094b9cf6",
+  "officeId": "0fcab951-92e8-49a0-af78-f95c459f74bc",
+  "lineId": "33add1ef-2d42-4d67-b098-56d87a2f988f",
+  "serviceId": "da204cee-98ad-4a3e-872d-9f9b7c5d89e7",
+  "timeSlotId": 123245346346,
+  "units": 1,
+  "deviceType": "Browser"
+}`}
+                  </pre>
+                  <div className="mt-4 pt-4 border-t border-slate-700">
+                    <p className="text-xs text-slate-400">
+                      <span className="text-[#2EC4B6] font-semibold">Ответ:</span>{' '}
+                      appointment.id, shortCode (например, «С7Я6»), дата и время записи.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-base font-semibold text-slate-900">Этапы интеграции</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {integrationSteps.map((item, i) => (
+                      <div key={i} className="rounded-xl bg-white border border-slate-200 p-5">
+                        <div className="flex items-start gap-3">
+                          <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center flex-shrink-0 text-sm font-bold text-[#2EC4B6]">
+                            {i + 1}
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-semibold text-slate-900 mb-1">{item.label}</h4>
+                            <p className="text-sm text-slate-600">{item.desc}</p>
+                          </div>
                         </div>
                       </div>
                     ))}
                   </div>
+                </div>
+
+                <BenefitsCard title="Преимущества интеграции МИС → ВнеОчередь" color="#2EC4B6" benefits={integrationBenefits} />
+
+                <InfoNote color="#2EC4B6" title="API ВнеОчереди">
+                  Полная документация:{' '}
+                  <a href="https://docs.ocheredi.com/api/" target="_blank" rel="noopener noreferrer" className="underline text-[#0052CC]">
+                    docs.ocheredi.com/api/
+                  </a>
+                  {' '}— endpoints для создания, изменения и отмены записей, получения статусов очереди и статистики.
+                </InfoNote>
+              </div>
+            )}
+
+            {(step === 4 || step === 5 || step === 7 || step === 8 || step === 9 || step === 10) && (
+              <div className="space-y-8">
+                <p className="text-slate-700 leading-relaxed max-w-3xl">
+                  {stepDescriptions[step]}
+                </p>
+                {stepImages[step] && stepImages[step].length > 0 && (
+                  <ImageGrid images={stepImages[step]} title={stepTitles[step]} />
                 )}
-              </>
+              </div>
             )}
 
             {/* Mobile nav buttons */}
