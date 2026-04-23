@@ -489,6 +489,32 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                   </div>
                   <Carousel slides={step3Slides} width={700} />
                 </div>
+                <div className="max-w-4xl mx-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 rounded-md bg-[#3A9BD9] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-semibold text-[#3A9BD9]">ТВ-экран вызова — анимация</h3>
+                  </div>
+                  <div className="overflow-hidden rounded-xl bg-slate-50 border border-slate-200">
+                    <video
+                      src="./images/step3/tv-call.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-auto object-contain mx-auto"
+                      style={{ maxHeight: '480px' }}
+                    />
+                  </div>
+                  <p className="text-sm text-slate-500 text-center mt-3">
+                    Голосовой и экранный вызов пациента по имени-отчеству
+                  </p>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <BenefitsCard title="Уведомления пациенту" color="#E91E8C" benefits={step3Benefits} />
                   <div className="rounded-xl bg-white border border-[#3A9BD9]/20 p-6">
@@ -685,6 +711,32 @@ Content-Type: application/json
                     <h3 className="text-base font-semibold text-[#E91E8C]">Уведомление о вызове в кабинет</h3>
                   </div>
                   <Carousel slides={step8Slides} width={700} />
+                </div>
+                <div className="max-w-4xl mx-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 rounded-md bg-[#3A9BD9] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-semibold text-[#3A9BD9]">ТВ-экран вызова — анимация</h3>
+                  </div>
+                  <div className="overflow-hidden rounded-xl bg-slate-50 border border-slate-200">
+                    <video
+                      src="./images/step3/tv-call.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-auto object-contain mx-auto"
+                      style={{ maxHeight: '480px' }}
+                    />
+                  </div>
+                  <p className="text-sm text-slate-500 text-center mt-3">
+                    Голосовой и экранный вызов пациента в кабинет по имени-отчеству
+                  </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <BenefitsCard title="Уведомления пациенту" color="#E91E8C" benefits={step8Benefits} />
