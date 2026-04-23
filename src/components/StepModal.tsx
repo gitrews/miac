@@ -27,34 +27,7 @@ const stepLabels: Record<number, { text: string; color: string; bg: string; bord
   10: { text: 'ВнеОчереди', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
 }
 
-// Updated images using new screens from /root/Скрины
-const stepImages: Record<number, string[]> = {
-  1: ['./images/step1-mp-1.png', './images/step1-mp-2.png', './images/step1-mp-3.png', './images/step1-mp-4.png'],
-  2: ['./images/screens/step2-widget-awaiting.jpg', './images/screens/step2-widget-calling.jpg', './images/screens/step2-widget-serving.jpg'],
-  3: ['./images/screens/step3-mp-waiting.jpg', './images/screens/step3-mp-notification.png', './images/screens/step3-tv-calling.jpg'],
-  4: ['./images/step4/page-3.png', './images/step4/page-4.png', './images/step4/page-5.png', './images/step4/page-6.png'],
-  5: ['./images/mis-registrar-queue-success.jpg', './images/widget-serving.png'],
-  6: ['./images/mis-registrar-schedule.jpg', './images/mis-registrar-exam-form.jpg'],
-  7: ['./images/step3/mp-awaiting.jpg', './images/widget-called.png'],
-  8: ['./images/step3/mp-notification.png', './images/widget-awaiting-call.png'],
-  9: ['./images/step4/page-7.png', './images/step4/page-8.png', './images/step4/page-9.png', './images/step4/page-10.png'],
-  10: ['./images/mis-registrar-extra-checkups.jpg', './images/step4/page-11.png'],
-}
-
-const stepDescriptions: Record<number, string> = {
-  1: 'Пациент записывается в очередь регистратуры с помощью мобильного приложения «МИАЦ ЯНАО» или терминала самозаписи, установленного в медицинской организации.',
-  2: 'Регистратор через виджет «ВнеОчереди» на рабочем столе вызывает пациента в окно. Система отображает вызов на ТВ-экране в зале ожидания и отправляет push-уведомление.',
-  3: 'Пациент получает уведомление о вызове через push в мобильном приложении «ВнеОчереди» и видит свой вызов на ТВ-экране в зале ожидания.',
-  4: 'Регистратор оформляет услуги в МИС ЕЦП, привязывает электронный талон к медицинской карте пациента, формирует направления на исследования и профосмотр.',
-  5: 'Завершение первичного этапа обслуживания в регистратуре. Пациент направляется в кабинет врача для прохождения профосмотра.',
-  6: 'Интеграция через API: МИС ЕЦП передаёт данные о маршруте пациента во «ВнеОчередь» — создаётся предварительная запись в очередь к врачу через endpoint /integration/api/v1/customer/appointments/create.',
-  7: 'Врач через виджет «ВнеОчереди» вызывает пациента в кабинет. Статус обновляется на ТВ-экране и в мобильном приложении пациента.',
-  8: 'Пациент получает push-уведомление в мобильном приложении «ВнеОчереди» и видит вызов на ТВ-экране в зале ожидания перед кабинетом врача.',
-  9: 'Врач проводит осмотр пациента, вносит данные в МИС ЕЦП, оформляет заключение профосмотра и назначения.',
-  10: 'Врач завершает обслуживание пациента через виджет «ВнеОчереди». Система архивирует талон, обновляет статус в очереди и формирует отчётность.',
-}
-
-// Step 1 data
+// --- Step 1 data ---
 const mobileSlides = [
   { src: './images/step1-mp-1.png', caption: 'Главный экран регистратуры с кнопкой «ЗАНЯТЬ ОЧЕРЕДЬ»' },
   { src: './images/step1-mp-2.png', caption: 'Ввод ФИО пациента' },
@@ -82,7 +55,7 @@ const terminalBenefits = [
   'Вызов пациента отобразится на экране вызова (ТВ)',
 ]
 
-// Step 2 data — Widget screenshots
+// --- Step 2 data — Widget ---
 const step2Slides = [
   { src: './images/screens/step2-widget-awaiting.jpg', caption: 'Виджет оператора — список пациентов, ожидающих вызова' },
   { src: './images/screens/step2-widget-calling.jpg', caption: 'Вызов пациента — виджет показывает текущий талон и время вызова' },
@@ -96,7 +69,7 @@ const step2Benefits = [
   'Синхронизация с мобильным приложением пациента',
 ]
 
-// Step 3 data — Notifications
+// --- Step 3 data — Notifications ---
 const step3Slides = [
   { src: './images/screens/step3-mp-waiting.jpg', caption: 'Мобильное приложение — статус «Ожидание вызова» с прогнозируемым временем' },
   { src: './images/screens/step3-mp-notification.png', caption: 'Push-уведомление «Ваша очередь!» — призыв подойти к окну' },
@@ -110,7 +83,35 @@ const step3Benefits = [
   'Возможность ответить «Я иду» прямо из уведомления',
 ]
 
-// Step 6 — Integration API info
+// --- Step 4 data — MIS ECP ---
+const step4Slides = [
+  { src: './images/mis-registrar-select-patient.jpg', caption: 'МИС ЕЦП — выбор пациента из очереди регистратуры' },
+  { src: './images/mis-registrar-select-service.jpg', caption: 'Выбор услуги: профосмотр, диспансеризация, справки' },
+  { src: './images/mis-registrar-service-form.jpg', caption: 'Форма оформления услуги с данными пациента' },
+  { src: './images/mis-registrar-queue-success.jpg', caption: 'Подтверждение записи в очередь — талон создан' },
+]
+
+const step4Benefits = [
+  'Единое окно оформления всех услуг профосмотра',
+  'Автоматическая привязка талона к медицинской карте',
+  'Формирование направлений на исследования и анализы',
+  'Интеграция с лабораторией и диагностическим оборудованием',
+]
+
+// --- Step 5 data — Completion ---
+const step5Slides = [
+  { src: './images/widget-serving.png', caption: 'Виджет оператора — статус «Обслуживание завершено»' },
+  { src: './images/mis-registrar-queue-success.jpg', caption: 'МИС ЕЦП — подтверждение завершения регистратуры' },
+]
+
+const step5Benefits = [
+  'Виджет фиксирует время завершения обслуживания',
+  'Автоматическое архивирование талона регистратуры',
+  'Пациент получает направление в кабинет врача',
+  'МИС формирует маршрут для следующего этапа',
+]
+
+// --- Step 6 — Integration API info ---
 const integrationSteps = [
   { label: '1. МИС ЕЦП формирует маршрут пациента', desc: 'Система определяет кабинет, врача и услуги для профосмотра.' },
   { label: '2. API-запрос во «ВнеОчередь»', desc: 'POST /integration/api/v1/customer/appointments/create с параметрами officeId, lineId, serviceId, timeSlotId.' },
@@ -123,6 +124,59 @@ const integrationBenefits = [
   'Единый талон от регистратуры до кабинета врача',
   'Прогнозируемое время ожидания для каждого этапа',
   'Снижение человеческого фактора и ошибок маршрутизации',
+]
+
+// --- Step 7 data — Doctor call ---
+const step7Slides = [
+  { src: './images/screens/step2-widget-awaiting.jpg', caption: 'Врач видит очередь пациентов в виджете «ВнеОчереди»' },
+  { src: './images/screens/step2-widget-calling.jpg', caption: 'Врач вызывает пациента — статус меняется на «Вызов»' },
+  { src: './images/screens/step3-tv-calling.jpg', caption: 'ТВ-экран перед кабинетом — голосовой вызов пациента по имени' },
+]
+
+const step7Benefits = [
+  'Врач вызывает пациента одним кликом в виджете',
+  'Автоматическое отображение вызова на ТВ-экране перед кабинетом',
+  'Push-уведомление в мобильное приложение пациента',
+  'Синхронизация статуса между регистратурой и кабинетом',
+]
+
+// --- Step 8 data — Doctor notification ---
+const step8Slides = [
+  { src: './images/screens/step3-mp-waiting.jpg', caption: 'Мобильное приложение — статус «Ожидание вызова в кабинет»' },
+  { src: './images/screens/step3-mp-notification.png', caption: 'Push-уведомление «Ваша очередь!» — призыв войти в кабинет' },
+]
+
+const step8Benefits = [
+  'Push-уведомление на смартфон при вызове в кабинет',
+  'ТВ-экран перед кабинетом показывает имя пациента и номер кабинета',
+  'Голосовое оповещение по имени-отчеству',
+  'Пациент может подтвердить, что идёт, прямо в приложении',
+]
+
+// --- Step 9 data — Doctor exam ---
+const step9Slides = [
+  { src: './images/mis-registrar-exam-form.jpg', caption: 'МИС ЕЦП — форма осмотра врача: жалобы, анамнез, диагноз' },
+  { src: './images/mis-registrar-extra-checkups.jpg', caption: 'Назначение дополнительных исследований и консультаций' },
+]
+
+const step9Benefits = [
+  'Электронная форма профосмотра с шаблонами и подсказками',
+  'Автоматическое формирование заключения профосмотра',
+  'Интеграция с лабораторией — результаты подтягиваются автоматически',
+  'Электронная подпись врача на заключении',
+]
+
+// --- Step 10 data — Final completion ---
+const step10Slides = [
+  { src: './images/widget-serving.png', caption: 'Виджет «ВнеОчереди» — завершение обслуживания, статус «Архив»' },
+  { src: './images/mis-registrar-extra-checkups.jpg', caption: 'МИС ЕЦП — завершение профосмотра, направления на доп. обследования' },
+]
+
+const step10Benefits = [
+  'Врач завершает обслуживание в виджете — талон архивируется',
+  'МИС фиксирует завершение профосмотра в электронной карте',
+  'Автоматическое формирование отчётности для Росздравнадзора',
+  'Пациент получает заключение профосмотра в личном кабинете',
 ]
 
 interface StepModalProps {
@@ -199,28 +253,6 @@ function Carousel({ slides, width }: { slides: { src: string; caption: string }[
       <p className="text-sm text-slate-500 text-center min-h-[20px] max-w-md">
         {slides[current]?.caption}
       </p>
-    </div>
-  )
-}
-
-function ImageGrid({ images, title }: { images: string[]; title: string }) {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-      {images.map((src, i) => (
-        <div key={i} className="rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-sm">
-          <div className="aspect-video bg-slate-100">
-            <img
-              src={src}
-              alt={`${title} — изображение ${i + 1}`}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div className="px-4 py-3 text-xs text-slate-500 font-medium">
-            Макет экрана {i + 1}
-          </div>
-        </div>
-      ))}
     </div>
   )
 }
@@ -346,6 +378,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
         {/* Body */}
         <div className="flex-1 overflow-y-auto bg-slate-50">
           <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-10">
+            {/* ==================== STEP 1 ==================== */}
             {step === 1 && (
               <div className="space-y-10">
                 <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
@@ -389,6 +422,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
               </div>
             )}
 
+            {/* ==================== STEP 2 ==================== */}
             {step === 2 && (
               <div className="space-y-10">
                 <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
@@ -437,6 +471,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
               </div>
             )}
 
+            {/* ==================== STEP 3 ==================== */}
             {step === 3 && (
               <div className="space-y-10">
                 <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
@@ -484,6 +519,65 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
               </div>
             )}
 
+            {/* ==================== STEP 4 ==================== */}
+            {step === 4 && (
+              <div className="space-y-10">
+                <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
+                  Регистратор в МИС ЕЦП выбирает пациента из очереди, оформляет услуги профосмотра, формирует направления на исследования и привязывает электронный талон к медицинской карте.
+                </p>
+                <div className="max-w-4xl mx-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 rounded-md bg-[#0052CC] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-semibold text-[#0052CC]">Интерфейс МИС ЕЦП — оформление услуг</h3>
+                  </div>
+                  <Carousel slides={step4Slides} width={700} />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <BenefitsCard title="Оформление в МИС ЕЦП" color="#0052CC" benefits={step4Benefits} />
+                  <InfoNote color="#0052CC" title="Интеграция">
+                    Данные о записи автоматически синхронизируются между МИС ЕЦП и «ВнеОчередью» через API. Электронный талон становится частью медицинской карты пациента.
+                  </InfoNote>
+                </div>
+              </div>
+            )}
+
+            {/* ==================== STEP 5 ==================== */}
+            {step === 5 && (
+              <div className="space-y-10">
+                <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
+                  Регистратор завершает обслуживание пациента. Виджет «ВнеОчереди» переводит талон в статус «Обслуживание завершено» и архивирует его. Пациент направляется в кабинет врача для профосмотра.
+                </p>
+                <div className="max-w-4xl mx-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 rounded-md bg-[#E91E8C] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-semibold text-[#E91E8C]">Завершение обслуживания в регистратуре</h3>
+                  </div>
+                  <Carousel slides={step5Slides} width={700} />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <BenefitsCard title="Виджет «ВнеОчереди»" color="#E91E8C" benefits={step5Benefits} />
+                  <InfoNote color="#E91E8C" title="Маршрутизация">
+                    После завершения в регистратуре МИС ЕЦП автоматически формирует маршрут пациента и передаёт данные во «ВнеОчередь» для следующего этапа — вызова в кабинет врача.
+                  </InfoNote>
+                </div>
+              </div>
+            )}
+
+            {/* ==================== STEP 6 ==================== */}
             {step === 6 && (
               <div className="space-y-10">
                 <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
@@ -546,14 +640,116 @@ Content-Type: application/json
               </div>
             )}
 
-            {(step === 4 || step === 5 || step === 7 || step === 8 || step === 9 || step === 10) && (
-              <div className="space-y-8">
-                <p className="text-slate-700 leading-relaxed max-w-3xl">
-                  {stepDescriptions[step]}
+            {/* ==================== STEP 7 ==================== */}
+            {step === 7 && (
+              <div className="space-y-10">
+                <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
+                  Врач через виджет «ВнеОчереди» на рабочем столе вызывает пациента в кабинет. Система автоматически обновляет статус на ТВ-экране перед кабинетом и отправляет push-уведомление в мобильное приложение.
                 </p>
-                {stepImages[step] && stepImages[step].length > 0 && (
-                  <ImageGrid images={stepImages[step]} title={stepTitles[step]} />
-                )}
+                <div className="max-w-4xl mx-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 rounded-md bg-[#E91E8C] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-semibold text-[#E91E8C]">Вызов в кабинет — виджет врача «ВнеОчереди»</h3>
+                  </div>
+                  <Carousel slides={step7Slides} width={700} />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <BenefitsCard title="Виджет врача" color="#E91E8C" benefits={step7Benefits} />
+                  <InfoNote color="#E91E8C" title="API интеграции">
+                    POST /process/activeTalon — получение текущего талона врача. Автоматическая смена статуса: ожидание → вызов → обслуживание. Синхронизация с ТВ-экраном перед кабинетом.
+                  </InfoNote>
+                </div>
+              </div>
+            )}
+
+            {/* ==================== STEP 8 ==================== */}
+            {step === 8 && (
+              <div className="space-y-10">
+                <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
+                  Пациент получает push-уведомление в мобильном приложении «ВнеОчереди» и видит свой вызов на ТВ-экране в зале ожидания перед кабинетом врача. Голосовой вызов по имени-отчеству.
+                </p>
+                <div className="max-w-4xl mx-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 rounded-md bg-[#E91E8C] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                        <line x1="12" y1="18" x2="12.01" y2="18" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-semibold text-[#E91E8C]">Уведомление о вызове в кабинет</h3>
+                  </div>
+                  <Carousel slides={step8Slides} width={700} />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <BenefitsCard title="Уведомления пациенту" color="#E91E8C" benefits={step8Benefits} />
+                  <InfoNote color="#E91E8C" title="Важно">
+                    Уведомление в кабинет использует тот же механизм, что и в регистратуре, но с персонализацией под конкретного врача и кабинет.
+                  </InfoNote>
+                </div>
+              </div>
+            )}
+
+            {/* ==================== STEP 9 ==================== */}
+            {step === 9 && (
+              <div className="space-y-10">
+                <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
+                  Врач проводит осмотр пациента в МИС ЕЦП: заполняет форму профосмотра, вносит результаты исследований, оформляет заключение и назначения. Все данные сохраняются в электронной медицинской карте.
+                </p>
+                <div className="max-w-4xl mx-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 rounded-md bg-[#0052CC] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-semibold text-[#0052CC]">Интерфейс врача — осмотр в МИС ЕЦП</h3>
+                  </div>
+                  <Carousel slides={step9Slides} width={700} />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <BenefitsCard title="Осмотр в МИС ЕЦП" color="#0052CC" benefits={step9Benefits} />
+                  <InfoNote color="#0052CC" title="Заключение">
+                    По завершении осмотра МИС формирует заключение профосмотра с электронной подписью врача. Данные автоматически передаются в Росздравнадзор.
+                  </InfoNote>
+                </div>
+              </div>
+            )}
+
+            {/* ==================== STEP 10 ==================== */}
+            {step === 10 && (
+              <div className="space-y-10">
+                <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
+                  Врач завершает обслуживание пациента через виджет «ВнеОчереди». Система архивирует талон, обновляет статус в очереди и формирует отчётность. МИС ЕЦП фиксирует завершение профосмотра и выдаёт направления на дополнительные обследования при необходимости.
+                </p>
+                <div className="max-w-4xl mx-auto">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-6 h-6 rounded-md bg-[#E91E8C] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                      </svg>
+                    </div>
+                    <h3 className="text-base font-semibold text-[#E91E8C]">Завершение профосмотра — виджет и МИС</h3>
+                  </div>
+                  <Carousel slides={step10Slides} width={700} />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <BenefitsCard title="Завершение в «ВнеОчереди» и МИС" color="#E91E8C" benefits={step10Benefits} />
+                  <InfoNote color="#E91E8C" title="Отчётность">
+                    По завершении профосмотра система автоматически формирует отчёты для Росздравнадзора, статистику загруженности кабинетов и аналитику по времени обслуживания.
+                  </InfoNote>
+                </div>
               </div>
             )}
 
