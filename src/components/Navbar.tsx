@@ -1,73 +1,85 @@
-import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { path: '/', label: 'Главная' },
-  { path: '/patient', label: 'Пациент' },
-  { path: '/registrar', label: 'Регистратор' },
-  { path: '/doctor', label: 'Врач' },
-  { path: '/integration', label: 'Интеграция' },
-  { path: '/flow', label: 'Процесс' },
+  { href: '#hero', label: 'Главная' },
+  { href: '#process', label: 'Процесс' },
+  { href: '#roles', label: 'Роли' },
+  { href: '#timeline', label: 'Этапы' },
+  { href: '#kpi', label: 'Показатели' },
+  { href: '#cases', label: 'Кейсы' },
 ]
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const location = useLocation()
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    setMenuOpen(false)
+    const el = document.querySelector(href)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-black/5 h-[72px] flex items-center justify-between px-6">
-      <Link to="/" className="flex items-center gap-2.5">
-        <img src="/images/yamal-checkup-logo.svg" alt="Logo" className="h-8 w-auto object-contain" />
-        <span className="font-display text-xl font-bold text-[#1A2B3C] hidden sm:block">
-          Ямальский чек-ап
-        </span>
-      </Link>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-200/60'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="container-wide flex items-center justify-between h-16 md:h-20">
+        <a href="#hero" onClick={(e) => handleClick(e, '#hero')} className="flex items-center gap-2.5">
+          <img src="./images/yamal-checkup-logo.svg" alt="Logo" className="h-8 w-auto object-contain" />
+          <span className="font-display text-xl font-bold text-slate-900 hidden sm:block">
+            Ямальский чек-ап
+          </span>
+        </a>
 
-      <div className="hidden lg:flex items-center gap-8">
-        {navLinks.map((link) => {
-          const isActive = location.pathname === link.path
-          return (
-            <Link
-              key={link.path}
-              to={link.path}
-              className="relative text-sm font-medium text-[#4A5568] hover:text-[#1A2B3C] transition-colors"
+        <div className="hidden lg:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleClick(e, link.href)}
+              className="relative text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
             >
               {link.label}
-              {isActive && (
-                <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#2EC4B6] rounded-full" />
-              )}
-            </Link>
-          )
-        })}
+            </a>
+          ))}
+        </div>
+
+        <button
+          className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <X size={22} className="text-slate-700" /> : <Menu size={22} className="text-slate-700" />}
+        </button>
       </div>
 
-      <button
-        className="lg:hidden ml-auto p-2"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle menu"
-      >
-        {menuOpen ? <X size={22} /> : <Menu size={22} />}
-      </button>
-
       {menuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white border-b border-black/5 shadow-lg lg:hidden">
-          <div className="flex flex-col p-4 gap-3">
-            {navLinks.map((link) => {
-              const isActive = location.pathname === link.path
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setMenuOpen(false)}
-                  className={`text-sm font-medium px-3 py-2 rounded-lg transition-colors ${
-                    isActive ? 'text-[#2EC4B6] bg-[#2EC4B6]/5' : 'text-[#4A5568] hover:bg-gray-50'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              )
-            })}
+        <div className="lg:hidden bg-white/95 backdrop-blur-md border-b border-slate-200/60">
+          <div className="container-wide flex flex-col py-4 gap-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleClick(e, link.href)}
+                className="text-sm font-medium px-3 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       )}
