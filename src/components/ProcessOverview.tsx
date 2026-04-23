@@ -66,11 +66,8 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
             Схема
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-dark mb-3">
-            Процесс интеграции
+            Схема процесса
           </h2>
-          <p className="text-muted text-lg max-w-2xl">
-            Столбец = роль. Строка = шаг процесса. Хронология: сверху вниз.
-          </p>
         </div>
 
         <div ref={containerRef} className="overflow-x-auto pb-4 -mx-4 px-4">
