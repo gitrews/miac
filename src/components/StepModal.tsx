@@ -501,12 +501,9 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                     <h3 className="text-base font-semibold text-[#3A9BD9]">ТВ-экран вызова — анимация</h3>
                   </div>
                   <div className="overflow-hidden rounded-xl bg-slate-50 border border-slate-200">
-                    <video
+                    <img
                       src="./images/step3/tv-call.gif"
-                      
-                      
-                      
-                      
+                      alt="ТВ-экран вызова — анимация"
                       className="w-full h-auto object-contain mx-auto"
                       style={{ maxHeight: '480px' }}
                     />
@@ -734,12 +731,9 @@ Content-Type: application/json
                     <h3 className="text-base font-semibold text-[#3A9BD9]">ТВ-экран вызова — анимация</h3>
                   </div>
                   <div className="overflow-hidden rounded-xl bg-slate-50 border border-slate-200">
-                    <video
+                    <img
                       src="./images/step3/tv-call.gif"
-                      
-                      
-                      
-                      
+                      alt="ТВ-экран вызова — анимация"
                       className="w-full h-auto object-contain mx-auto"
                       style={{ maxHeight: '480px' }}
                     />
