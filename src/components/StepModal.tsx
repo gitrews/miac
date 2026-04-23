@@ -114,8 +114,8 @@ const step5Benefits = [
 // --- Step 6 — Integration API info ---
 const integrationSteps = [
   { label: '1. МИС ЕЦП формирует маршрут пациента', desc: 'Система определяет кабинет, врача и услуги для профосмотра.' },
-  { label: '2. API-запрос во «ВнеОчередь»', desc: 'POST /integration/api/v1/customer/appointments/create — создание записи с параметрами officeId, lineId, serviceId, timeSlotId.' },
-  { label: '3. Создание предварительной записи', desc: 'ВнеОчередь создаёт электронный талон с shortCode (например, С7Я6) и возвращает appointment.id.' },
+  { label: '2. API-запрос во «ВнеОчереди»', desc: 'POST /integration/api/v1/customer/appointments/create — создание записи с параметрами officeId, lineId, serviceId, timeSlotId.' },
+  { label: '3. Создание предварительной записи', desc: 'ВнеОчереди создаёт электронный талон с shortCode (например, С7Я6) и возвращает appointment.id.' },
   { label: '4. Синхронизация статусов', desc: 'При изменении статуса в МИС — обновление через API в реальном времени.' },
 ]
 
@@ -569,7 +569,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <BenefitsCard title="Оформление в МИС ЕЦП" color="#0052CC" benefits={step4Benefits} />
                   <InfoNote color="#0052CC" title="Интеграция">
-                    Данные о записи автоматически синхронизируются между МИС ЕЦП и «ВнеОчередью» через API. Электронный талон становится частью медицинской карты пациента.
+                    Данные о записи автоматически синхронизируются между МИС ЕЦП и «ВнеОчередию» через API. Электронный талон становится частью медицинской карты пациента.
                   </InfoNote>
                 </div>
               </div>
@@ -597,7 +597,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <BenefitsCard title="Виджет «ВнеОчереди»" color="#E91E8C" benefits={step5Benefits} />
                   <InfoNote color="#E91E8C" title="Маршрутизация">
-                    После завершения в регистратуре МИС ЕЦП автоматически формирует маршрут пациента и передаёт данные во «ВнеОчередь» для следующего этапа — вызова в кабинет врача.
+                    После завершения в регистратуре МИС ЕЦП автоматически формирует маршрут пациента и передаёт данные во «ВнеОчереди» для следующего этапа — вызова в кабинет врача.
                   </InfoNote>
                 </div>
               </div>
@@ -611,7 +611,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                 </p>
 
                 <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-                  <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Пример API-запроса (МИС → ВнеОчередь)</h3>
+                  <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Пример API-запроса (МИС → ВнеОчереди)</h3>
                   <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /integration/api/v1/customer/appointments/create
 Content-Type: application/json
@@ -654,7 +654,7 @@ Content-Type: application/json
                   </div>
                 </div>
 
-                <BenefitsCard title="Преимущества интеграции МИС → ВнеОчередь" color="#2EC4B6" benefits={integrationBenefits} />
+                <BenefitsCard title="Преимущества интеграции МИС → ВнеОчереди" color="#2EC4B6" benefits={integrationBenefits} />
 
                 <InfoNote color="#2EC4B6" title="API ВнеОчереди">
                   Полная документация:{' '}
