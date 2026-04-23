@@ -4,11 +4,8 @@ import Hero from './components/Hero'
 import ProcessOverview from './components/ProcessOverview'
 import RolesInteractions from './components/RolesInteractions'
 import StepTimeline from './components/StepTimeline'
-import KPICards from './components/KPICards'
 import CasesSection from './components/CasesSection'
-import FinalCTA from './components/FinalCTA'
 import StepModal from './components/StepModal'
-import ProcessScheme from './components/sections/ProcessScheme'
 
 function App() {
   const [activeStep, setActiveStep] = useState<number | null>(() => {
@@ -61,10 +58,7 @@ function App() {
       <ProcessOverview onOpenStep={openStep} />
       <RolesInteractions />
       <StepTimeline onOpenStep={openStep} />
-      <ProcessScheme />
-      <KPICards />
       <CasesSection />
-      <FinalCTA />
       <StepModal
         step={activeStep}
         onClose={closeStep}
