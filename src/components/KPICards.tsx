@@ -39,8 +39,7 @@ export default function KPICards() {
         <motion.div
           className="mb-12 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <span className="text-primary-600 text-sm font-bold tracking-wider uppercase mb-3 block">
@@ -60,8 +59,7 @@ export default function KPICards() {
               key={kpi.label}
               className="relative rounded-2xl border border-slate-100 bg-slate-50/50 p-6 lg:p-8 hover:shadow-lg hover:border-slate-200 transition-all"
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className={`inline-flex items-center justify-center w-11 h-11 rounded-xl ${kpi.color} mb-5`}>

@@ -12,8 +12,7 @@ export default function FinalCTA() {
         <motion.div
           className="max-w-3xl mx-auto text-center"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <span className="text-primary-400 text-sm font-bold tracking-wider uppercase mb-4 block">

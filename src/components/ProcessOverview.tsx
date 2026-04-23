@@ -77,8 +77,7 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
         <motion.div
           className="mb-10 md:mb-14"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <span className="text-primary-600 text-sm font-bold tracking-wider uppercase mb-3 block">
@@ -96,8 +95,7 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
         <motion.div
           className="overflow-x-auto pb-4 -mx-4 px-4"
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-60px' }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="lg:hidden flex items-center gap-2 mb-4 text-sm text-slate-500">
@@ -122,8 +120,7 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
                 <motion.g
                   key={role.id}
                   initial={{ opacity: 0, y: -20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-20px' }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: s * 0.06, duration: 0.4 }}
                 >
                   <rect
@@ -226,8 +223,7 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
                 <motion.g
                   key={node.id}
                   initial={{ opacity: 0, scale: 0.6 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: '-20px' }}
+                  animate={{ opacity: 1, scale: 1 }}
                   transition={{
                     delay: node.phase * 0.06,
                     duration: 0.5,
@@ -282,7 +278,6 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
                 <motion.g
                   initial={{ opacity: 0, scaleX: 0.2 }}
                   whileInView={{ opacity: 1, scaleX: 1 }}
-                  viewport={{ once: true, margin: '-20px' }}
                   transition={{
                     delay: bannerNode.phase * 0.06,
                     duration: 0.6,

@@ -76,8 +76,7 @@ export default function ProcessScheme() {
         <motion.div
           className="mb-10"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <span className="inline-block text-xs font-bold tracking-wider uppercase text-primary-600 bg-primary-50 rounded-full px-3 py-1 mb-4">
@@ -94,8 +93,7 @@ export default function ProcessScheme() {
         <motion.div
           className="overflow-x-auto pb-4 -mx-4 px-4"
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-60px' }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="lg:hidden flex items-center gap-2 mb-4 text-sm text-muted">
@@ -120,8 +118,7 @@ export default function ProcessScheme() {
                   <motion.g
                     key={role.id}
                     initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-20px' }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: s * 0.06, duration: 0.4 }}
                   >
                     <rect
@@ -220,8 +217,7 @@ export default function ProcessScheme() {
                   <motion.g
                     key={node.id}
                     initial={{ opacity: 0, scale: 0.6 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true, margin: '-20px' }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{
                       delay: node.phase * 0.06,
                       duration: 0.5,
@@ -277,7 +273,6 @@ export default function ProcessScheme() {
                   <motion.g
                     initial={{ opacity: 0, scaleX: 0.2 }}
                     whileInView={{ opacity: 1, scaleX: 1 }}
-                    viewport={{ once: true, margin: '-20px' }}
                     transition={{
                       delay: bannerNode.phase * 0.06,
                       duration: 0.6,

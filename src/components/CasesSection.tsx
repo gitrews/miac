@@ -45,8 +45,7 @@ export default function CasesSection() {
         <motion.div
           className="mb-12 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <span className="text-primary-600 text-sm font-bold tracking-wider uppercase mb-3 block">
@@ -66,8 +65,7 @@ export default function CasesSection() {
               key={item.title}
               className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="p-5 md:p-6 border-b border-slate-100">

@@ -94,8 +94,7 @@ export default function StepTimeline({ onOpenStep }: StepTimelineProps) {
         <motion.div
           className="mb-12 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <span className="text-primary-600 text-sm font-bold tracking-wider uppercase mb-3 block">
@@ -123,8 +122,7 @@ export default function StepTimeline({ onOpenStep }: StepTimelineProps) {
                     isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
                   }`}
                   initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.05 }}
                 >
                   {/* Timeline dot */}

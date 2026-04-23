@@ -71,8 +71,7 @@ export default function RolesInteractions() {
         <motion.div
           className="mb-12 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <span className="text-primary-600 text-sm font-bold tracking-wider uppercase mb-3 block">
@@ -92,8 +91,7 @@ export default function RolesInteractions() {
               key={role.id}
               className={`relative rounded-2xl border ${role.borderColor} bg-slate-50/50 p-6 lg:p-8 hover:shadow-lg transition-shadow`}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${role.color} mb-5`}>
@@ -119,8 +117,7 @@ export default function RolesInteractions() {
               key={item.title}
               className="flex gap-4 p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-slate-200 transition-colors"
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-200/60 flex items-center justify-center text-slate-700">

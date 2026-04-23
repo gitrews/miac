@@ -39,8 +39,7 @@ export default function KPICards() {
         <motion.div
           className="text-center max-w-2xl mx-auto mb-16"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block text-xs font-bold tracking-wider uppercase text-primary-600 bg-primary-50 rounded-full px-3 py-1 mb-4">
@@ -62,8 +61,7 @@ export default function KPICards() {
                 key={kpi.label}
                 className="card p-6 text-center group"
                 initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
               >
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 border ${kpi.color} transition-transform group-hover:scale-110`}>
