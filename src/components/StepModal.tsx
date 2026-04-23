@@ -114,7 +114,7 @@ const step5Benefits = [
 // --- Step 6 — Integration API info ---
 const integrationSteps = [
   { label: '1. МИС ЕЦП формирует маршрут пациента', desc: 'Система определяет кабинет, врача и услуги для профосмотра.' },
-  { label: '2. API-запрос во «ВнеОчередь»', desc: 'POST /integration/api/v1/customer/appointments/create с параметрами officeId, lineId, serviceId, timeSlotId.' },
+  { label: '2. API-запрос во «ВнеОчередь»', desc: 'POST /integration/api/v1/customer/appointments/create — создание записи с параметрами officeId, lineId, serviceId, timeSlotId.' },
   { label: '3. Создание предварительной записи', desc: 'ВнеОчередь создаёт электронный талон с shortCode (например, С7Я6) и возвращает appointment.id.' },
   { label: '4. Синхронизация статусов', desc: 'При изменении статуса в МИС — обновление через API в реальном времени.' },
 ]
@@ -450,22 +450,22 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
                       </div>
-                      <h3 className="text-base font-semibold text-[#0052CC]">API интеграции</h3>
+                      <h3 className="text-base font-semibold text-[#0052CC]">API интеграции — порядок вызовов</h3>
                     </div>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-3 text-sm text-slate-700">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#0052CC] mt-1.5 flex-shrink-0" />
-                        POST /process/activeTalon — получение текущего талона оператора
-                      </li>
-                      <li className="flex items-start gap-3 text-sm text-slate-700">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#0052CC] mt-1.5 flex-shrink-0" />
-                        Автоматическая смена статуса: ожидание → вызов → обслуживание
-                      </li>
-                      <li className="flex items-start gap-3 text-sm text-slate-700">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#0052CC] mt-1.5 flex-shrink-0" />
-                        Синхронизация с ТВ-экраном и мобильным приложением
-                      </li>
-                    </ul>
+                    <ol className="space-y-2.5 text-sm text-slate-700 list-decimal list-inside">
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">GET /operator/lines</span> — получение списка кабинетов оператора</li>
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">GET /process/queue</span> — получение очереди по выбранному кабинету</li>
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">POST /process/activeTalon</span> — получение текущего талона (ожидание)</li>
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">POST /process/call</span> — вызов пациента в окно (статус: вызов)</li>
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">POST /process/start</span> — начало обслуживания (статус: в кабинете)</li>
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">POST /process/finish</span> — завершение приёма (статус: завершён)</li>
+                    </ol>
+                    <div className="mt-4 pt-3 border-t border-slate-100">
+                      <p className="text-xs text-slate-500">
+                        Каждый вызов автоматически синхронизирует статус с ТВ-экраном и мобильным приложением пациента.
+                        {' '}<a href="https://docs.ocheredi.com/api/" target="_blank" rel="noopener noreferrer" className="underline text-[#0052CC]">docs.ocheredi.com/api/</a>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -687,8 +687,18 @@ Content-Type: application/json
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <BenefitsCard title="Виджет врача" color="#E91E8C" benefits={step7Benefits} />
-                  <InfoNote color="#E91E8C" title="API интеграции">
-                    POST /process/activeTalon — получение текущего талона врача. Автоматическая смена статуса: ожидание → вызов → обслуживание. Синхронизация с ТВ-экраном перед кабинетом.
+                  <InfoNote color="#E91E8C" title="API интеграции — порядок вызовов">
+                    <ol className="list-decimal list-inside space-y-1.5 text-sm text-slate-700">
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#E91E8C]">GET /doctor/lines</span> — список кабинетов врача</li>
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#E91E8C]">GET /process/activeTalon</span> — текущий талон в кабинете</li>
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#E91E8C]">POST /process/call</span> — вызов в кабинет (статус: вызов)</li>
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#E91E8C]">POST /process/start</span> — начало осмотра (статус: в кабинете)</li>
+                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#E91E8C]">POST /process/finish</span> — завершение осмотра</li>
+                    </ol>
+                    <p className="mt-3 text-xs text-slate-500">
+                      Все статусы синхронизируются с ТВ-экраном перед кабинетом и мобильным приложением.
+                      {' '}<a href="https://docs.ocheredi.com/api/" target="_blank" rel="noopener noreferrer" className="underline text-[#0052CC]">docs.ocheredi.com/api/</a>
+                    </p>
                   </InfoNote>
                 </div>
               </div>
