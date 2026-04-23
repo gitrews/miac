@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ямальский чек-ап">
+  <defs>
+    <pattern id="snow" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M6 1v10M1 6h10M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="#ffffff" stroke-width="1" opacity=".95"/>
+    </pattern>
+    <clipPath id="inner">
+      <circle cx="64" cy="64" r="48"/>
+    </clipPath>
+  </defs>
+  <circle cx="64" cy="64" r="63" fill="#174a9a"/>
+  <circle cx="64" cy="64" r="60" fill="url(#snow)" opacity=".95"/>
+  <circle cx="64" cy="64" r="50" fill="#f7fbff" stroke="#174a9a" stroke-width="4"/>
+  <g clip-path="url(#inner)">
+    <path d="M8 62h112v13H8z" fill="#d91f2b"/>
+    <path d="M50 22c9 2 15 9 15 19 0 7-3 12-8 16h27v9H43V52c6-2 10-7 10-13 0-7-4-12-10-14z" fill="#174a9a"/>
+    <path d="M31 38h13v42H31z" fill="#174a9a"/>
+    <path d="M20 80h66v13H20z" fill="#174a9a"/>
+  </g>
+  <text x="91" y="43" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#d91f2b">ГБУЗ</text>
+  <text x="85" y="64" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="800" fill="#d91f2b">МИАЦ</text>
+  <text x="88" y="84" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="800" fill="#d91f2b">ЯНАО</text>
+</svg>

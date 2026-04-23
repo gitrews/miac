@@ -1,0 +1,131 @@
+@keyframes miacStepFullscreenIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes miacScrollHint {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 10px 24px rgba(26, 43, 60, 0.08);
+  }
+  50% {
+    transform: translateY(8px);
+    box-shadow: 0 16px 30px rgba(46, 196, 182, 0.16);
+  }
+}
+html, body {
+  background: #F7FAFC;
+  color: #1A2B3C;
+}
+nav[code-path="src/components/Navbar.tsx:20:5"] {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-bottom-color: rgba(26, 43, 60, 0.08) !important;
+  box-shadow: 0 8px 24px rgba(26, 43, 60, 0.06);
+}
+nav[code-path="src/components/Navbar.tsx:20:5"] a,
+nav[code-path="src/components/Navbar.tsx:20:5"] span,
+nav[code-path="src/components/Navbar.tsx:20:5"] button {
+  color: #1A2B3C !important;
+}
+div[code-path="src/pages/CompleteFlow.tsx:845:7"] {
+  background-color: #F7FAFC !important;
+}
+div[code-path="src/pages/CompleteFlow.tsx:860:9"] {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-bottom-color: rgba(26, 43, 60, 0.08) !important;
+}
+div[code-path^="src/pages/CompleteFlow.tsx"] {
+  color: #1A2B3C !important;
+}
+div[code-path="src/pages/Home.tsx:82:7"] {
+  max-width: none !important;
+  white-space: nowrap !important;
+}
+p[code-path="src/pages/Home.tsx:104:11"] {
+  display: none !important;
+}
+div[code-path="src/pages/Home.tsx:86:7"] {
+  cursor: pointer !important;
+  border-radius: 999px !important;
+  padding: 10px 16px !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  border: 1px solid rgba(26, 43, 60, 0.08) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: miacScrollHint 1.9s ease-in-out infinite !important;
+}
+div[code-path="src/pages/Home.tsx:86:7"]:hover {
+  background: rgba(255, 255, 255, 0.94) !important;
+}
+[code-path^="src/pages/PatientJourney"],
+[code-path^="src/pages/RegistrarJourney"],
+[code-path^="src/pages/DoctorJourney"],
+[code-path^="src/pages/Integration"],
+[code-path^="src/pages/CompleteFlow"] {
+  color: #1A2B3C !important;
+  border-color: rgba(26, 43, 60, 0.1) !important;
+}
+section[code-path^="src/pages/PatientJourney"],
+section[code-path^="src/pages/RegistrarJourney"],
+section[code-path^="src/pages/DoctorJourney"],
+section[code-path^="src/pages/Integration"],
+section[code-path^="src/pages/CompleteFlow"],
+div[code-path^="src/pages/PatientJourney"],
+div[code-path^="src/pages/RegistrarJourney"],
+div[code-path^="src/pages/DoctorJourney"],
+div[code-path^="src/pages/Integration"],
+div[code-path^="src/pages/CompleteFlow"] {
+  background-color: #F7FAFC !important;
+}
+h1[code-path^="src/pages/"],
+h2[code-path^="src/pages/"],
+h3[code-path^="src/pages/"],
+p[code-path^="src/pages/"],
+span[code-path^="src/pages/"],
+li[code-path^="src/pages/"] {
+  color: #1A2B3C !important;
+}
+div[code-path^="src/pages/"][style*="rgba(255,255,255"],
+div[code-path^="src/pages/"][style*="rgba(255, 255, 255"],
+div[code-path^="src/pages/"][style*="#fff"],
+div[code-path^="src/pages/"][style*="#FFF"] {
+  background-color: #FFFFFF !important;
+}
+button[code-path^="src/pages/"] {
+  background-color: #FFFFFF !important;
+  color: #1A2B3C !important;
+  border-color: rgba(26, 43, 60, 0.14) !important;
+}
+.miac-embedded nav[code-path="src/components/Navbar.tsx:20:5"],
+.miac-embedded div[code-path="src/pages/Step1Detail.tsx:117:7"],
+.miac-embedded div[code-path="src/pages/Step4Detail.tsx:105:7"],
+.miac-embedded div[code-path="src/pages/Step1Detail.tsx:139:11"],
+.miac-embedded h1[code-path="src/pages/Step1Detail.tsx:145:11"],
+.miac-embedded button[code-path="src/pages/Step1Detail.tsx:268:11"],
+.miac-embedded div[code-path="src/pages/Step4Detail.tsx:126:9"],
+.miac-embedded h1[code-path="src/pages/Step4Detail.tsx:132:9"],
+.miac-embedded #step-placeholder-title,
+.miac-embedded #step-placeholder-overlay button[onclick] {
+  display: none !important;
+}
+.miac-embedded body {
+  overflow: auto !important;
+}
+.miac-embedded #step-placeholder-overlay {
+  position: static !important;
+  min-height: 100dvh;
+}
+.miac-embedded #step-placeholder-overlay > div {
+  padding: 32px 32px 56px !important;
+}
+.miac-embedded div[code-path="src/pages/Step1Detail.tsx:131:7"],
+.miac-embedded div[code-path="src/pages/Step4Detail.tsx:120:7"],
+.miac-embedded div[code-path="src/pages/Step4Detail.tsx:144:7"] {
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+}
