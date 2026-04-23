@@ -6,7 +6,6 @@ const navLinks = [
   { href: '#process', label: 'Процесс' },
   { href: '#roles', label: 'Роли' },
   { href: '#timeline', label: 'Этапы' },
-  { href: '#kpi', label: 'Показатели' },
   { href: '#cases', label: 'Кейсы' },
 ]
 

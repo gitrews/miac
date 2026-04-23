@@ -89,7 +89,7 @@ interface StepTimelineProps {
 
 export default function StepTimeline({ onOpenStep }: StepTimelineProps) {
   return (
-    <section id="timeline" className="section bg-slate-50">
+    <section id="timeline" className="section bg-slate-50 px-4 sm:px-6">
       <div className="container-wide">
         <motion.div
           className="mb-12 md:mb-16"

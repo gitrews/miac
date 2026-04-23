@@ -66,7 +66,7 @@ const interactions = [
 
 export default function RolesInteractions() {
   return (
-    <section id="roles" className="section bg-white">
+    <section id="roles" className="section bg-white px-4 sm:px-6">
       <div className="container-wide">
         <motion.div
           className="mb-12 md:mb-16"

@@ -40,7 +40,7 @@ const cases = [
 
 export default function CasesSection() {
   return (
-    <section id="cases" className="section bg-slate-50">
+    <section id="cases" className="section bg-slate-50 px-4 sm:px-6">
       <div className="container-wide">
         <motion.div
           className="mb-12 md:mb-16"

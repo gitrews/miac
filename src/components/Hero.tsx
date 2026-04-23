@@ -62,16 +62,6 @@ export default function Hero() {
           >
             Схема процесса
           </button>
-          <a
-            href="#timeline"
-            onClick={(e) => {
-              e.preventDefault()
-              document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth' })
-            }}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-slate-700 rounded-xl font-semibold text-sm border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all shadow-sm"
-          >
-            Этапы внедрения
-          </a>
         </motion.div>
       </div>
 
