@@ -235,27 +235,28 @@
         var copy = document.getElementById('step-placeholder-copy');
         function checkHash() {
           var step = location.hash.split('/').pop();
-          var iframe = document.getElementById('step2-iframe');
-          var grid = document.getElementById('step-placeholder-grid');
-          var label = document.getElementById('step-placeholder-label');
+          var contentDiv = overlay.querySelector('div[style*="border-radius:28px"]');
           if (step === '2') {
-            title.textContent = 'Шаг 2';
-            copy.textContent = '';
-            if (iframe) iframe.style.display = 'block';
-            if (grid) grid.style.display = 'none';
-            if (label) label.style.display = 'none';
+            if (!contentDiv.dataset.originalHtml) {
+              contentDiv.dataset.originalHtml = contentDiv.innerHTML;
+            }
+            contentDiv.innerHTML = '<iframe src="./step2.html" style="width:100%;height:85vh;border:1px solid rgba(26,43,60,0.08);border-radius:12px;background:#fff;"></iframe>';
             overlay.style.display = 'block';
             document.body.style.overflow = 'hidden';
           } else if (/^#\/step\/(3|5|6|7|8|9|10)$/.test(location.hash)) {
+            if (contentDiv.dataset.originalHtml) {
+              contentDiv.innerHTML = contentDiv.dataset.originalHtml;
+              delete contentDiv.dataset.originalHtml;
+            }
             title.textContent = 'Шаг ' + step + ' - Заглушка';
             copy.textContent = 'Здесь будет полноценный экран шага ' + step + '. Пока оставляем этот маршрут как временную заглушку.';
-            if (iframe) iframe.style.display = 'none';
-            if (grid) grid.style.display = 'grid';
-            if (label) label.style.display = 'inline-flex';
             overlay.style.display = 'block';
             document.body.style.overflow = 'hidden';
           } else {
-            if (iframe) iframe.style.display = 'none';
+            if (contentDiv.dataset.originalHtml) {
+              contentDiv.innerHTML = contentDiv.dataset.originalHtml;
+              delete contentDiv.dataset.originalHtml;
+            }
             overlay.style.display = 'none';
             document.body.style.overflow = '';
           }
