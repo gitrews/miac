@@ -72,10 +72,20 @@ const step2Benefits = [
 ]
 
 // --- Step 3 data — Notifications ---
-const step3Slides = [
+const step3MobileSlides = [
   { src: './images/screens/step3-mp-waiting.jpg', caption: 'Мобильное приложение — статус «Ожидание вызова» с прогнозируемым временем' },
   { src: './images/screens/step3-mp-notification.png', caption: 'Push-уведомление «Ваша очередь!» — призыв подойти к окну' },
+]
+
+const step3TVSlides = [
   { src: './images/screens/step3-tv-calling.jpg', caption: 'ТВ-экран в зале ожидания — голосовой и экранный вызов пациента по имени' },
+  { src: './images/step3/tv-call.gif', caption: 'Анимация вызова пациента на ТВ-экране' },
+]
+
+const step3TVBenefits = [
+  'Персонализированный вызов по имени-отчеству (без номеров талонов)',
+  'Голосовое оповещение с номером окна и именем пациента',
+  'Отображение очереди и прогнозируемого времени ожидания',
 ]
 
 const step3Benefits = [
@@ -411,7 +421,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                       </div>
                           <h3 className="text-base font-semibold text-[#3A9BD9]">Терминал самозаписи</h3>
                     </div>
-                    <Carousel slides={terminalSlides} width={820} />
+                    <Carousel slides={terminalSlides} width={1100} />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -448,30 +458,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <BenefitsCard title="Виджет оператора" color="#E91E8C" benefits={step2Benefits} />
-                  <div className="rounded-xl bg-white border border-[#0052CC]/20 p-6">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-5 h-5 rounded bg-[#0052CC]/20 flex items-center justify-center">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0052CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                      </div>
-                      <h3 className="text-base font-semibold text-[#0052CC]">API интеграции — порядок вызовов</h3>
-                    </div>
-                    <ol className="space-y-2.5 text-sm text-slate-700 list-decimal list-inside">
-                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">GET /operator/lines</span> — получение списка кабинетов оператора</li>
-                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">GET /process/queue</span> — получение очереди по выбранному кабинету</li>
-                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">POST /process/activeTalon</span> — получение текущего талона (ожидание)</li>
-                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">POST /process/call</span> — вызов пациента в окно (статус: вызов)</li>
-                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">POST /process/start</span> — начало обслуживания (статус: в кабинете)</li>
-                      <li><span className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-[#0052CC]">POST /process/finish</span> — завершение приёма (статус: завершён)</li>
-                    </ol>
-                    <div className="mt-4 pt-3 border-t border-slate-100">
-                      <p className="text-xs text-slate-500">
-                        Каждый вызов автоматически синхронизирует статус с ТВ-экраном и мобильным приложением пациента.
-                        {' '}<a href="https://docs.ocheredi.com/api/" target="_blank" rel="noopener noreferrer" className="underline text-[#0052CC]">docs.ocheredi.com/api/</a>
-                      </p>
-                    </div>
-                  </div>
+                  <BenefitsCard title="ТВ-экран и мобильное приложение" color="#3A9BD9" benefits={step3TVBenefits} />
                 </div>
               </div>
             )}
@@ -482,67 +469,37 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                 <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
                   Пациент получает уведомление о вызове через push в мобильном приложении «ВнеОчереди» и видит свой вызов на ТВ-экране в зале ожидания. Голосовой вызов производится по имени и отчеству.
                 </p>
-                <div className="max-w-4xl mx-auto">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-6 h-6 rounded-md bg-[#E91E8C] flex items-center justify-center">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                        <line x1="12" y1="18" x2="12.01" y2="18" />
-                      </svg>
-                    </div>
-                    <h3 className="text-base font-semibold text-[#E91E8C]">Мобильное приложение и ТВ-экран</h3>
-                  </div>
-                  <Carousel slides={step3Slides} width={700} />
-                </div>
-                <div className="max-w-4xl mx-auto">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-6 h-6 rounded-md bg-[#3A9BD9] flex items-center justify-center">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                        <line x1="8" y1="21" x2="16" y2="21" />
-                        <line x1="12" y1="17" x2="12" y2="21" />
-                      </svg>
-                    </div>
-                    <h3 className="text-base font-semibold text-[#3A9BD9]">ТВ-экран вызова — анимация</h3>
-                  </div>
-                  <div className="overflow-hidden rounded-xl bg-slate-50 border border-slate-200">
-                    <img
-                      src="./images/step3/tv-call.gif"
-                      alt="ТВ-экран вызова — анимация"
-                      className="w-full h-auto object-contain mx-auto"
-                      style={{ maxHeight: '480px' }}
-                    />
-                  </div>
-                  <p className="text-sm text-slate-500 text-center mt-3">
-                    Голосовой и экранный вызов пациента по имени-отчеству
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <BenefitsCard title="Уведомления пациенту" color="#E91E8C" benefits={step3Benefits} />
-                  <div className="rounded-xl bg-white border border-[#3A9BD9]/20 p-6">
+                <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+                  <div className="flex-1 flex flex-col">
                     <div className="flex items-center gap-2 mb-4">
-                      <div className="w-5 h-5 rounded bg-[#3A9BD9]/20 flex items-center justify-center">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3A9BD9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="20 6 9 17 4 12" />
+                      <div className="w-6 h-6 rounded-md bg-[#E91E8C] flex items-center justify-center">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                          <line x1="12" y1="18" x2="12.01" y2="18" />
+                        </svg>
+                      </div>
+                      <h3 className="text-base font-semibold text-[#E91E8C]">Мобильное приложение «ВнеОчереди»</h3>
+                    </div>
+                    <Carousel slides={step3MobileSlides} width={250} />
+                  </div>
+                  <div className="hidden lg:block w-px bg-slate-200 self-stretch" />
+                  <div className="flex-1 flex flex-col">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-6 h-6 rounded-md bg-[#3A9BD9] flex items-center justify-center">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                          <line x1="8" y1="21" x2="16" y2="21" />
+                          <line x1="12" y1="17" x2="12" y2="21" />
                         </svg>
                       </div>
                       <h3 className="text-base font-semibold text-[#3A9BD9]">ТВ-экран вызова</h3>
                     </div>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-3 text-sm text-slate-700">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#3A9BD9] mt-1.5 flex-shrink-0" />
-                        Персонализированный вызов по имени-отчеству (без номеров талонов)
-                      </li>
-                      <li className="flex items-start gap-3 text-sm text-slate-700">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#3A9BD9] mt-1.5 flex-shrink-0" />
-                        Голосовое оповещение с номером окна и именем пациента
-                      </li>
-                      <li className="flex items-start gap-3 text-sm text-slate-700">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#3A9BD9] mt-1.5 flex-shrink-0" />
-                        Отображение очереди и прогнозируемого времени ожидания
-                      </li>
-                    </ul>
+                    <Carousel slides={step3TVSlides} width={700} />
                   </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <BenefitsCard title="Уведомления пациенту" color="#E91E8C" benefits={step3Benefits} />
+                  <BenefitsCard title="ТВ-экран вызова" color="#3A9BD9" benefits={step3TVBenefits} />
                 </div>
               </div>
             )}
