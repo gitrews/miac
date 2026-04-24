@@ -80,7 +80,7 @@ export default function WidgetShowcase({
   const showRestartBtn = isLast
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-2xl border border-slate-200 shadow-lg">
+    <div className="relative w-full max-w-6xl mx-auto rounded-2xl border border-slate-200 shadow-lg">
       <div className="relative w-full bg-slate-100" style={{ aspectRatio: '16 / 9' }}>
         <img
           src="./images/screens/widget-bg.png"
@@ -91,16 +91,16 @@ export default function WidgetShowcase({
         <div className="absolute inset-0 flex items-start justify-end pt-16 pr-4">
           {showClickHint && (
             <motion.div
-              className="flex flex-col items-center gap-1 shrink-0 ml-3 mt-12 z-10 order-1"
+              className="absolute right-[-70px] top-1/2 -translate-y-1/2 flex flex-col items-center gap-1 z-10"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
             >
               <motion.div
                 className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm border border-slate-200 shadow-sm flex items-center justify-center"
-                animate={{ x: [0, -6, 0] }}
+                animate={{ x: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 0.9, ease: 'easeInOut' }}
               >
-                <span className="text-xl text-slate-700">←</span>
+                <span className="text-xl text-slate-700">→</span>
               </motion.div>
               <span className="text-[10px] text-white font-semibold bg-black/50 backdrop-blur-sm rounded px-2 py-1 whitespace-nowrap">
                 Нажми сюда
