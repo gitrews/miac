@@ -91,7 +91,7 @@ export default function WidgetShowcase({
         <div className="absolute inset-0 flex items-start justify-end pt-16 pr-4">
           {showClickHint && (
             <motion.div
-              className="absolute right-[-80px] top-16 flex items-center gap-2 z-10"
+              className="absolute right-[-80px] top-20 flex items-center gap-2 z-10"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
             >
