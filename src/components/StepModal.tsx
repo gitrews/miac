@@ -16,16 +16,16 @@ const stepTitles: Record<number, string> = {
 }
 
 const stepLabels: Record<number, { text: string; color: string; bg?: string; border?: string; split?: boolean }> = {
-  1: { text: 'ВнеОчереди', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
-  2: { text: 'ВнеОчереди', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
-  3: { text: 'ВнеОчереди', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
-  4: { text: 'ЕЦП МИС', color: '#0052CC', bg: 'rgba(0,82,204,0.12)', border: 'rgba(0,82,204,0.24)' },
-  5: { text: 'ВнеОчереди', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
-  6: { text: 'ЕЦП - ВнеОчереди', color: '#0052CC', split: true },
-  7: { text: 'ВнеОчереди', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
-  8: { text: 'ВнеОчереди', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
-  9: { text: 'ЕЦП МИС', color: '#0052CC', bg: 'rgba(0,82,204,0.12)', border: 'rgba(0,82,204,0.24)' },
-  10: { text: 'ВнеОчереди', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
+  1: { text: 'Пациент', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
+  2: { text: 'Регистратор', color: '#2EC4B6', bg: 'rgba(46,196,182,0.12)', border: 'rgba(46,196,182,0.24)' },
+  3: { text: 'Пациент', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
+  4: { text: 'Регистратор', color: '#2EC4B6', bg: 'rgba(46,196,182,0.12)', border: 'rgba(46,196,182,0.24)' },
+  5: { text: 'Регистратор', color: '#2EC4B6', bg: 'rgba(46,196,182,0.12)', border: 'rgba(46,196,182,0.24)' },
+  6: { text: 'ЕЦП МИС + ВнеОчереди', color: '#0052CC', split: true },
+  7: { text: 'Врач', color: '#3A9BD9', bg: 'rgba(58,155,217,0.12)', border: 'rgba(58,155,217,0.24)' },
+  8: { text: 'Пациент', color: '#E91E8C', bg: 'rgba(233,30,140,0.12)', border: 'rgba(233,30,140,0.24)' },
+  9: { text: 'Врач', color: '#3A9BD9', bg: 'rgba(58,155,217,0.12)', border: 'rgba(58,155,217,0.24)' },
+  10: { text: 'Врач', color: '#3A9BD9', bg: 'rgba(58,155,217,0.12)', border: 'rgba(58,155,217,0.24)' },
 }
 
 const mobileSlides = [
@@ -148,8 +148,8 @@ function renderLabel(label: { text: string; color: string; bg?: string; border?:
           borderColor: 'rgba(99,102,241,0.18)',
         }}
       >
-        <span style={{ color: '#0052CC' }}>ЕЦП</span>
-        <span className="mx-1 text-slate-500">-</span>
+        <span style={{ color: '#0052CC' }}>ЕЦП МИС</span>
+        <span className="mx-1 text-slate-500">+</span>
         <span style={{ color: '#E91E8C' }}>ВнеОчереди</span>
       </span>
     )
