@@ -6,8 +6,8 @@ const steps = [
     title: 'Запись в регистратуру',
     system: 'ВнеОчереди',
     systemColor: '#E91E8C',
-    role: 'Регистратор',
-    roleColor: '#0F766E',
+    role: 'Пациент',
+    roleColor: '#E91E8C',
     description: 'Пациент записывается на профосмотр через систему «ВнеОчереди». Создаётся электронный талон с уникальным номером.',
   },
   {
@@ -16,7 +16,7 @@ const steps = [
     system: 'ВнеОчереди',
     systemColor: '#E91E8C',
     role: 'Регистратор',
-    roleColor: '#0F766E',
+    roleColor: '#2EC4B6',
     description: 'Регистратор вызывает пациента в окно через своё рабочее место. Информация отображается на ТВ-экране.',
   },
   {
@@ -25,7 +25,7 @@ const steps = [
     system: 'ВнеОчереди',
     systemColor: '#E91E8C',
     role: 'Пациент',
-    roleColor: '#BE185D',
+    roleColor: '#E91E8C',
     description: 'Пациент получает уведомление о вызове через ТВ-экран в зале ожидания и push-оповещение.',
   },
   {
@@ -34,7 +34,7 @@ const steps = [
     system: 'ЕЦП МИС',
     systemColor: '#0052CC',
     role: 'Регистратор',
-    roleColor: '#0F766E',
+    roleColor: '#2EC4B6',
     description: 'Регистратор оформляет услуги в МИС ЕЦП и привязывает талон к медицинской карте пациента.',
   },
   {
@@ -43,16 +43,16 @@ const steps = [
     system: 'ВнеОчереди',
     systemColor: '#E91E8C',
     role: 'Регистратор',
-    roleColor: '#0F766E',
+    roleColor: '#2EC4B6',
     description: 'Завершение первичного этапа обслуживания в регистратуре. Пациент направляется в кабинет врача.',
   },
   {
     step: 6,
     title: 'Запись на Профосмотр',
-    system: 'ЕЦП - ВнеОчереди',
+    system: 'ЕЦП',
     systemColor: '#0052CC',
-    role: 'Интеграция',
-    roleColor: '#7C3AED',
+    role: 'ЕЦП',
+    roleColor: '#0052CC',
     description: 'Данные о записи на профосмотр синхронизируются из МИС ЕЦП в систему «ВнеОчереди» для управления очередью в кабинетах.',
   },
   {
@@ -61,7 +61,7 @@ const steps = [
     system: 'ВнеОчереди',
     systemColor: '#E91E8C',
     role: 'Врач',
-    roleColor: '#1E6FA8',
+    roleColor: '#3A9BD9',
     description: 'Врач вызывает пациента в кабинет через систему «ВнеОчереди». Статус обновляется на ТВ-экране.',
   },
   {
@@ -70,7 +70,7 @@ const steps = [
     system: 'ВнеОчереди',
     systemColor: '#E91E8C',
     role: 'Пациент',
-    roleColor: '#BE185D',
+    roleColor: '#E91E8C',
     description: 'Пациент получает уведомление о готовности к приёму врача через ТВ-экран и push-уведомление.',
   },
   {
@@ -79,7 +79,7 @@ const steps = [
     system: 'ЕЦП МИС',
     systemColor: '#0052CC',
     role: 'Врач',
-    roleColor: '#1E6FA8',
+    roleColor: '#3A9BD9',
     description: 'Врач проводит осмотр пациента, вносит данные в МИС ЕЦП, оформляет заключение и назначения.',
   },
   {
@@ -88,7 +88,7 @@ const steps = [
     system: 'ВнеОчереди',
     systemColor: '#E91E8C',
     role: 'Врач',
-    roleColor: '#1E6FA8',
+    roleColor: '#3A9BD9',
     description: 'Врач завершает обслуживание пациента. Система обновляет статус в очереди и архивирует талон.',
   },
 ]
@@ -98,30 +98,15 @@ interface StepTimelineProps {
 }
 
 function StepBadge({ item }: { item: typeof steps[number] }) {
-  if (item.step === 6) {
-    return (
-      <span
-        className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-full text-slate-900"
-        style={{
-          background: 'linear-gradient(90deg, rgba(0,82,204,0.14) 0%, rgba(0,82,204,0.14) 48%, rgba(233,30,140,0.14) 52%, rgba(233,30,140,0.14) 100%)',
-        }}
-      >
-        <span style={{ color: '#0052CC' }}>ЕЦП</span>
-        <span className="mx-1 text-slate-500">-</span>
-        <span style={{ color: '#E91E8C' }}>ВнеОчереди</span>
-      </span>
-    )
-  }
-
   return (
     <span
       className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-full"
       style={{
-        backgroundColor: item.systemColor + '18',
-        color: item.systemColor,
+        backgroundColor: item.roleColor + '18',
+        color: item.roleColor,
       }}
     >
-      {item.system}
+      {item.role}
     </span>
   )
 }
@@ -175,8 +160,8 @@ export default function StepTimeline({ onOpenStep }: StepTimelineProps) {
                           {item.title}
                         </h3>
                         <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
-                        <div className="mt-3 text-xs font-semibold" style={{ color: item.roleColor }}>
-                          Роль: {item.role}
+                        <div className="mt-3 text-xs font-semibold" style={{ color: item.systemColor }}>
+                          Система: {item.system}
                         </div>
                       </div>
                     </button>
