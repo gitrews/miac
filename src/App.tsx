@@ -26,7 +26,7 @@ function App() {
     const url = new URL(window.location.href)
     if (url.searchParams.has('step')) {
       url.searchParams.delete('step')
-      window.history.back()
+      window.history.replaceState({}, '', url.pathname + url.search)
     }
   }, [])
 
