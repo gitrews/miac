@@ -39,7 +39,7 @@ export default function Navbar() {
       <div className="container-wide flex items-center justify-between h-16 md:h-20">
         <a href="#hero" onClick={(e) => handleClick(e, '#hero')} className="flex items-center gap-2.5">
           <img src="./images/yamal-checkup-logo.svg" alt="Logo" className="h-8 w-auto object-contain" />
-          <span className="font-display text-xl font-bold text-slate-900 hidden sm:block">
+          <span className="font-display text-xl font-bold text-slate-900">
             Ямальский чек-ап
           </span>
         </a>
