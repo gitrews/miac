@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Layout from './components/Layout'
 import Hero from './components/Hero'
 import ProcessOverview from './components/ProcessOverview'
@@ -18,14 +18,16 @@ function App() {
     setActiveStep(step)
     const url = new URL(window.location.href)
     url.searchParams.set('step', String(step))
-    window.history.replaceState({ step }, '', url.toString())
+    window.history.pushState({ step }, '', url.toString())
   }, [])
 
   const closeStep = useCallback(() => {
     setActiveStep(null)
     const url = new URL(window.location.href)
-    url.searchParams.delete('step')
-    window.history.replaceState({}, '', url.pathname + url.search)
+    if (url.searchParams.has('step')) {
+      url.searchParams.delete('step')
+      window.history.back()
+    }
   }, [])
 
   const nextStep = useCallback(() => {
@@ -34,7 +36,7 @@ function App() {
       if (next !== prev && next !== null) {
         const url = new URL(window.location.href)
         url.searchParams.set('step', String(next))
-        window.history.replaceState({ step: next }, '', url.toString())
+        window.history.pushState({ step: next }, '', url.toString())
       }
       return next
     })
@@ -46,10 +48,24 @@ function App() {
       if (prevStep !== prev && prevStep !== null) {
         const url = new URL(window.location.href)
         url.searchParams.set('step', String(prevStep))
-        window.history.replaceState({ step: prevStep }, '', url.toString())
+        window.history.pushState({ step: prevStep }, '', url.toString())
       }
       return prevStep
     })
+  }, [])
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search)
+      const step = parseInt(params.get('step') || '', 10)
+      if (isNaN(step)) {
+        setActiveStep(null)
+      } else {
+        setActiveStep(step)
+      }
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
   }, [])
 
   return (
