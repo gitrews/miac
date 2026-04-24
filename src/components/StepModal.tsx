@@ -717,6 +717,7 @@ function renderStepContent(step: number) {
 }
 
 export default function StepModal({ step, onClose, onNext, onPrev }: StepModalProps) {
+  const scrollRef = useRef<HTMLDivElement>(null)
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -729,8 +730,10 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
   useEffect(() => {
     if (step !== null) {
       document.body.style.overflow = 'hidden'
-      window.scrollTo(0, 0)
       window.addEventListener('keydown', handleKeyDown)
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = 0
+      }
     } else {
       document.body.style.overflow = ''
     }
@@ -789,7 +792,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto bg-slate-50">
+        <div ref={scrollRef} className="flex-1 overflow-y-auto bg-slate-50">
           <div className={`${'max-w-7xl'} mx-auto px-4 md:px-6 py-6 md:py-10`}>
             {renderStepContent(step)}
 
