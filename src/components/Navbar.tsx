@@ -36,7 +36,7 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <div className="container-wide flex items-center justify-between h-16 md:h-20">
+      <div className="container-wide flex items-center justify-between h-16 md:h-20 px-4 sm:px-6 lg:px-8">
         <a href="#hero" onClick={(e) => handleClick(e, '#hero')} className="flex items-center gap-2.5">
           <img src="./images/yamal-checkup-logo.svg" alt="Logo" className="h-8 w-auto object-contain" />
           <span className="font-display text-xl font-bold text-slate-900">
