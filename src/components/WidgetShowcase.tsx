@@ -88,10 +88,10 @@ export default function WidgetShowcase({
           className="absolute inset-0 w-full h-full object-contain bg-slate-100"
         />
 
-        <div className="absolute top-16 right-4 w-[42%] max-w-[460px] min-w-[220px]">
+        <div className="absolute inset-0 flex items-start justify-end pt-16 pr-4">
           {showClickHint && (
             <motion.div
-              className="absolute right-full top-1/2 -translate-y-1/2 mr-2 flex flex-col items-center gap-1 z-10"
+              className="flex flex-col items-center gap-1 shrink-0 mr-3 mt-12 z-10"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
             >
@@ -108,7 +108,7 @@ export default function WidgetShowcase({
             </motion.div>
           )}
 
-          <div className="relative">
+          <div className="w-[42%] max-w-[460px] min-w-[220px] relative">
             {normalizedImages.map((img, index) => (
               <div
                 key={img.src}
