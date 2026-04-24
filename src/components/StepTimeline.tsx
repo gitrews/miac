@@ -4,7 +4,7 @@ const steps = [
   {
     step: 1,
     title: 'Запись в регистратуру',
-    system: 'ВнеОчереди',
+    system: 'Терминал, Мобильное приложение',
     systemColor: '#E91E8C',
     role: 'Пациент',
     roleColor: '#E91E8C',
@@ -13,7 +13,7 @@ const steps = [
   {
     step: 2,
     title: 'Вызов пациента в окно',
-    system: 'ВнеОчереди',
+    system: 'Виджет ВнеОчереди',
     systemColor: '#E91E8C',
     role: 'Регистратор',
     roleColor: '#2EC4B6',
@@ -22,7 +22,7 @@ const steps = [
   {
     step: 3,
     title: 'Уведомление пациента',
-    system: 'ВнеОчереди',
+    system: 'Экран вызова (ТВ), Мобильное приложение',
     systemColor: '#E91E8C',
     role: 'Пациент',
     roleColor: '#E91E8C',
@@ -31,7 +31,7 @@ const steps = [
   {
     step: 4,
     title: 'Оформление услуг',
-    system: 'ЕЦП МИС',
+    system: 'ЕЦП.МИС',
     systemColor: '#0052CC',
     role: 'Регистратор',
     roleColor: '#2EC4B6',
@@ -40,7 +40,7 @@ const steps = [
   {
     step: 5,
     title: 'Завершение обслуживания',
-    system: 'ВнеОчереди',
+    system: 'Виджет ВнеОчереди',
     systemColor: '#E91E8C',
     role: 'Регистратор',
     roleColor: '#2EC4B6',
@@ -58,7 +58,7 @@ const steps = [
   {
     step: 7,
     title: 'Вызов пациента в кабинет',
-    system: 'ВнеОчереди',
+    system: 'Виджет ВнеОчереди',
     systemColor: '#E91E8C',
     role: 'Врач',
     roleColor: '#3A9BD9',
@@ -67,7 +67,7 @@ const steps = [
   {
     step: 8,
     title: 'Уведомление пациента',
-    system: 'ВнеОчереди',
+    system: 'Экран вызова (ТВ), Мобильное приложение',
     systemColor: '#E91E8C',
     role: 'Пациент',
     roleColor: '#E91E8C',
@@ -76,7 +76,7 @@ const steps = [
   {
     step: 9,
     title: 'Осмотр пациента',
-    system: 'ЕЦП МИС',
+    system: 'ЕЦП.МИС',
     systemColor: '#0052CC',
     role: 'Врач',
     roleColor: '#3A9BD9',
@@ -85,7 +85,7 @@ const steps = [
   {
     step: 10,
     title: 'Завершение обслуживания',
-    system: 'ВнеОчереди',
+    system: 'Виджет ВнеОчереди',
     systemColor: '#E91E8C',
     role: 'Врач',
     roleColor: '#3A9BD9',
