@@ -4,9 +4,9 @@ import { Menu, X } from 'lucide-react'
 const navLinks = [
   { href: '#hero', label: 'Главная' },
   { href: '#process', label: 'Процесс' },
-  { href: '#roles', label: 'Роли' },
+  { href: '#roles', label: 'Роли и задачи' },
   { href: '#timeline', label: 'Этапы' },
-  { href: '#cases', label: 'Кейсы' },
+  { href: '#cases', label: 'Интерфейсы' },
 ]
 
 export default function Navbar() {

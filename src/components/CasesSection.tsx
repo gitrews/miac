@@ -49,7 +49,7 @@ export default function CasesSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-display text-3xl md:text-4xl font-bold text-slate-900">
-            Кейсы и интерфейсы
+            Интерфейсы
           </h2>
         </motion.div>
 

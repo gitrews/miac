@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { UserCheck, Stethoscope, Users, ArrowRightLeft, Bell, ClipboardList } from 'lucide-react'
+import { UserCheck, Stethoscope, Users, Monitor, Database } from 'lucide-react'
 
 const roles = [
   {
@@ -44,23 +44,33 @@ const roles = [
       'Получение результатов',
     ],
   },
-]
-
-const interactions = [
   {
-    icon: ArrowRightLeft,
-    title: 'Интеграция систем',
-    description: 'Двусторонний обмен данными между АИС УЭО «ВнеОчереди» и МИС «ЕЦП» через защищённый API.',
+    id: 'vneocheredi',
+    icon: Monitor,
+    title: 'ВнеОчереди',
+    color: 'bg-[#FFF1F2] text-[#BE123C]',
+    borderColor: 'border-[#FDA4AF]',
+    description: 'АИС управления электронной очередью: регистрация, вызов, уведомления, отчётность.',
+    actions: [
+      'Электронная запись пациентов',
+      'Автоматический вызов в окно',
+      'SMS и push-уведомления',
+      'Аналитика и мониторинг очереди',
+    ],
   },
   {
-    icon: Bell,
-    title: 'Оповещения',
-    description: 'Автоматические уведомления пациентам через SMS, push и голосовые сообщения о статусе очереди.',
-  },
-  {
-    icon: ClipboardList,
-    title: 'Единый талон',
-    description: 'Единый электронный талон прохождения профосмотра синхронизируется между системами в реальном времени.',
+    id: 'ecp',
+    icon: Database,
+    title: 'МИС.ЕЦП',
+    color: 'bg-[#EFF6FF] text-[#1E6FA8]',
+    borderColor: 'border-[#93C5FD]',
+    description: 'Медицинская информационная система: ведение записей, услуг, назначений и отчётности.',
+    actions: [
+      'Ведение электронной медкарты',
+      'Учёт услуг и назначений',
+      'Интеграция с лабораториями',
+      'Формирование отчётов',
+    ],
   },
 ]
 
@@ -75,11 +85,11 @@ export default function RolesInteractions() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-display text-3xl md:text-4xl font-bold text-slate-900">
-            Роли и взаимодействия
+            Роли и задачи
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-16">
+        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-6 mb-16">
           {roles.map((role, index) => (
             <motion.div
               key={role.id}
@@ -105,25 +115,7 @@ export default function RolesInteractions() {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {interactions.map((item, index) => (
-            <motion.div
-              key={item.title}
-              className="flex gap-4 p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-slate-200 transition-colors"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-200/60 flex items-center justify-center text-slate-700">
-                <item.icon size={20} />
-              </div>
-              <div>
-                <h4 className="font-semibold text-slate-900 mb-1">{item.title}</h4>
-                <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+
       </div>
     </section>
   )

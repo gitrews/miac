@@ -5,13 +5,13 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <img src="./images/yamal-checkup-logo.svg" alt="Logo" className="h-7 w-auto opacity-70" />
-            <span className="text-sm font-medium text-slate-300">
-              Интеграция АИС УЭО «ВнеОчереди» и МИС «ЕЦП»
-            </span>
+            <a href="https://miac.yanao.ru/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+              МИАЦ ЯНАО
+            </a>
           </div>
-          <span className="text-xs">
-            © {new Date().getFullYear()} МИАЦ ЯНАО
-          </span>
+          <a href="https://ocheredi.com" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-200 transition-colors">
+            2026 ВнеОчереди
+          </a>
         </div>
       </div>
     </footer>
