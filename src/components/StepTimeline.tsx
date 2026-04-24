@@ -51,7 +51,7 @@ const steps = [
     title: 'Запись на Профосмотр',
     system: 'ЕЦП',
     systemColor: '#0052CC',
-    role: 'ЕЦП',
+    role: 'Интеграция',
     roleColor: '#0052CC',
     description: 'Данные о записи на профосмотр синхронизируются из МИС ЕЦП в систему «ВнеОчереди» для управления очередью в кабинетах.',
   },
@@ -100,7 +100,7 @@ interface StepTimelineProps {
 function StepBadge({ item }: { item: typeof steps[number] }) {
   return (
     <span
-      className="text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-full"
+      className="text-xs font-bold px-2 py-0.5 rounded-full"
       style={{
         backgroundColor: item.roleColor + '18',
         color: item.roleColor,
@@ -161,7 +161,7 @@ export default function StepTimeline({ onOpenStep }: StepTimelineProps) {
                         </h3>
                         <p className="text-sm text-slate-600 leading-relaxed">{item.description}</p>
                         <div className="mt-3 text-xs font-semibold" style={{ color: item.systemColor }}>
-                          Система: {item.system}
+                          {item.system}
                         </div>
                       </div>
                     </button>
