@@ -23,7 +23,7 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
     return () => container.removeEventListener('click', handleClick)
   }, [onOpenStep])
 
-  const svgHTML = `<svg viewBox="0 0 920 820" preserveAspectRatio="xMinYMin meet" style="min-width:920px;height:820px;display:block">
+  const svgHTML = `<svg viewBox="0 0 902 820" preserveAspectRatio="xMinYMin meet" style="width:100%;height:auto;max-width:902px;display:block">
 <defs><linearGradient id="intGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0052CC"/><stop offset="100%" stop-color="#E91E8C"/></linearGradient></defs>
 <g opacity="1"><rect x="274" y="2" width="196" height="36" rx="8" fill="#2EC4B612" stroke="#2EC4B635" stroke-width="1"/><text x="372" y="25" text-anchor="middle" fill="#2EC4B6" font-size="12" font-weight="700" font-family="Inter, sans-serif">Пациент</text></g>
 <g opacity="1"><rect x="484" y="2" width="196" height="36" rx="8" fill="#3A9BD912" stroke="#3A9BD935" stroke-width="1"/><text x="582" y="25" text-anchor="middle" fill="#3A9BD9" font-size="12" font-weight="700" font-family="Inter, sans-serif">Регистратор</text></g>
