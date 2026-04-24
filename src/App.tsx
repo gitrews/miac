@@ -56,8 +56,8 @@ function App() {
     <Layout>
       <Hero />
       <ProcessOverview onOpenStep={openStep} />
-      <RolesInteractions />
       <StepTimeline onOpenStep={openStep} />
+      <RolesInteractions />
       <CasesSection />
       <StepModal
         step={activeStep}

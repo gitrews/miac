@@ -3,9 +3,9 @@ import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { href: '#hero', label: 'Главная' },
-  { href: '#process', label: 'Процесс' },
-  { href: '#roles', label: 'Роли и задачи' },
+  { href: '#process', label: 'Схема' },
   { href: '#timeline', label: 'Этапы' },
+  { href: '#roles', label: 'Роли и задачи' },
   { href: '#cases', label: 'Интерфейсы' },
 ]
 
@@ -50,7 +50,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleClick(e, link.href)}
-              className="relative text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+              className="relative type-nav text-slate-600 hover:text-slate-900 transition-colors"
             >
               {link.label}
             </a>
@@ -74,7 +74,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleClick(e, link.href)}
-                className="text-sm font-medium px-3 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors"
+                className="type-nav px-3 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors"
               >
                 {link.label}
               </a>

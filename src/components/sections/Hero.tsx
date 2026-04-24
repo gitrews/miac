@@ -15,12 +15,12 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-4xl mx-auto">
         <motion.span
-          className="inline-block uppercase tracking-[0.15em] mb-6 text-xs font-semibold text-primary-700 bg-primary-50 border border-primary-200 rounded-full px-4 py-1.5"
+          className="inline-block uppercase tracking-[0.15em] mb-6 text-sm font-semibold text-primary-700 bg-primary-50 border border-primary-200 rounded-full px-5 py-2"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Процесс обслуживания пациентов
+          Описание процесса обслуживания пациентов
         </motion.span>
 
         <motion.h1
@@ -34,12 +34,12 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="text-muted text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
+          className="text-muted text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
         >
-          Интеграция АИС УЭО «ВнеОчереди» и МИС «ЕЦП» для&nbsp;оптимизации потока пациентов и повышения качества медицинского обслуживания
+          Пользовательские пути пациента, регистратора, врача, а также описание точек интеграции АИС УЭО ВнеОчереди и ЕЦП.МИС
         </motion.p>
 
         <motion.div

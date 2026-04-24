@@ -2,38 +2,39 @@ import { motion } from 'framer-motion'
 
 const cases = [
   {
-    title: 'Рабочее место регистратора',
-    description: 'Интерфейс оператора для управления очередью, вызова пациентов и мониторинга статусов.',
+    title: 'Мобильное приложение МИАЦ ЯНАО для пациента',
+    description: 'Пациент записывается на профосмотр, получает вызов и отслеживает маршрут обслуживания без бумажного талона.',
     images: [
-      './images/mis-registrar-select-patient.jpg',
-      './images/mis-registrar-select-service.jpg',
-      './images/mis-registrar-service-form.jpg',
+      './images/screens/step1-mp-1.png',
+      './images/screens/step1-mp-2.png',
+      './images/screens/step3-mp-notification.png',
     ],
   },
   {
-    title: 'ТВ-экран и уведомления',
-    description: 'Отображение очереди на экранах в зале ожидания и push-уведомления для пациентов.',
+    title: 'Терминал для самозаписи пациента',
+    description: 'Альтернативный сценарий записи на месте: выбор услуги, ввод данных и печать талона в единой цифровой очереди.',
     images: [
+      './images/screens/step1-term-1.jpg',
+      './images/screens/step1-term-2.jpg',
+      './images/screens/step1-term-3.jpg',
+    ],
+  },
+  {
+    title: 'Экран вызова ТВ',
+    description: 'ТВ-экран в зоне ожидания показывает вызов, номер окна или кабинета и помогает пациенту ориентироваться по маршруту.',
+    images: [
+      './images/screens/step3-tv-calling.jpg',
       './images/step3/mp-awaiting.jpg',
       './images/step3/mp-notification.png',
     ],
   },
   {
-    title: 'Виджеты оператора',
-    description: 'Компактные виджеты для быстрого доступа к ключевым функциям рабочего места.',
+    title: 'Рабочее место регистратора и врача',
+    description: 'МИС ЕЦП и виджет «ВнеОчереди» работают рядом: оформление услуг, вызов пациента и завершение обслуживания идут в одном контуре.',
     images: [
+      './images/mis-registrar-select-patient.jpg',
       './images/step2-widget-1.jpg',
-      './images/step2-widget-2.jpg',
-      './images/step2-widget-3.jpg',
-    ],
-  },
-  {
-    title: 'Оформление в МИС ЕЦП',
-    description: 'Процесс оформления услуг и работы с медицинской документацией в системе ЕЦП.',
-    images: [
-      './images/step4/page-3.png',
-      './images/step4/page-4.png',
-      './images/step4/page-5.png',
+      './images/mis-registrar-exam-form.jpg',
     ],
   },
 ]
@@ -43,17 +44,17 @@ export default function CasesSection() {
     <section id="cases" className="section bg-slate-50 px-4 sm:px-6">
       <div className="container-wide">
         <motion.div
-          className="mb-12 md:mb-16"
+          className="mb-8 md:mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-slate-900">
+          <h2 className="type-section-title">
             Интерфейсы
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
           {cases.map((item, index) => (
             <motion.div
               key={item.title}
@@ -63,7 +64,7 @@ export default function CasesSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="p-5 md:p-6 border-b border-slate-100">
-                <h3 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h3>
+                <h3 className="type-card-title mb-1">{item.title}</h3>
                 <p className="text-sm text-slate-600">{item.description}</p>
               </div>
               <div className="p-4 md:p-5">
@@ -76,7 +77,7 @@ export default function CasesSection() {
                       <img
                         src={src}
                         alt={`${item.title} ${i + 1}`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-contain bg-white hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
                     </div>

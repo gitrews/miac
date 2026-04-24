@@ -80,56 +80,58 @@ export default function StepOverlay({ children }: StepOverlayProps) {
   return (
     <div className="fixed inset-0 z-[9998] flex flex-col bg-gradient-to-b from-white to-light animate-scale-in">
       {/* Header */}
-      <div className="flex items-center justify-between gap-4 px-4 sm:px-6 py-4 border-b border-black/5 bg-white/80 backdrop-blur-md shrink-0">
-        <div className="flex flex-col gap-1 min-w-0">
-          <div className="text-xs font-bold tracking-widest uppercase text-primary-600">
-            Шаг {currentStep}
-          </div>
-          <div className="flex items-center gap-3 min-w-0 flex-wrap">
+      <div className="px-4 sm:px-6 py-4 border-b border-black/5 bg-white/80 backdrop-blur-md shrink-0">
+        <div className="max-w-[1560px] mx-auto flex items-center justify-between gap-4">
+          <div className="flex flex-col gap-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="text-xs font-bold tracking-widest uppercase text-primary-600 min-w-[4.5rem] tabular-nums">
+                Шаг {currentStep}
+              </div>
+              <span
+                className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border shrink-0"
+                style={{
+                  color: label.color,
+                  backgroundColor: label.color + '14',
+                  borderColor: label.color + '30',
+                }}
+              >
+                {label.text}
+              </span>
+            </div>
             <h2 className="text-lg sm:text-xl font-bold text-dark truncate">{title}</h2>
-            <span
-              className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border shrink-0"
-              style={{
-                color: label.color,
-                backgroundColor: label.color + '14',
-                borderColor: label.color + '30',
-              }}
-            >
-              {label.text}
-            </span>
           </div>
-        </div>
 
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            onClick={prevStep}
-            disabled={!hasPrev}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-black/10 text-dark text-sm font-semibold hover:bg-light transition-all disabled:opacity-40 disabled:cursor-default shadow-soft"
-          >
-            <ChevronLeft size={16} />
-            Назад
-          </button>
-          <button
-            onClick={nextStep}
-            disabled={!hasNext}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-black/10 text-dark text-sm font-semibold hover:bg-light transition-all disabled:opacity-40 disabled:cursor-default shadow-soft"
-          >
-            Дальше
-            <ChevronRight size={16} />
-          </button>
-          <button
-            onClick={close}
-            className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white border border-black/10 text-dark hover:bg-light transition-all shadow-soft"
-            aria-label="Закрыть"
-          >
-            <X size={18} />
-          </button>
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={prevStep}
+              disabled={!hasPrev}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-black/10 text-dark text-sm font-semibold hover:bg-light transition-all disabled:opacity-40 disabled:cursor-default shadow-soft"
+            >
+              <ChevronLeft size={16} />
+              Назад
+            </button>
+            <button
+              onClick={nextStep}
+              disabled={!hasNext}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-black/10 text-dark text-sm font-semibold hover:bg-light transition-all disabled:opacity-40 disabled:cursor-default shadow-soft"
+            >
+              Дальше
+              <ChevronRight size={16} />
+            </button>
+            <button
+              onClick={close}
+              className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white border border-black/10 text-dark hover:bg-light transition-all shadow-soft"
+              aria-label="Закрыть"
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-[1560px] mx-auto">
           {children}
         </div>
       </div>

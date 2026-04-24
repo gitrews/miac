@@ -3,23 +3,62 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --font-sans: 'Inter', sans-serif;
+    --font-display: 'Playfair Display', serif;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-sans);
     color: #1A2B3C;
     background: #F8FAFC;
   }
 }
 
 @layer components {
-  .section-padding {
-    @apply py-16 md:py-24;
+  .type-nav {
+    @apply text-sm font-medium;
   }
+
+  .type-kicker {
+    @apply text-xs font-bold tracking-wider uppercase;
+  }
+
+  .type-section-title {
+    @apply font-display text-3xl md:text-4xl font-bold text-slate-900;
+  }
+
+  .type-card-title {
+    @apply text-lg font-bold text-slate-900;
+  }
+
+  .type-button {
+    @apply text-sm font-semibold;
+  }
+
+  .section {
+    @apply pt-12 pb-16 md:pt-16 md:pb-24;
+  }
+
+  .section-padding {
+    @apply pt-12 pb-16 md:pt-16 md:pb-24;
+  }
+
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
   .container-wide {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
   .process-svg-wrapper svg {
     width: 100%;
     height: auto;
