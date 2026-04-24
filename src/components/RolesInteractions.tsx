@@ -6,8 +6,8 @@ const roles = [
     id: 'registrar',
     icon: UserCheck,
     title: 'Регистратура',
-    color: 'bg-primary-100 text-primary-700',
-    borderColor: 'border-primary-200',
+    color: 'bg-[#CCFBF1] text-[#0F766E]',
+    borderColor: 'border-[#99F6E4]',
     description: 'Первичная регистрация пациентов, запись на профосмотр, управление очередью вызова.',
     actions: [
       'Регистрация через «ВнеОчереди»',
@@ -20,8 +20,8 @@ const roles = [
     id: 'doctor',
     icon: Stethoscope,
     title: 'Врач',
-    color: 'bg-secondary-100 text-secondary-700',
-    borderColor: 'border-secondary-200',
+    color: 'bg-[#DBEAFE] text-[#1E6FA8]',
+    borderColor: 'border-[#93C5FD]',
     description: 'Приём пациентов, проведение осмотров, работа с медицинской документацией в МИС ЕЦП.',
     actions: [
       'Вызов пациента в кабинет',
@@ -34,8 +34,8 @@ const roles = [
     id: 'patient',
     icon: Users,
     title: 'Пациент',
-    color: 'bg-accent-100 text-accent-700',
-    borderColor: 'border-accent-200',
+    color: 'bg-[#FCE8F3] text-[#B7156E]',
+    borderColor: 'border-[#F9A8D4]',
     description: 'Получение уведомлений, прохождение осмотра, отслеживание статуса в очереди.',
     actions: [
       'Получение SMS-уведомлений',
@@ -96,7 +96,7 @@ export default function RolesInteractions() {
               <ul className="space-y-2.5">
                 {role.actions.map((action, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                    <span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${role.color.split(' ')[0].replace('bg-', 'bg-').replace('100', '400')}`} />
+                    <span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${role.id === 'patient' ? 'bg-[#E91E8C]' : role.id === 'registrar' ? 'bg-[#2EC4B6]' : 'bg-[#3A9BD9]'}`} />
                     {action}
                   </li>
                 ))}
