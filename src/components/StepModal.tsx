@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import WidgetShowcase from './WidgetShowcase'
 
 const stepTitles: Record<number, string> = {
   1: 'Запись в регистратуру',
@@ -56,10 +57,11 @@ const terminalBenefits = [
 ]
 
 // --- Step 2 data — Widget ---
-const step2Slides = [
-  { src: './images/screens/step2-widget-awaiting.jpg', caption: 'Виджет оператора — список пациентов, ожидающих вызова' },
-  { src: './images/screens/step2-widget-calling.jpg', caption: 'Вызов пациента — виджет показывает текущий талон и время вызова' },
-  { src: './images/screens/step2-widget-serving.jpg', caption: 'Обслуживание пациента — статус «В кабинете» и таймер приёма' },
+const widgetImages = [
+  './images/widgets/WidgetContent1.png',
+  './images/widgets/WidgetContent2.png',
+  './images/widgets/WidgetContent.png',
+  './images/widgets/agentCompact.png',
 ]
 
 const step2Benefits = [
@@ -437,9 +439,12 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                         <line x1="12" y1="17" x2="12" y2="21" />
                       </svg>
                     </div>
-                    <h3 className="text-base font-semibold text-[#E91E8C]">Виджет оператора «ВнеОчереди»</h3>
+                    <h3 className="text-base font-semibold text-[#E91E8C]">Виджет оператора «ВнеОчереди» поверх МИС</h3>
                   </div>
-                  <Carousel slides={step2Slides} width={700} />
+                  <p className="text-sm text-slate-600 mb-4">
+                    Виджет отображается поверх интерфейса МИС ЕЦП. Регистратору и врачу не нужно переключаться между программами — управление очередью всегда под рукой.
+                  </p>
+                  <WidgetShowcase images={widgetImages} interval={3000} />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <BenefitsCard title="Виджет оператора" color="#E91E8C" benefits={step2Benefits} />
