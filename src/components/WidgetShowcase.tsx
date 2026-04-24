@@ -91,18 +91,18 @@ export default function WidgetShowcase({
         <div className="absolute inset-0 flex items-start justify-end pt-16 pr-4">
           {showClickHint && (
             <motion.div
-              className="absolute right-[-70px] top-16 flex flex-col items-center gap-1 z-10"
+              className="absolute right-[-80px] top-16 flex items-center gap-2 z-10"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
             >
-              <motion.div
-                className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm border border-slate-200 shadow-sm flex items-center justify-center"
-                animate={{ x: [0, -6, 0] }}
+              <motion.span
+                className="text-sm text-slate-500"
+                animate={{ x: [0, -4, 0] }}
                 transition={{ repeat: Infinity, duration: 0.9, ease: 'easeInOut' }}
               >
-                <span className="text-xl text-slate-700">←</span>
-              </motion.div>
-              <span className="text-[10px] text-white font-semibold bg-black/50 backdrop-blur-sm rounded px-2 py-1 whitespace-nowrap">
+                ←
+              </motion.span>
+              <span className="text-xs text-slate-500 whitespace-nowrap">
                 Нажми сюда
               </span>
             </motion.div>
