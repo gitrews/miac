@@ -56,10 +56,11 @@ const terminalBenefits = [
 ]
 
 const widgetImages = [
-  '/images/widgets/WidgetContent1.png',
-  '/images/widgets/WidgetContent2.png',
-  { src: '/images/widgets/agentCompact.png', className: 'w-3/5 ml-auto' },
-  '/images/widgets/WidgetContent.png',
+  { src: '/images/widgets/Widget0.png', className: 'w-2/5 ml-auto' },
+  { src: '/images/widgets/WidgetContent1.png', className: 'w-5/6 ml-auto' },
+  { src: '/images/widgets/WidgetContent2.png', className: 'w-5/6 ml-auto' },
+  { src: '/images/widgets/agentCompact.png', className: 'w-2/5 ml-auto' },
+  { src: '/images/widgets/WidgetContent.png', className: 'w-5/6 ml-auto' },
 ]
 
 const queueBenefits = [
@@ -539,7 +540,7 @@ function QueueWidgetContent({ actor }: { actor: 'регистратор' | 'вр
           images={widgetImages}
           interval={3200}
           overlayLabel={`Виджет ${actorTitle} поверх МИС`}
-          pauseAtIndex={2}
+          clickToAdvance
         />
       </div>
 
