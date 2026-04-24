@@ -484,16 +484,6 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
                   </div>
                   <div className="hidden lg:block w-px bg-slate-200 self-stretch" />
                   <div className="flex-1 flex flex-col">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-6 h-6 rounded-md bg-[#3A9BD9] flex items-center justify-center">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                          <line x1="8" y1="21" x2="16" y2="21" />
-                          <line x1="12" y1="17" x2="12" y2="21" />
-                        </svg>
-                      </div>
-                      <h3 className="text-base font-semibold text-[#3A9BD9]">ТВ-экран вызова</h3>
-                    </div>
                     <Carousel slides={step3TVSlides} width={700} />
                   </div>
                 </div>
