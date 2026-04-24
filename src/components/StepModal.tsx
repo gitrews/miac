@@ -255,16 +255,6 @@ function Carousel({
           </button>
         )}
 
-        {slides.length > 1 && !overlayControls && (
-          <button
-            onClick={handleNext}
-            className="flex-shrink-0 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 flex items-center justify-center text-slate-600 transition-colors"
-            aria-label="Следующий слайд"
-          >
-            <ChevronRight size={16} />
-          </button>
-        )}
-
         <div
           className="overflow-hidden rounded-2xl bg-white border border-slate-200 flex-1 min-w-0 w-full shadow-sm"
           style={frameMaxWidth ? { maxWidth: frameMaxWidth } : undefined}
@@ -316,6 +306,16 @@ function Carousel({
             ))}
           </div>
         </div>
+
+        {slides.length > 1 && !overlayControls && (
+          <button
+            onClick={handleNext}
+            className="flex-shrink-0 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 flex items-center justify-center text-slate-600 transition-colors"
+            aria-label="Следующий слайд"
+          >
+            <ChevronRight size={16} />
+          </button>
+        )}
 
       </div>
 
