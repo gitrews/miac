@@ -48,13 +48,6 @@ export default function ProcessScheme() {
         </div>
 
         <div className="overflow-x-auto pb-4 -mx-4 px-4">
-          <div className="lg:hidden flex items-center gap-2 mb-4 text-sm text-muted">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-            Листайте вправо
-          </div>
-
           <div className="rounded-2xl bg-white border border-black/5 shadow-soft p-4 md:p-6">
             <div dangerouslySetInnerHTML={{ __html: svgHTML }} />
           </div>

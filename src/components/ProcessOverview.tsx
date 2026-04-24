@@ -89,14 +89,7 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
         </div>
 
         <div ref={containerRef} className="overflow-x-auto pb-4 -mx-2 px-2 md:mx-0 md:px-0">
-          <div className="lg:hidden flex items-center gap-2 mb-4 text-sm text-muted">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-            Листайте вправо
-          </div>
-
-          <div className="rounded-2xl bg-white border border-black/5 shadow-soft px-[62px] py-[18px]">
+          <div className="rounded-2xl bg-white border border-black/5 shadow-soft px-4 md:px-[62px] py-[18px]">
             <div className="w-full" dangerouslySetInnerHTML={{ __html: svgHTML }} />
           </div>
         </div>

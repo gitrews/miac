@@ -729,6 +729,7 @@ export default function StepModal({ step, onClose, onNext, onPrev }: StepModalPr
   useEffect(() => {
     if (step !== null) {
       document.body.style.overflow = 'hidden'
+      window.scrollTo(0, 0)
       window.addEventListener('keydown', handleKeyDown)
     } else {
       document.body.style.overflow = ''

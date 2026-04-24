@@ -65,13 +65,11 @@ export default function Hero() {
             Листайте вниз
           </motion.span>
           <motion.div
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-slate-300/70 bg-white/70 shadow-lg shadow-slate-300/30 backdrop-blur-sm"
+            className="flex h-12 w-12 items-center justify-center"
             animate={{
               y: [0, 8, 0],
               boxShadow: [
-                '0 8px 24px rgba(148,163,184,0.18)',
-                '0 14px 32px rgba(148,163,184,0.28)',
-                '0 8px 24px rgba(148,163,184,0.18)',
+                'none','none','none'
               ],
             }}
             transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
