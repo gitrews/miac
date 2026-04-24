@@ -74,11 +74,6 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
             Листайте вправо
           </div>
 
-          <div className="flex items-center gap-4 mb-4 text-xs text-slate-600">
-            <span className="font-semibold text-slate-800">Система:</span>
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-[#E91E8C] opacity-70" />ВнеОчереди</span>
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-[#0052CC] opacity-70" />ЕЦП МИС</span>
-          </div>
           <div className="rounded-2xl bg-white border border-black/5 shadow-soft p-4 md:p-6">
             <div dangerouslySetInnerHTML={{ __html: svgHTML }} />
           </div>
