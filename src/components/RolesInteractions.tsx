@@ -74,15 +74,9 @@ export default function RolesInteractions() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary-600 text-sm font-bold tracking-wider uppercase mb-3 block">
-            Участники
-          </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-slate-900">
             Роли и взаимодействия
           </h2>
-          <p className="mt-4 text-slate-600 max-w-2xl">
-            Процесс объединяет три ключевые роли и обеспечивает бесшовное взаимодействие через интеграцию двух информационных систем.
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-16">

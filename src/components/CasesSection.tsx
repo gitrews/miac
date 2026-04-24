@@ -48,15 +48,9 @@ export default function CasesSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary-600 text-sm font-bold tracking-wider uppercase mb-3 block">
-            Примеры
-          </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-slate-900">
             Кейсы и интерфейсы
           </h2>
-          <p className="mt-4 text-slate-600 max-w-2xl">
-            Реальные скриншоты интерфейсов систем, используемых в процессе обслуживания пациентов.
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">

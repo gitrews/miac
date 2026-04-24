@@ -61,10 +61,7 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
     <section id="process" className="section-padding bg-light">
       <div className="section-container">
         <div className="mb-10">
-          <span className="inline-block text-xs font-bold tracking-wider uppercase text-primary-600 bg-primary-50 rounded-full px-3 py-1 mb-4">
-            Схема
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-dark mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-dark">
             Схема процесса
           </h2>
         </div>

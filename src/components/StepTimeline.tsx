@@ -97,15 +97,9 @@ export default function StepTimeline({ onOpenStep }: StepTimelineProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary-600 text-sm font-bold tracking-wider uppercase mb-3 block">
-            Пошагово
-          </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-slate-900">
             Этапы процесса
           </h2>
-          <p className="mt-4 text-slate-600 max-w-2xl">
-            Десять ключевых шагов от записи пациента до завершения обслуживания. Нажмите на этап для подробностей.
-          </p>
         </motion.div>
 
         <div className="relative">
