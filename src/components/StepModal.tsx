@@ -673,10 +673,9 @@ function IntegrationContent() {
         </ul>
       </div>
 
-      <div className="mt-2">
-        <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
-        <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-          <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+      <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
+      <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
+        <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/customer/createOrUpdate
 Content-Type: application/json
 
@@ -691,8 +690,7 @@ Content-Type: application/json
     "phone": "+79991234567"
   }
 }`}
-          </pre>
-        </div>
+        </pre>
       </div>
 
       <div className="mt-2">
@@ -724,10 +722,9 @@ Content-Type: application/json
         </ul>
       </div>
 
-      <div className="mt-2">
-        <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
-        <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-          <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+      <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
+      <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
+        <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/line/join
 Content-Type: application/json
 
@@ -743,8 +740,7 @@ Content-Type: application/json
   "deviceType": "Browser",
   "priority": false
 }`}
-          </pre>
-        </div>
+        </pre>
       </div>
 
       <div className="mt-2">
@@ -790,6 +786,7 @@ Content-Type: application/json
             <div>
               <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/places</h4>
               <p className="text-xs text-slate-600 mb-3">Возвращает список мест, очередей (линий) и услуг, зарегистрированных на сервере. Используется при первоначальной настройке для получения идентификаторов.</p>
+              <h5 className="text-xs font-semibold text-slate-500 mb-1">Пример запроса</h5>
               <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto mb-3">
                 <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/places
@@ -830,6 +827,7 @@ Content-Type: application/json
             <div>
               <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/line/todayPositions</h4>
               <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной линии.</p>
+              <h5 className="text-xs font-semibold text-slate-500 mb-1">Пример запроса</h5>
               <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto mb-3">
                 <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/line/todayPositions
