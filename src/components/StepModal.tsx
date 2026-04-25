@@ -112,23 +112,14 @@ const completionBenefits = [
   'Этот экран позже можно скорректировать без смены структуры',
 ]
 
-const integrationSteps = [
-  { label: '1. МИС ЕЦП формирует маршрут пациента', desc: 'Определяются кабинет, поток, услуга и слот приёма.' },
-  { label: '2. Создаётся запись во «ВнеОчереди»', desc: 'МИС отправляет API-запрос на создание электронного талона.' },
-  { label: '3. Возвращается shortCode и идентификатор записи', desc: 'Система очереди подтверждает создание талона и время обслуживания.' },
-  { label: '4. Статусы синхронизируются между системами', desc: 'Дальнейший вызов и завершение отражаются и в МИС, и во «ВнеОчереди».' },
-]
+const integrationSteps = [  { label: '1. Создание заявителя в ВнеОчереди', desc: 'МИС передаёт ФИО и контакты пациента через API upsert. ВнеОчереди возвращает customerId.' },  { label: '2. Создание записи на приём', desc: 'МИС отправляет customerId + список услуг. ВнеОчереди определяет кабинеты и рассчитывает маршрут.' },  { label: '3. Подтверждение талона', desc: 'ВнеОчереди возвращает shortCode, время приёма и порядок кабинетов.' },  { label: '4. Синхронизация статусов', desc: 'Вызов и завершение обслуживания отражаются в МИС и ВнеОчереди в реальном времени.' },]
 
 const integrationBenefits = [
   'Автоматическая запись в нужную очередь без участия сотрудника',
   'Единый цифровой маршрут от регистратуры до кабинета врача',
   'Снижение ошибок при ручной маршрутизации пациента',
   'Одинаковый источник правды для МИС и электронной очереди',
-]
-
-interface StepModalProps {
-  step: number | null
-  onClose: () => void
+const integrationBenefits = [  'Автоматическая запись без участия регистратора',  'Оптимальный маршрут по кабинетам рассчитывается автоматически',  'Единый цифровой маршрут от регистратуры до кабинета врача',  'Снижение ошибок при ручной маршрутизации пациента',  'Одинаковый источник правды для МИС и электронной очереди',]
   onNext: () => void
   onPrev: () => void
 }
@@ -636,11 +627,29 @@ function IntegrationContent() {
   return (
     <div className="space-y-10">
       <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
-        Интеграция через API «ВнеОчереди»: МИС ЕЦП автоматически передаёт кабинет, поток, услугу и временной слот, создавая запись в электронной очереди без участия регистратора.
+        МИС ЕЦП передаёт в ВнеОчереди ФИО пациента и список назначенных услуг. ВнеОчереди автоматически определяет, в каких кабинетах оказываются эти услуги, и рассчитывает оптимальный маршрут.
       </p>
 
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Пример API-запроса (МИС → ВнеОчереди)</h3>
+        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 1. Создание заявителя</h3>
+        <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+{`POST /integration/api/v1/customer/upsert
+Content-Type: application/json
+
+{
+  "apiKey": "3dfdc1ed-ce72-46d1-89c9-376df0f83237",
+  "person": {
+    "firstName": "Иван",
+    "middleName": "Иванович",
+    "lastName": "Иванов",
+    "phone": "+79990001122"
+  }
+}`}
+        </pre>
+      </div>
+
+      <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
+        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 2. Создание записи на приём</h3>
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /integration/api/v1/customer/appointments/create
 Content-Type: application/json
