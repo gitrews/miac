@@ -415,26 +415,44 @@ function DocumentIcon() {
   )
 }
 
-function StepVideo({ src, poster, frameHeight = 520, caption }: { src: string; poster: string; frameHeight?: number; caption?: string }) {
+function StepVideo({ src, frameHeight = 520, caption }: { src: string; frameHeight?: number; caption?: string }) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
-    video.playbackRate = 1.1
-    void video.play().catch(() => {})
+    const handleCanPlay = () => {
+      setLoaded(true)
+      video.playbackRate = 1.1
+      void video.play().catch(() => {})
+    }
+
+    video.addEventListener('canplaythrough', handleCanPlay)
+    // Fallback: if already cached
+    if (video.readyState >= 4) {
+      handleCanPlay()
+    }
+
+    return () => {
+      video.removeEventListener('canplaythrough', handleCanPlay)
+    }
   }, [src])
 
   return (
     <div className="flex flex-col items-center gap-3 w-full">
       <div className="overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-sm w-full">
-        <div className="flex items-center justify-center bg-slate-50" style={{ height: frameHeight }}>
+        <div className="flex items-center justify-center bg-slate-50 relative" style={{ height: frameHeight }}>
+          {!loaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-50 z-10">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#2EC4B6]" />
+            </div>
+          )}
           <video
             ref={videoRef}
             src={src}
-            poster={poster}
-            className="h-full w-auto max-w-full object-contain"
+            className={"h-full w-auto max-w-full object-contain transition-opacity duration-300 " + (loaded ? "opacity-100" : "opacity-0")}
             autoPlay
             muted
             loop
@@ -550,7 +568,6 @@ function NotificationContent() {
           />
           <StepVideo
             src="/images/step3/tv-call.mp4"
-            poster="/images/screens/step3-tv-calling.jpg"
             frameHeight={520}
             caption="Видеосценарий вызова пациента по имени и точке обслуживания"
           />
