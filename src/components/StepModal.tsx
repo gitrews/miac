@@ -753,7 +753,7 @@ Content-Type: application/json
 
             <div>
               <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/line/todayPositions</h4>
-              <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной линии. Полезен для отображения состояния очереди в МИС.</p>
+              <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной линии.</p>
               <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
                 <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/line/todayPositions

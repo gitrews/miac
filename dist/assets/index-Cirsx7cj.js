@@ -188,7 +188,7 @@ Content-Type: application/json
 
 {
   "accessKey": "your-access-key"
-}`})})]}),c.jsxs("div",{children:[c.jsx("h4",{className:"text-sm font-semibold text-[#2EC4B6] mb-2",children:"POST /api/integration/line/todayPositions"}),c.jsx("p",{className:"text-xs text-slate-600 mb-3",children:"Возвращает текущую очередь на приём для конкретной линии. Полезен для отображения состояния очереди в МИС."}),c.jsx("div",{className:"rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto",children:c.jsx("pre",{className:"text-xs text-slate-300 font-mono leading-relaxed",children:`POST /api/integration/line/todayPositions
+}`})})]}),c.jsxs("div",{children:[c.jsx("h4",{className:"text-sm font-semibold text-[#2EC4B6] mb-2",children:"POST /api/integration/line/todayPositions"}),c.jsx("p",{className:"text-xs text-slate-600 mb-3",children:"Возвращает текущую очередь на приём для конкретной линии."}),c.jsx("div",{className:"rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto",children:c.jsx("pre",{className:"text-xs text-slate-300 font-mono leading-relaxed",children:`POST /api/integration/line/todayPositions
 Content-Type: application/json
 
 {
