@@ -658,6 +658,8 @@ function IntegrationContent() {
         </ul>
       </div>
 
+      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 1. Создание или обновление пациента</h3>
+
       <div className="mt-2">
         <h4 className="text-sm font-semibold text-slate-700 mb-2">Параметры запроса</h4>
         <ul className="space-y-1.5 text-xs text-slate-600">
@@ -671,7 +673,7 @@ function IntegrationContent() {
         </ul>
       </div>
 
-      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 1. Создание или обновление пациента</h3>
+      <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/customer/createOrUpdate
@@ -705,6 +707,8 @@ Content-Type: application/json
         </div>
       </div>
 
+      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 2. Запись в очередь</h3>
+
       <div className="mt-2">
         <h4 className="text-sm font-semibold text-slate-700 mb-2">Параметры запроса</h4>
         <ul className="space-y-1.5 text-xs text-slate-600">
@@ -718,7 +722,7 @@ Content-Type: application/json
         </ul>
       </div>
 
-      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 2. Запись в очередь</h3>
+      <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/line/join
