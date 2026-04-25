@@ -669,7 +669,7 @@ function IntegrationContent() {
           </li>
           <li className="flex items-start gap-2">
             <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: '#2EC4B6' }} />
-            <span></span>
+            <span>Два API-вызова: создание пациента и запись в очередь.</span>
           </li>
         </ul>
       </div>
@@ -694,6 +694,19 @@ Content-Type: application/json
         </pre>
       </div>
 
+      <div className="mt-2">
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Параметры запроса</h4>
+        <ul className="space-y-1.5 text-xs text-slate-600">
+          <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
+          <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента. <code className="bg-slate-100 px-1 rounded">null</code> при создании нового.</li>
+          <li><code className="text-[#2EC4B6] font-mono">externalId</code> — внешний идентификатор в МИС. <code className="bg-slate-100 px-1 rounded">null</code>, если не используется.</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.firstName</code> — имя пациента.</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.middleName</code> — отчество пациента.</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.lastName</code> — фамилия пациента.</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.phone</code> — номер телефона.</li>
+        </ul>
+      </div>
+
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
         <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 2. Запись в очередь</h3>
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
@@ -715,6 +728,63 @@ Content-Type: application/json
         </pre>
       </div>
 
+      <div className="mt-2">
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Параметры запроса</h4>
+        <ul className="space-y-1.5 text-xs text-slate-600">
+          <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
+          <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента, полученный на шаге 1.</li>
+          <li><code className="text-[#2EC4B6] font-mono">placeId</code> — идентификатор места (кабинета), фиксированный для клиники.</li>
+          <li><code className="text-[#2EC4B6] font-mono">lineId</code> — идентификатор очереди, фиксированный для клиники.</li>
+          <li><code className="text-[#2EC4B6] font-mono">services</code> — массив услуг. Каждая услуга содержит <code className="bg-slate-100 px-1 rounded">serviceId</code> — название или идентификатор услуги.</li>
+          <li><code className="text-[#2EC4B6] font-mono">deviceType</code> — тип устройства. <code className="bg-slate-100 px-1 rounded">Browser</code> для записи из МИС.</li>
+          <li><code className="text-[#2EC4B6] font-mono">priority</code> — флаг приоритетной записи. <code className="bg-slate-100 px-1 rounded">false</code> по умолчанию.</li>
+        </ul>
+      </div>
+
+      <div className="rounded-xl border border-slate-200 overflow-hidden">
+        <details className="group">
+          <summary className="flex items-center justify-between px-5 py-4 cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors list-none">
+            <span className="text-sm font-semibold text-slate-700">Дополнительные методы API</span>
+            <svg className="w-4 h-4 text-slate-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </summary>
+          <div className="px-5 py-5 space-y-6 bg-white border-t border-slate-200">
+
+            <div>
+              <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/places</h4>
+              <p className="text-xs text-slate-600 mb-3">Возвращает список мест, очередей (линий) и услуг, зарегистрированных на сервере. Используется при первоначальной настройке для получения идентификаторов.</p>
+              <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
+                <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+{`POST /api/integration/places
+Content-Type: application/json
+
+{
+  "accessKey": "your-access-key"
+}`}
+                </pre>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/line/todayPositions</h4>
+              <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной линии. Полезен для отображения состояния очереди в МИС.</p>
+              <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
+                <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+{`POST /api/integration/line/todayPositions
+Content-Type: application/json
+
+{
+  "accessKey": "your-access-key",
+  "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1"
+}`}
+                </pre>
+              </div>
+            </div>
+
+          </div>
+        </details>
+      </div>
 
       <BenefitsCard title="Преимущества интеграции" color="#2EC4B6" benefits={integrationBenefits} />
 
