@@ -665,7 +665,7 @@ function IntegrationContent() {
         <ul className="space-y-1.5 text-xs text-slate-600">
           <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
           <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента. <code className="bg-slate-100 px-1 rounded">null</code> при создании нового.</li>
-          <li><code className="text-[#2EC4B6] font-mono">externalId</code> — внешний идентификатор в МИС. <code className="bg-slate-100 px-1 rounded">null</code>, если не используется.</li>
+          <li><code className="text-[#2EC4B6] font-mono">externalId</code> — внешний идентификатор пациента в МИС. <code className="bg-slate-100 px-1 rounded">null</code>, если не используется.</li>
           <li><code className="text-[#2EC4B6] font-mono">person.firstName</code> — имя пациента.</li>
           <li><code className="text-[#2EC4B6] font-mono">person.middleName</code> — отчество пациента.</li>
           <li><code className="text-[#2EC4B6] font-mono">person.lastName</code> — фамилия пациента.</li>
