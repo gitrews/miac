@@ -615,12 +615,14 @@ function CompletionContent({ title }: { title: string }) {
 
 function IntegrationContent() {
   return (
-    <div className="space-y-10">
+<div className="space-y-10">
       <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
         Интеграция МИС ЕЦП с системой электронной очереди «ВнеОчереди» позволяет автоматизировать запись пациента на профосмотр без участия регистратора. После оформления услуг в МИС система сама создаёт запись в электронную очередь, передавая ФИО пациента и перечень назначенных кабинетов.
       </p>
 
-      <div className="space-y-4">
+            <BenefitsCard title="Преимущества интеграции" color="#2EC4B6" benefits={integrationBenefits} />
+
+<div className="space-y-4">
         <h3 className="text-base font-semibold text-slate-900">Методы API</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {integrationSteps.map((item, i) => (
@@ -753,7 +755,21 @@ Content-Type: application/json
         </div>
       </div>
 
-      <div className="rounded-xl border border-slate-200 overflow-hidden">
+            <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: 'rgba(233,30,140,0.08)', border: '1px solid rgba(233,30,140,0.25)' }}>
+        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'rgba(233,30,140,0.15)' }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E91E8C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </div>
+        <p className="text-sm text-slate-700 leading-relaxed">
+          <span className="font-semibold" style={{ color: '#E91E8C' }}>Важно!{' '}</span>
+          Для полноценной интеграции МИС и ЭО необходимо обсудить с командой ВнеОчереди соответствие справочников услуг МИС и ЭО, а также передачу идентификатора регистратора.
+        </p>
+      </div>
+
+<div className="rounded-xl border border-slate-200 overflow-hidden">
         <details className="group">
           <summary className="flex items-center justify-between px-5 py-4 cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors list-none">
             <span className="text-sm font-semibold text-slate-700">Дополнительные методы API</span>
@@ -841,17 +857,6 @@ Content-Type: application/json
         </details>
       </div>
 
-      <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: 'rgba(233,30,140,0.08)', border: '1px solid rgba(233,30,140,0.25)' }}>
-        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'rgba(233,30,140,0.15)' }}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E91E8C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="8" x2="12" y2="12" />
-            <line x1="12" y1="16" x2="12.01" y2="16" />
-          </svg>
-        </div>
-
-      <BenefitsCard title="Преимущества интеграции" color="#2EC4B6" benefits={integrationBenefits} />
-
 <div className="space-y-6">
         <h3 className="text-base font-semibold text-slate-900">Ручное перенаправление пациента из очереди Регистратуры в очередь Профосмотр</h3>
         <p className="text-sm text-slate-600 leading-relaxed">
@@ -909,12 +914,6 @@ Content-Type: application/json
         </div>
       </div>
 
-      
-        <p className="text-sm text-slate-700 leading-relaxed">
-          <span className="font-semibold" style={{ color: '#E91E8C' }}>Важно!{' '}</span>
-          Для полноценной интеграции МИС и ЭО необходимо обсудить с командой ВнеОчереди соответствие справочников услуг МИС и ЭО, а также передачу идентификатора регистратора.
-        </p>
-      </div>
     </div>
   )
 }
