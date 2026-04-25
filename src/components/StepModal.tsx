@@ -882,21 +882,17 @@ Content-Type: application/json
       </div>
 
 <div className="space-y-6">
-        <h3 className="text-base font-semibold text-slate-900">Ручное перенаправление пациента из очереди Регистратуры в очередь Профосмотр (без интеграции)</h3>
-        <p className="text-sm text-slate-600 leading-relaxed">
-          Если автоматическая интеграция МИС и «ВнеОчереди» не настроена, регистратор может вручную перенаправить пациента из очереди регистратуры в очередь профосмотра.
-        </p>
+        <h3 className="text-base font-semibold text-slate-900">Ручное перенаправление (без интеграции)</h3>
 
         <div className="space-y-6">
           {/* Шаг 1 */}
           <div className="rounded-xl bg-white border border-slate-200 overflow-hidden">
             <div className="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center text-sm font-bold text-[#2EC4B6]">1</div>
-              <h4 className="text-sm font-semibold text-slate-900">Вызов пациента из очереди регистратуры</h4>
+              <h4 className="text-sm font-semibold text-slate-900">Откройте административную панель ВнеОчереди</h4>
             </div>
-            <div className="p-5 space-y-3">
-              <p className="text-sm text-slate-600">Регистратор нажимает кнопку «Вызвать следующего» в интерфейсе «ВнеОчереди». Система определяет первого пациента в очереди и отображает его ФИО на экране регистратора.</p>
-              <img src="/images/manual/step-1-placeholder.svg" alt="Интерфейс очереди регистратуры — вызов пациента" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+            <div className="p-5">
+              <img src="/images/manual/step-1-placeholder.svg" alt="Административная панель ВнеОчереди" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
             </div>
           </div>
 
@@ -904,11 +900,10 @@ Content-Type: application/json
           <div className="rounded-xl bg-white border border-slate-200 overflow-hidden">
             <div className="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center text-sm font-bold text-[#2EC4B6]">2</div>
-              <h4 className="text-sm font-semibold text-slate-900">Оформление услуг в МИС ЕЦП</h4>
+              <h4 className="text-sm font-semibold text-slate-900">Зайдите в раздел «Точки обслуживания»</h4>
             </div>
-            <div className="p-5 space-y-3">
-              <p className="text-sm text-slate-600">Регистратор оформляет в МИС ЕЦП необходимые услуги профосмотра (забор биоматериала, терапевт и др.). Система автоматически формирует маршрут пациента по кабинетам.</p>
-              <img src="/images/manual/step-2-placeholder.svg" alt="Интерфейс МИС ЕЦП — оформление услуг" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+            <div className="p-5">
+              <img src="/images/manual/step-2-placeholder.svg" alt="Раздел Точки обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
             </div>
           </div>
 
@@ -916,11 +911,10 @@ Content-Type: application/json
           <div className="rounded-xl bg-white border border-slate-200 overflow-hidden">
             <div className="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center text-sm font-bold text-[#2EC4B6]">3</div>
-              <h4 className="text-sm font-semibold text-slate-900">Перенаправление в очередь профосмотра</h4>
+              <h4 className="text-sm font-semibold text-slate-900">Выберите вашу точку обслуживания</h4>
             </div>
-            <div className="p-5 space-y-3">
-              <p className="text-sm text-slate-600">В интерфейсе «ВнеОчереди» регистратор выбирает функцию «Перенаправить». В открывшемся диалоге указывает целевую очередь «Профосмотр» и перечень назначенных услуг.</p>
-              <img src="/images/manual/step-3-placeholder.svg" alt="Интерфейс ВнеОчереди — выбор очереди профосмотра" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+            <div className="p-5">
+              <img src="/images/manual/step-3-placeholder.svg" alt="Выбор точки обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
             </div>
           </div>
 
@@ -928,11 +922,44 @@ Content-Type: application/json
           <div className="rounded-xl bg-white border border-slate-200 overflow-hidden">
             <div className="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center text-sm font-bold text-[#2EC4B6]">4</div>
-              <h4 className="text-sm font-semibold text-slate-900">Получение талона в очереди профосмотра</h4>
+              <h4 className="text-sm font-semibold text-slate-900">Нажмите на пациента → «Перенаправить» → выберите очередь «Профосмотр»</h4>
             </div>
-            <div className="p-5 space-y-3">
-              <p className="text-sm text-slate-600">Система «ВнеОчереди» создаёт новую позицию в очереди «Профосмотр» с сохранением приоритета. Пациент получает талон с номером и временем ожидания. Регистратор может сразу вызвать следующего пациента.</p>
-              <img src="/images/manual/step-4-placeholder.svg" alt="Талон пациента в очереди профосмотра" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+            <div className="p-5">
+              <img src="/images/manual/step-4-placeholder.svg" alt="Перенаправление пациента" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+            </div>
+          </div>
+
+          {/* Шаг 5 */}
+          <div className="rounded-xl bg-white border border-slate-200 overflow-hidden">
+            <div className="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center text-sm font-bold text-[#2EC4B6]">5</div>
+              <h4 className="text-sm font-semibold text-slate-900">Выберите необходимые услуги</h4>
+            </div>
+            <div className="p-5">
+              <p className="text-sm text-slate-600 mb-3">Можно выбрать готовый набор услуг из предустановленных заранее.</p>
+              <img src="/images/manual/step-5-placeholder.svg" alt="Выбор услуг" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+            </div>
+          </div>
+
+          {/* Шаг 6 */}
+          <div className="rounded-xl bg-white border border-slate-200 overflow-hidden">
+            <div className="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center text-sm font-bold text-[#2EC4B6]">6</div>
+              <h4 className="text-sm font-semibold text-slate-900">Нажмите «Записать» — откроется окно с первым кабинетом маршрута</h4>
+            </div>
+            <div className="p-5">
+              <img src="/images/manual/step-6-placeholder.svg" alt="Окно с кабинетом маршрута" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+            </div>
+          </div>
+
+          {/* Шаг 7 */}
+          <div className="rounded-xl bg-white border border-slate-200 overflow-hidden">
+            <div className="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center text-sm font-bold text-[#2EC4B6]">7</div>
+              <h4 className="text-sm font-semibold text-slate-900">Сообщите номер кабинета пациенту и завершите обслуживание</h4>
+            </div>
+            <div className="p-5">
+              <img src="/images/manual/step-7-placeholder.svg" alt="Завершение обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
             </div>
           </div>
         </div>
