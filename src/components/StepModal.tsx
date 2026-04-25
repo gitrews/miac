@@ -708,9 +708,9 @@ Content-Type: application/json
         <ul className="space-y-1.5 text-xs text-slate-600">
           <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
           <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента, полученный на шаге 1.</li>
-          <li><code className="text-[#2EC4B6] font-mono">placeId</code> — идентификатор места (кабинета), фиксированный для клиники.</li>
-          <li><code className="text-[#2EC4B6] font-mono">lineId</code> — идентификатор очереди, фиксированный для клиники.</li>
-          <li><code className="text-[#2EC4B6] font-mono">services</code> — массив услуг. Каждая услуга содержит <code className="bg-slate-100 px-1 rounded">serviceId</code> — название или идентификатор услуги.</li>
+          <li><code className="text-[#2EC4B6] font-mono">placeId</code> — идентификатор места (кабинета), фиксированный для клиники. Представляется командой ВнеОчереди.</li>
+          <li><code className="text-[#2EC4B6] font-mono">lineId</code> — идентификатор очереди, фиксированный для клиники. Представляется командой ВнеОчереди.</li>
+          <li><code className="text-[#2EC4B6] font-mono">services</code> — массив услуг. Каждая услуга содержит <code className="bg-slate-100 px-1 rounded">serviceId</code> — название или идентификатор услуги. Представляется командой ВнеОчереди.</li>
           <li><code className="text-[#2EC4B6] font-mono">deviceType</code> — тип устройства. <code className="bg-slate-100 px-1 rounded">Browser</code> для записи из МИС.</li>
           <li><code className="text-[#2EC4B6] font-mono">priority</code> — флаг приоритетной записи. <code className="bg-slate-100 px-1 rounded">false</code> по умолчанию.</li>
         </ul>
