@@ -688,7 +688,7 @@ Content-Type: application/json
           <li><code className="text-[#2EC4B6] font-mono">person.firstName</code> — имя пациента.</li>
           <li><code className="text-[#2EC4B6] font-mono">person.middleName</code> — отчество пациента.</li>
           <li><code className="text-[#2EC4B6] font-mono">person.lastName</code> — фамилия пациента.</li>
-          <li><code className="text-[#2EC4B6] font-mono">person.phone</code> — номер телефона.</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.phone</code> — номер телефона (необязательно).</li>
         </ul>
       </div>
 
