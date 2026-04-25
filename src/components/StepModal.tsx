@@ -522,7 +522,7 @@ function StepOneContent() {
   )
 }
 
-function QueueWidgetContent({ actor }: { actor: 'регистратор' | 'врач' }) {
+function QueueWidgetContent({ actor, customBenefits, customSideBenefits }: { actor: 'регистратор' | 'врач'; customBenefits?: string[]; customSideBenefits?: string[] }) {
   const actorTitle = actor === 'регистратор' ? 'регистратора' : 'врача'
   const roleTitle = actor === 'регистратор' ? 'Регистратор' : 'Врач'
   const target = actor === 'регистратор' ? 'в окно' : 'в кабинет'
@@ -544,8 +544,8 @@ function QueueWidgetContent({ actor }: { actor: 'регистратор' | 'вр
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <BenefitsCard title={`Виджет ${actorTitle}`} color="#E91E8C" benefits={queueBenefits} />
-        <BenefitsCard title="Сценарий вызова" color="#3A9BD9" benefits={queueSideBenefits} />
+        <BenefitsCard title={customBenefits ? 'Виджет ВнеОчереди' : `Виджет ${actorTitle}`} color="#E91E8C" benefits={customBenefits || queueBenefits} />
+        <BenefitsCard title={customSideBenefits ? 'Уведомление и напоминания' : 'Сценарий вызова'} color="#3A9BD9" benefits={customSideBenefits || queueSideBenefits} />
       </div>
     </div>
   )
@@ -991,7 +991,21 @@ function renderStepContent(step: number) {
     case 1:
       return <StepOneContent />
     case 2:
-      return <QueueWidgetContent actor="регистратор" />
+      return <QueueWidgetContent
+        actor="регистратор"
+        customBenefits={[
+          'Всегда доступен поверх интерфейса МИС',
+          'Регистратор и врач не переключаются между окнами',
+          'Один клик для совершения действий',
+          'Возможность настроить автовызов следующего пациента',
+        ]}
+        customSideBenefits={[
+          'Уведомление о пациенте возле кабинета',
+          'Напоминание начать обслуживание',
+          'Сообщает о превышении времени обслуживания',
+          'Не мешает во время работы в МИС',
+        ]}
+      />
     case 3:
       return <NotificationContent />
     case 4:
