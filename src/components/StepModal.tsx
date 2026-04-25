@@ -112,14 +112,22 @@ const completionBenefits = [
   'Этот экран позже можно скорректировать без смены структуры',
 ]
 
-const integrationSteps = [  { label: '1. Создание заявителя в ВнеОчереди', desc: 'МИС передаёт ФИО и контакты пациента через API upsert. ВнеОчереди возвращает customerId.' },  { label: '2. Создание записи на приём', desc: 'МИС отправляет customerId + список услуг. ВнеОчереди определяет кабинеты и рассчитывает маршрут.' },  { label: '3. Подтверждение талона', desc: 'ВнеОчереди возвращает shortCode, время приёма и порядок кабинетов.' },  { label: '4. Синхронизация статусов', desc: 'Вызов и завершение обслуживания отражаются в МИС и ВнеОчереди в реальном времени.' },]
+const integrationSteps = [
+  { label: '1. Регистрация пациента', desc: 'МИС создаёт пациента в системе «ВнеОчереди» через API createOrUpdate. Возвращается customerId.' },
+  { label: '2. Запись в живую очередь', desc: 'МИС отправляет customerId и список услуг. Система создаёт мультисервисную позицию на текущий день.' },
+]
 
 const integrationBenefits = [
-  'Автоматическая запись в нужную очередь без участия сотрудника',
+  'Автоматическая запись в живую очередь без участия регистратора',
+  'Мультисервисная запись — несколько услуг одним запросом',
+  'Запись на текущий день без предварительного бронирования',
   'Единый цифровой маршрут от регистратуры до кабинета врача',
   'Снижение ошибок при ручной маршрутизации пациента',
-  'Одинаковый источник правды для МИС и электронной очереди',
-const integrationBenefits = [  'Автоматическая запись без участия регистратора',  'Оптимальный маршрут по кабинетам рассчитывается автоматически',  'Единый цифровой маршрут от регистратуры до кабинета врача',  'Снижение ошибок при ручной маршрутизации пациента',  'Одинаковый источник правды для МИС и электронной очереди',]
+]
+
+interface StepModalProps {
+  step: number | null
+  onClose: () => void
   onNext: () => void
   onPrev: () => void
 }
@@ -627,42 +635,64 @@ function IntegrationContent() {
   return (
     <div className="space-y-10">
       <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
-        МИС ЕЦП передаёт в ВнеОчереди ФИО пациента и список назначенных услуг. ВнеОчереди автоматически определяет, в каких кабинетах оказываются эти услуги, и рассчитывает оптимальный маршрут.
+        Интеграция МИС ЕЦП с системой электронной очереди «ВнеОчереди» позволяет автоматизировать запись пациента на профосмотр без участия регистратора. После оформления услуг в МИС система сама создаёт запись в электронную очередь, передавая ФИО пациента и перечень назначенных кабинетов. Пациент получает талон с номером и временем ожидания — без необходимости подходить к регистратуре.
       </p>
 
+      <div className="rounded-xl p-5" style={{ backgroundColor: 'rgba(46,196,182,0.08)', border: '1px solid rgba(46,196,182,0.25)' }}>
+        <h4 className="text-sm font-semibold text-[#2EC4B6] mb-3">Подготовка к интеграции</h4>
+        <ul className="space-y-2 text-sm text-slate-700">
+          <li className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: '#2EC4B6' }} />
+            <span><strong>Ключ доступа (accessKey)</strong> — предоставляется командой «ВнеОчереди» при подключении интеграции.</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: '#2EC4B6' }} />
+            <span><strong>Идентификаторы места, очереди и услуг</strong> (placeId, lineId, serviceId) — фиксированы для конкретной клиники и запрашиваются один раз при настройке через метод <code className="text-xs bg-slate-100 px-1 py-0.5 rounded">POST /places</code>.</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: '#2EC4B6' }} />
+            <span>После настройки для создания записи достаточно двух API-вызовов: регистрация пациента → запись в очередь.</span>
+          </li>
+        </ul>
+      </div>
+
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 1. Создание заявителя</h3>
+        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 1. Регистрация пациента</h3>
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
-{`POST /integration/api/v1/customer/upsert
+{`POST /api/integration/customer/createOrUpdate
 Content-Type: application/json
 
 {
-  "apiKey": "3dfdc1ed-ce72-46d1-89c9-376df0f83237",
+  "accessKey": "your-access-key",
+  "customerId": null,
+  "externalId": null,
   "person": {
     "firstName": "Иван",
     "middleName": "Иванович",
     "lastName": "Иванов",
-    "phone": "+79990001122"
+    "phone": "+79991234567"
   }
 }`}
         </pre>
       </div>
 
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 2. Создание записи на приём</h3>
+        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 2. Запись в живую очередь</h3>
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
-{`POST /integration/api/v1/customer/appointments/create
+{`POST /api/integration/line/join
 Content-Type: application/json
 
 {
-  "apiKey": "3dfdc1ed-ce72-46d1-89c9-376df0f83237",
-  "customerId": "e3c53333-2552-46ce-b2de-752c094b9cf6",
-  "officeId": "0fcab951-92e8-49a0-af78-f95c459f74bc",
-  "lineId": "33add1ef-2d42-4d67-b098-56d87a2f988f",
-  "serviceId": "da204cee-98ad-4a3e-872d-9f9b7c5d89e7",
-  "timeSlotId": 123245346346,
-  "units": 1,
-  "deviceType": "Browser"
+  "accessKey": "your-access-key",
+  "customerId": "0c52c445020145b40760d99f12000000",
+  "placeId": "8ca734a1-f3b4-4b9e-a9d4-838dfbf9008b",
+  "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1",
+  "services": [
+    { "serviceId": "Забор биоматериала" },
+    { "serviceId": "Терапевт" }
+  ],
+  "deviceType": "Browser",
+  "priority": false
 }`}
         </pre>
       </div>
