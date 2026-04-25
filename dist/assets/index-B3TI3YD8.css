@@ -1,0 +1,1 @@
+@tailwind base;@tailwind components;@tailwind utilities;@layer base{body{font-family:Inter,sans-serif;color:#1a2b3c;background:#f8fafc}}@layer components{.section-padding{@apply py-16 md:py-24;}.section-container,.container-wide{@apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;}.process-svg-wrapper svg{width:100%;height:auto;display:block}}
