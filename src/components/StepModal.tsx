@@ -709,6 +709,20 @@ Content-Type: application/json
         </div>
       </div>
 
+      <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: 'rgba(0,82,204,0.08)', border: '1px solid rgba(0,82,204,0.25)' }}>
+        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'rgba(0,82,204,0.15)' }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0052CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </div>
+        <p className="text-sm text-slate-700 leading-relaxed">
+          <span className="font-semibold" style={{ color: '#0052CC' }}>Примечание.{' '}</span>
+          Использование одного и того же externalId будет возвращать один и тот же customerId.
+        </p>
+      </div>
+
       <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 2. Запись в очередь</h3>
 
       <div className="mt-2">
