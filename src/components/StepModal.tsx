@@ -621,7 +621,7 @@ function IntegrationContent() {
       </p>
 
       <div className="space-y-4">
-        <h3 className="text-base font-semibold text-slate-900">Этапы интеграции</h3>
+        <h3 className="text-base font-semibold text-slate-900">Методы API</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {integrationSteps.map((item, i) => (
             <div key={item.label} className="rounded-xl bg-white border border-slate-200 p-5">
