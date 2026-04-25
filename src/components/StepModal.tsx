@@ -119,9 +119,6 @@ const integrationSteps = [
 
 const integrationBenefits = [
   'Автоматическая запись в живую очередь без участия регистратора',
-  'Мультисервисная запись — несколько услуг одним запросом',
-  'Запись на текущий день без предварительного бронирования',
-  'Единый цифровой маршрут от регистратуры до кабинета врача',
   'Снижение ошибок при ручной маршрутизации пациента',
 ]
 
@@ -659,6 +656,19 @@ function IntegrationContent() {
         </ul>
       </div>
 
+      <div className="mt-2">
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Параметры запроса</h4>
+        <ul className="space-y-1.5 text-xs text-slate-600">
+          <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
+          <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента. <code className="bg-slate-100 px-1 rounded">null</code> при создании нового.</li>
+          <li><code className="text-[#2EC4B6] font-mono">externalId</code> — внешний идентификатор в МИС. <code className="bg-slate-100 px-1 rounded">null</code>, если не используется.</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.firstName</code> — имя пациента.</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.middleName</code> — отчество пациента.</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.lastName</code> — фамилия пациента.</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.phone</code> — номер телефона (необязательно).</li>
+        </ul>
+      </div>
+
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
         <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 1. Создание или обновление пациента</h3>
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
@@ -680,15 +690,29 @@ Content-Type: application/json
       </div>
 
       <div className="mt-2">
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример ответа</h4>
+        <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
+          <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+{`HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "customerId": "0c52c445020145b40760d99f12000000"
+}`}
+          </pre>
+        </div>
+      </div>
+
+      <div className="mt-2">
         <h4 className="text-sm font-semibold text-slate-700 mb-2">Параметры запроса</h4>
         <ul className="space-y-1.5 text-xs text-slate-600">
           <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
-          <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента. <code className="bg-slate-100 px-1 rounded">null</code> при создании нового.</li>
-          <li><code className="text-[#2EC4B6] font-mono">externalId</code> — внешний идентификатор в МИС. <code className="bg-slate-100 px-1 rounded">null</code>, если не используется.</li>
-          <li><code className="text-[#2EC4B6] font-mono">person.firstName</code> — имя пациента.</li>
-          <li><code className="text-[#2EC4B6] font-mono">person.middleName</code> — отчество пациента.</li>
-          <li><code className="text-[#2EC4B6] font-mono">person.lastName</code> — фамилия пациента.</li>
-          <li><code className="text-[#2EC4B6] font-mono">person.phone</code> — номер телефона (необязательно).</li>
+          <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента, полученный на шаге 1.</li>
+          <li><code className="text-[#2EC4B6] font-mono">placeId</code> — идентификатор места (кабинета), фиксированный для клиники.</li>
+          <li><code className="text-[#2EC4B6] font-mono">lineId</code> — идентификатор очереди, фиксированный для клиники.</li>
+          <li><code className="text-[#2EC4B6] font-mono">services</code> — массив услуг. Каждая услуга содержит <code className="bg-slate-100 px-1 rounded">serviceId</code> — название или идентификатор услуги.</li>
+          <li><code className="text-[#2EC4B6] font-mono">deviceType</code> — тип устройства. <code className="bg-slate-100 px-1 rounded">Browser</code> для записи из МИС.</li>
+          <li><code className="text-[#2EC4B6] font-mono">priority</code> — флаг приоритетной записи. <code className="bg-slate-100 px-1 rounded">false</code> по умолчанию.</li>
         </ul>
       </div>
 
@@ -714,16 +738,19 @@ Content-Type: application/json
       </div>
 
       <div className="mt-2">
-        <h4 className="text-sm font-semibold text-slate-700 mb-2">Параметры запроса</h4>
-        <ul className="space-y-1.5 text-xs text-slate-600">
-          <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
-          <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента, полученный на шаге 1.</li>
-          <li><code className="text-[#2EC4B6] font-mono">placeId</code> — идентификатор места (кабинета), фиксированный для клиники.</li>
-          <li><code className="text-[#2EC4B6] font-mono">lineId</code> — идентификатор очереди, фиксированный для клиники.</li>
-          <li><code className="text-[#2EC4B6] font-mono">services</code> — массив услуг. Каждая услуга содержит <code className="bg-slate-100 px-1 rounded">serviceId</code> — название или идентификатор услуги.</li>
-          <li><code className="text-[#2EC4B6] font-mono">deviceType</code> — тип устройства. <code className="bg-slate-100 px-1 rounded">Browser</code> для записи из МИС.</li>
-          <li><code className="text-[#2EC4B6] font-mono">priority</code> — флаг приоритетной записи. <code className="bg-slate-100 px-1 rounded">false</code> по умолчанию.</li>
-        </ul>
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример ответа</h4>
+        <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
+          <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+{`HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "positionId": "pos-123456789",
+  "queueNumber": 42,
+  "estimatedWaitTime": 15
+}`}
+          </pre>
+        </div>
       </div>
 
       <div className="rounded-xl border border-slate-200 overflow-hidden">
@@ -739,7 +766,7 @@ Content-Type: application/json
             <div>
               <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/places</h4>
               <p className="text-xs text-slate-600 mb-3">Возвращает список мест, очередей (линий) и услуг, зарегистрированных на сервере. Используется при первоначальной настройке для получения идентификаторов.</p>
-              <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
+              <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto mb-3">
                 <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/places
 Content-Type: application/json
@@ -749,12 +776,37 @@ Content-Type: application/json
 }`}
                 </pre>
               </div>
+              <h5 className="text-xs font-semibold text-slate-500 mb-1">Пример ответа</h5>
+              <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
+                <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+{`HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "places": [
+    {
+      "placeId": "8ca734a1-f3b4-4b9e-a9d4-838dfbf9008b",
+      "name": "Кабинет №1",
+      "lines": [
+        {
+          "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1",
+          "name": "Основная очередь",
+          "services": [
+            { "serviceId": "Терапевт", "name": "Приём терапевта" }
+          ]
+        }
+      ]
+    }
+  ]
+}`}
+                </pre>
+              </div>
             </div>
 
             <div>
               <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/line/todayPositions</h4>
               <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной линии.</p>
-              <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
+              <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto mb-3">
                 <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/line/todayPositions
 Content-Type: application/json
@@ -762,6 +814,24 @@ Content-Type: application/json
 {
   "accessKey": "your-access-key",
   "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1"
+}`}
+                </pre>
+              </div>
+              <h5 className="text-xs font-semibold text-slate-500 mb-1">Пример ответа</h5>
+              <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
+                <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+{`HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "positions": [
+    {
+      "positionId": "pos-123456789",
+      "queueNumber": 42,
+      "status": "waiting",
+      "customerName": "Иванов И.И."
+    }
+  ]
 }`}
                 </pre>
               </div>
