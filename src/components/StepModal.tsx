@@ -598,11 +598,11 @@ function NotificationContent() {
   )
 }
 
-function MisContent({ title }: { title: string }) {
+function MisContent({ title, description }: { title: string; description?: string }) {
   return (
     <div className="space-y-8">
       <p className="text-slate-700 leading-relaxed max-w-4xl text-base">
-        Скриншоты на этом шаге показываются крупнее и собраны из PDF-материала по процессу оформления в МИС ЕЦП.
+        {description || 'Скриншоты на этом шаге показываются крупнее и собраны из PDF-материала по процессу оформления в МИС ЕЦП.'}
       </p>
 
       <div className="max-w-[1180px] mx-auto">
@@ -1009,17 +1009,31 @@ function renderStepContent(step: number) {
     case 3:
       return <NotificationContent />
     case 4:
-      return <MisContent title="Интерфейс МИС ЕЦП — оформление услуг" />
+      return <MisContent title="Интерфейс МИС ЕЦП — оформление услуг" description="Регистратор оформляет услуги пациента в МИС. Ниже — пользовательский сценарий работы с системой." />
     case 5:
       return <CompletionContent title="Завершение обслуживания в регистратуре" />
     case 6:
       return <IntegrationContent />
     case 7:
-      return <QueueWidgetContent actor="врач" />
+      return <QueueWidgetContent
+        actor="врач"
+        customBenefits={[
+          'Всегда доступен поверх интерфейса МИС',
+          'Регистратор и врач не переключаются между окнами',
+          'Один клик для совершения действий',
+          'Возможность настроить автовызов следующего пациента',
+        ]}
+        customSideBenefits={[
+          'Уведомление о пациенте возле кабинета',
+          'Напоминание начать обслуживание',
+          'Сообщает о превышении времени обслуживания',
+          'Не мешает во время работы в МИС',
+        ]}
+      />
     case 8:
       return <NotificationContent />
     case 9:
-      return <MisContent title="Интерфейс врача в МИС ЕЦП" />
+      return <MisContent title="Интерфейс врача в МИС ЕЦП" description="Врач фиксирует результаты осмотра пациента в МИС." />
     case 10:
       return <CompletionContent title="Завершение профосмотра у врача" />
     default:
