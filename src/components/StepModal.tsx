@@ -638,6 +638,24 @@ function IntegrationContent() {
         Интеграция МИС ЕЦП с системой электронной очереди «ВнеОчереди» позволяет автоматизировать запись пациента на профосмотр без участия регистратора. После оформления услуг в МИС система сама создаёт запись в электронную очередь, передавая ФИО пациента и перечень назначенных кабинетов.
       </p>
 
+      <div className="space-y-4">
+        <h3 className="text-base font-semibold text-slate-900">Этапы интеграции</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {integrationSteps.map((item, i) => (
+            <div key={item.label} className="rounded-xl bg-white border border-slate-200 p-5">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center flex-shrink-0 text-sm font-bold text-[#2EC4B6]">
+                  {i + 1}
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-slate-900 mb-1">{item.label}</h4>
+                  <p className="text-sm text-slate-600">{item.desc}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
       <div className="rounded-xl p-5" style={{ backgroundColor: 'rgba(46,196,182,0.08)', border: '1px solid rgba(46,196,182,0.25)' }}>
         <h4 className="text-sm font-semibold text-[#2EC4B6] mb-3">Подготовка к интеграции</h4>
         <ul className="space-y-2 text-sm text-slate-700">
@@ -697,24 +715,6 @@ Content-Type: application/json
         </pre>
       </div>
 
-      <div className="space-y-4">
-        <h3 className="text-base font-semibold text-slate-900">Этапы интеграции</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {integrationSteps.map((item, i) => (
-            <div key={item.label} className="rounded-xl bg-white border border-slate-200 p-5">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center flex-shrink-0 text-sm font-bold text-[#2EC4B6]">
-                  {i + 1}
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-slate-900 mb-1">{item.label}</h4>
-                  <p className="text-sm text-slate-600">{item.desc}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       <BenefitsCard title="Преимущества интеграции" color="#2EC4B6" benefits={integrationBenefits} />
 
