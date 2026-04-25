@@ -647,7 +647,7 @@ function IntegrationContent() {
           </li>
           <li className="flex items-start gap-2">
             <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: '#2EC4B6' }} />
-            <span><strong>Идентификаторы места, очереди и услуг</strong> (placeId, lineId, serviceId) — фиксированы для конкретной клиники и запрашиваются один раз при настройке через метод <code className="text-xs bg-slate-100 px-1 py-0.5 rounded">POST /places</code>.</span>
+            <span><strong>Идентификаторы места, очереди и услуг</strong> (placeId, lineId, serviceId) — фиксированы для конкретной клиники</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: '#2EC4B6' }} />
