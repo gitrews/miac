@@ -673,9 +673,10 @@ function IntegrationContent() {
         </ul>
       </div>
 
-      <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
-      <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+      <div className="mt-2">
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
+        <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
+          <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/customer/createOrUpdate
 Content-Type: application/json
 
@@ -690,7 +691,8 @@ Content-Type: application/json
     "phone": "+79991234567"
   }
 }`}
-        </pre>
+          </pre>
+        </div>
       </div>
 
       <div className="mt-2">
@@ -722,9 +724,10 @@ Content-Type: application/json
         </ul>
       </div>
 
-      <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
-      <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+      <div className="mt-2">
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
+        <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
+          <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/line/join
 Content-Type: application/json
 
@@ -740,7 +743,8 @@ Content-Type: application/json
   "deviceType": "Browser",
   "priority": false
 }`}
-        </pre>
+          </pre>
+        </div>
       </div>
 
       <div className="mt-2">
