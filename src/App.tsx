@@ -6,6 +6,7 @@ import RolesInteractions from './components/RolesInteractions'
 import StepTimeline from './components/StepTimeline'
 import CasesSection from './components/CasesSection'
 import StepModal from './components/StepModal'
+import ImagePreloader from './components/ImagePreloader'
 
 function App() {
   const [activeStep, setActiveStep] = useState<number | null>(() => {
@@ -70,6 +71,7 @@ function App() {
 
   return (
     <Layout>
+      <ImagePreloader />
       <Hero />
       <ProcessOverview onOpenStep={openStep} />
       <StepTimeline onOpenStep={openStep} />
