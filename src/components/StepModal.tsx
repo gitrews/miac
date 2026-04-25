@@ -362,22 +362,7 @@ function BenefitsCard({ title, color, benefits }: { title: string; color: string
   )
 }
 
-function InfoNote({ color, title, children }: { color: string; title: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: `${color}15`, border: `1px solid ${color}40` }}>
-      <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: `${color}20` }}>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="16" x2="12" y2="12" />
-          <line x1="12" y1="8" x2="12.01" y2="8" />
-        </svg>
-      </div>
-      <p className="text-sm text-slate-700 leading-relaxed">
-        <span className="font-semibold" style={{ color }}>{title}:</span>{' '}{children}
-      </p>
-    </div>
-  )
-}
+
 
 function SectionHeader({
   color,
@@ -788,12 +773,19 @@ Content-Type: application/json
 
       <BenefitsCard title="Преимущества интеграции" color="#2EC4B6" benefits={integrationBenefits} />
 
-      <InfoNote color="#2EC4B6" title="API ВнеОчереди">
-        Полная документация:{' '}
-        <a href="https://docs.ocheredi.com/api/" target="_blank" rel="noopener noreferrer" className="underline text-[#0052CC]">
-          docs.ocheredi.com/api/
-        </a>
-      </InfoNote>
+      <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: 'rgba(233,30,140,0.08)', border: '1px solid rgba(233,30,140,0.25)' }}>
+        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'rgba(233,30,140,0.15)' }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E91E8C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </div>
+        <p className="text-sm text-slate-700 leading-relaxed">
+          <span className="font-semibold" style={{ color: '#E91E8C' }}>Важно!{' '}</span>
+          Для полноценной интеграции МИС и ЭО необходимо обсудить с командой ВнеОчереди соответствие справочников услуг МИС и ЭО, а также передачу идентификатора регистратора.
+        </p>
+      </div>
     </div>
   )
 }
