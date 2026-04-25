@@ -826,7 +826,7 @@ Content-Type: application/json
 
             <div>
               <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/line/todayPositions</h4>
-              <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной линии.</p>
+              <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной очереди.</p>
               <h5 className="text-xs font-semibold text-slate-500 mb-1">Пример запроса</h5>
               <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto mb-3">
                 <pre className="text-xs text-slate-300 font-mono leading-relaxed">
