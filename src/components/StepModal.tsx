@@ -671,8 +671,8 @@ function IntegrationContent() {
         </ul>
       </div>
 
+      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 1. Создание или обновление пациента</h3>
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 1. Создание или обновление пациента</h3>
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/customer/createOrUpdate
 Content-Type: application/json
@@ -718,8 +718,8 @@ Content-Type: application/json
         </ul>
       </div>
 
+      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 2. Запись в очередь</h3>
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 2. Запись в очередь</h3>
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/line/join
 Content-Type: application/json
