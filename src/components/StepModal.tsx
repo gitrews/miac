@@ -665,7 +665,7 @@ function IntegrationContent() {
         <ul className="space-y-1.5 text-xs text-slate-600">
           <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
           <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента. <code className="bg-slate-100 px-1 rounded">null</code> при создании нового.</li>
-          <li><code className="text-[#2EC4B6] font-mono">externalId</code> — внешний идентификатор пациента в МИС. <code className="bg-slate-100 px-1 rounded">null</code>, если не используется.</li>
+          <li><code className="text-[#2EC4B6] font-mono">externalId</code> — внешний идентификатор в МИС. <code className="bg-slate-100 px-1 rounded">null</code>, если не используется.</li>
           <li><code className="text-[#2EC4B6] font-mono">person.firstName</code> — имя пациента.</li>
           <li><code className="text-[#2EC4B6] font-mono">person.middleName</code> — отчество пациента.</li>
           <li><code className="text-[#2EC4B6] font-mono">person.lastName</code> — фамилия пациента.</li>
@@ -673,9 +673,10 @@ function IntegrationContent() {
         </ul>
       </div>
 
-      <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
-      <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+      <div className="mt-2">
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
+        <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
+          <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/customer/createOrUpdate
 Content-Type: application/json
 
@@ -690,7 +691,8 @@ Content-Type: application/json
     "phone": "+79991234567"
   }
 }`}
-        </pre>
+          </pre>
+        </div>
       </div>
 
       <div className="mt-2">
@@ -722,9 +724,10 @@ Content-Type: application/json
         </ul>
       </div>
 
-      <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
-      <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+      <div className="mt-2">
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
+        <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
+          <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/line/join
 Content-Type: application/json
 
@@ -740,7 +743,8 @@ Content-Type: application/json
   "deviceType": "Browser",
   "priority": false
 }`}
-        </pre>
+          </pre>
+        </div>
       </div>
 
       <div className="mt-2">
@@ -826,7 +830,7 @@ Content-Type: application/json
 
             <div>
               <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/line/todayPositions</h4>
-              <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной очереди.</p>
+              <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной линии.</p>
               <h5 className="text-xs font-semibold text-slate-500 mb-1">Пример запроса</h5>
               <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto mb-3">
                 <pre className="text-xs text-slate-300 font-mono leading-relaxed">
