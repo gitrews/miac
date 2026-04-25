@@ -83,17 +83,17 @@ const notificationSlides = [
 ]
 
 const notificationBenefits = [
-  'Push-уведомление приходит прямо на смартфон',
-  'Пациент видит статус вызова без бумажного талона',
+  'Push-уведомление о вызове приходит на смартфон',
+  'Пациент видит номер кабинета и точку вызова',
   'Текст вызова синхронизирован с ТВ-экраном',
   'Маршрут читается одинаково на всех каналах',
 ]
 
 const tvBenefits = [
   'На экране видно имя пациента и точку вызова',
+  'Голосовое оповещение по имени и отчеству',
   'Оповещение можно показывать в зоне ожидания',
-  'Видео демонстрирует живой сценарий вызова',
-  'Темп воспроизведения ускорен для плавного показа',
+  'Персонализированный вызов без номеров',
 ]
 
 const step4Slides = [
@@ -106,10 +106,10 @@ const step4Slides = [
 ]
 
 const completionBenefits = [
-  'Используются те же рабочие экраны, что и на шаге вызова',
-  'Сотрудник завершает действие в том же виджете',
-  'Переход к следующему этапу маршрута остаётся прозрачным',
-  'Этот экран позже можно скорректировать без смены структуры',
+  'Завершение обслуживания одним кликом',
+  'Автоматический расчёт следующего кабинета',
+  'Передача данных в МИС без переключения окон',
+  'Обновление статуса на ТВ и в мобильном приложении',
 ]
 
 const integrationSteps = [
@@ -613,11 +613,11 @@ function MisContent({ title, description }: { title: string; description?: strin
   )
 }
 
-function CompletionContent({ title }: { title: string }) {
+function CompletionContent({ title, description, customBenefits }: { title: string; description?: string; customBenefits?: string[] }) {
   return (
     <div className="space-y-10">
       <p className="text-slate-700 leading-relaxed max-w-4xl text-base">
-        Для этого шага используются те же визуальные экраны, что и на шаге 2. Структура оставлена одинаковой, чтобы позже можно было быстро внести точечные корректировки.
+        {description || 'Для этого шага используются те же визуальные экраны, что и на шаге 2. Структура оставлена одинаковой, чтобы позже можно было быстро внести точечные корректировки.'}
       </p>
 
       <div className="max-w-6xl mx-auto">
@@ -625,7 +625,7 @@ function CompletionContent({ title }: { title: string }) {
         <WidgetShowcase images={widgetImages} interval={3200} overlayLabel={title} pauseAtIndex={2} />
       </div>
 
-      <BenefitsCard title="Текущая версия экрана" color="#E91E8C" benefits={completionBenefits} />
+      <BenefitsCard title={customBenefits ? 'Виджет ВнеОчереди' : 'Текущая версия экрана'} color="#E91E8C" benefits={customBenefits || completionBenefits} />
     </div>
   )
 }
@@ -1011,7 +1011,16 @@ function renderStepContent(step: number) {
     case 4:
       return <MisContent title="Интерфейс МИС ЕЦП — оформление услуг" description="Регистратор оформляет услуги пациента в МИС. Ниже — пользовательский сценарий работы с системой." />
     case 5:
-      return <CompletionContent title="Завершение обслуживания в регистратуре" />
+      return <CompletionContent
+        title="Завершение обслуживания в регистратуре"
+        description="Регистратор завершает приём в ЕЦП.МИС. Виджет ВнеОчереди автоматически перенаправляет пациента к следующему кабинету по маршруту профосмотра."
+        customBenefits={[
+          'Завершение обслуживания одним кликом',
+          'Автоматический расчёт следующего кабинета',
+          'Передача данных в МИС без переключения окон',
+          'Обновление статуса на ТВ и в мобильном приложении',
+        ]}
+      />
     case 6:
       return <IntegrationContent />
     case 7:
@@ -1035,7 +1044,16 @@ function renderStepContent(step: number) {
     case 9:
       return <MisContent title="Интерфейс врача в МИС ЕЦП" description="Врач фиксирует результаты осмотра пациента в МИС." />
     case 10:
-      return <CompletionContent title="Завершение профосмотра у врача" />
+      return <CompletionContent
+        title="Завершение профосмотра у врача"
+        description="Врач завершает осмотр в ЕЦП.МИС. Система определяет следующий этап маршрута или формирует заключение о прохождении профосмотра."
+        customBenefits={[
+          'Фиксация результата осмотра в МИС',
+          'Автоматическое перенаправление к следующему специалисту',
+          'Создание записи в очереди без ручного ввода',
+          'Обновление маршрута в мобильном приложении пациента',
+        ]}
+      />
     default:
       return null
   }
