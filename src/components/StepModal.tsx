@@ -841,7 +841,18 @@ Content-Type: application/json
         </details>
       </div>
 
-      <div className="space-y-6">
+      <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: 'rgba(233,30,140,0.08)', border: '1px solid rgba(233,30,140,0.25)' }}>
+        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'rgba(233,30,140,0.15)' }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E91E8C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </div>
+
+      <BenefitsCard title="Преимущества интеграции" color="#2EC4B6" benefits={integrationBenefits} />
+
+<div className="space-y-6">
         <h3 className="text-base font-semibold text-slate-900">Ручное перенаправление пациента из очереди Регистратуры в очередь Профосмотр</h3>
         <p className="text-sm text-slate-600 leading-relaxed">
           Если автоматическая интеграция МИС и «ВнеОчереди» не настроена, регистратор может вручную перенаправить пациента из очереди регистратуры в очередь профосмотра. Процесс занимает 30–40 секунд и не требует повторного оформления пациента.
@@ -898,16 +909,7 @@ Content-Type: application/json
         </div>
       </div>
 
-      <BenefitsCard title="Преимущества интеграции" color="#2EC4B6" benefits={integrationBenefits} />
-
-      <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: 'rgba(233,30,140,0.08)', border: '1px solid rgba(233,30,140,0.25)' }}>
-        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'rgba(233,30,140,0.15)' }}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E91E8C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="8" x2="12" y2="12" />
-            <line x1="12" y1="16" x2="12.01" y2="16" />
-          </svg>
-        </div>
+      
         <p className="text-sm text-slate-700 leading-relaxed">
           <span className="font-semibold" style={{ color: '#E91E8C' }}>Важно!{' '}</span>
           Для полноценной интеграции МИС и ЭО необходимо обсудить с командой ВнеОчереди соответствие справочников услуг МИС и ЭО, а также передачу идентификатора регистратора.
