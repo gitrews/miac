@@ -113,8 +113,8 @@ const completionBenefits = [
 ]
 
 const integrationSteps = [
-  { label: '1. Регистрация пациента', desc: 'МИС создаёт пациента в системе «ВнеОчереди» через API createOrUpdate. Возвращается customerId.' },
-  { label: '2. Запись в живую очередь', desc: 'МИС отправляет customerId и список услуг. Система создаёт мультисервисную позицию на текущий день.' },
+  { label: '1. Создание или обновление пациента', desc: 'МИС создаёт или обновляет пациента в системе «ВнеОчереди». Возвращается customerId.' },
+  { label: '2. Запись в очередь', desc: 'МИС отправляет customerId и список услуг. Система создаёт позицию в очереди.' },
 ]
 
 const integrationBenefits = [
@@ -669,13 +669,13 @@ function IntegrationContent() {
           </li>
           <li className="flex items-start gap-2">
             <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: '#2EC4B6' }} />
-            <span>После настройки для создания записи достаточно двух API-вызовов: регистрация пациента → запись в очередь.</span>
+            <span></span>
           </li>
         </ul>
       </div>
 
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 1. Регистрация пациента</h3>
+        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 1. Создание или обновление пациента</h3>
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/customer/createOrUpdate
 Content-Type: application/json
@@ -695,7 +695,7 @@ Content-Type: application/json
       </div>
 
       <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
-        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 2. Запись в живую очередь</h3>
+        <h3 className="text-sm font-semibold text-[#2EC4B6] mb-4">Шаг 2. Запись в очередь</h3>
         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`POST /api/integration/line/join
 Content-Type: application/json
