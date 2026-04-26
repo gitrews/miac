@@ -667,7 +667,30 @@ function CompletionContent({ title, intro }: { title: string; intro: string }) {
   )
 }
 
+function ManualScreenshot({
+  src,
+  alt,
+  onOpen,
+}: {
+  src: string
+  alt: string
+  onOpen: (image: { src: string; alt: string }) => void
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onOpen({ src, alt })}
+      className="block w-full rounded-lg border border-slate-200 bg-slate-50 overflow-hidden hover:border-[#2EC4B6]/50 hover:shadow-md transition-all"
+      aria-label={`Открыть скриншот: ${alt}`}
+    >
+      <img src={src} alt={alt} className="w-full max-h-[260px] object-contain bg-slate-50" />
+    </button>
+  )
+}
+
 function IntegrationContent() {
+  const [previewImage, setPreviewImage] = useState<{ src: string; alt: string } | null>(null)
+
   return (
 <div className="space-y-10">
       <p className="text-slate-700 leading-relaxed max-w-3xl text-base">
@@ -935,10 +958,16 @@ Content-Type: application/json
         </details>
       </div>
 
-<div className="space-y-6">
-        <h3 className="text-base font-semibold text-slate-900">Ручное перенаправление (без интеграции)</h3>
+<div className="rounded-xl border border-slate-200 overflow-hidden">
+        <details className="group">
+          <summary className="flex items-center justify-between px-5 py-4 cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors list-none">
+            <span className="text-sm font-semibold text-slate-700">Ручное перенаправление (без интеграции)</span>
+            <svg className="w-4 h-4 text-slate-400 transition-transform group-open:rotate-180" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </summary>
 
-        <div className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-5 bg-white border-t border-slate-200">
           {/* Шаг 1 */}
           <div className="rounded-xl bg-white border border-slate-200 overflow-hidden">
             <div className="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
@@ -946,7 +975,7 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Откройте административную панель ВнеОчереди</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-1.png" alt="Административная панель ВнеОчереди" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
+              <ManualScreenshot src="/images/manual/step-1.png" alt="Административная панель ВнеОчереди" onOpen={setPreviewImage} />
             </div>
           </div>
 
@@ -957,7 +986,7 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Зайдите в раздел «Точки обслуживания»</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-2.png" alt="Раздел Точки обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
+              <ManualScreenshot src="/images/manual/step-2.png" alt="Раздел Точки обслуживания" onOpen={setPreviewImage} />
             </div>
           </div>
 
@@ -968,7 +997,7 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Выберите вашу точку обслуживания</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-3.png" alt="Выбор точки обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
+              <ManualScreenshot src="/images/manual/step-3.png" alt="Выбор точки обслуживания" onOpen={setPreviewImage} />
             </div>
           </div>
 
@@ -979,7 +1008,7 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Нажмите на пациента → «Перенаправить» → выберите очередь «Профосмотр»</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-4.png" alt="Перенаправление пациента" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
+              <ManualScreenshot src="/images/manual/step-4.png" alt="Перенаправление пациента" onOpen={setPreviewImage} />
             </div>
           </div>
 
@@ -991,7 +1020,7 @@ Content-Type: application/json
             </div>
             <div className="p-5">
               <p className="text-sm text-slate-600 mb-3">Можно выбрать готовый набор услуг из предустановленных заранее.</p>
-              <img src="/images/manual/step-5.png" alt="Выбор услуг" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
+              <ManualScreenshot src="/images/manual/step-5.png" alt="Выбор услуг" onOpen={setPreviewImage} />
             </div>
           </div>
 
@@ -999,10 +1028,10 @@ Content-Type: application/json
           <div className="rounded-xl bg-white border border-slate-200 overflow-hidden">
             <div className="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#2EC4B6]/15 flex items-center justify-center text-sm font-bold text-[#2EC4B6]">6</div>
-              <h4 className="text-sm font-semibold text-slate-900">Нажмите «Записать» — откроется окно с первым кабинетом маршрута</h4>
+              <h4 className="text-sm font-semibold text-slate-900">Нажмите «Добавить» — откроется окно с первым кабинетом маршрута</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-6.png" alt="Окно с кабинетом маршрута" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
+              <ManualScreenshot src="/images/manual/step-6.png" alt="Окно с кабинетом маршрута" onOpen={setPreviewImage} />
             </div>
           </div>
 
@@ -1013,11 +1042,27 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Сообщите номер кабинета пациенту и завершите обслуживание</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-7.png" alt="Завершение обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
+              <ManualScreenshot src="/images/manual/step-7.png" alt="Завершение обслуживания" onOpen={setPreviewImage} />
             </div>
           </div>
-        </div>
+          </div>
+        </details>
       </div>
+
+      {previewImage && (
+        <button
+          type="button"
+          className="fixed inset-0 z-[100] bg-slate-950/75 backdrop-blur-sm p-4 md:p-8 flex items-center justify-center cursor-zoom-out"
+          onClick={() => setPreviewImage(null)}
+          aria-label="Закрыть полноразмерный скриншот"
+        >
+          <img
+            src={previewImage.src}
+            alt={previewImage.alt}
+            className="max-w-full max-h-full object-contain rounded-xl bg-white shadow-2xl"
+          />
+        </button>
+      )}
 
     </div>
   )
