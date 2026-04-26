@@ -1009,7 +1009,7 @@ function renderStepContent(step: number) {
     case 3:
       return <NotificationContent />
     case 4:
-      return <MisContent title="Интерфейс МИС ЕЦП — оформление услуг" />
+      return <MisContent title="Интерфейс ЕЦП.МИС" />
     case 5:
       return <CompletionContent title="Завершение обслуживания в регистратуре" />
     case 6:
@@ -1019,7 +1019,7 @@ function renderStepContent(step: number) {
     case 8:
       return <NotificationContent />
     case 9:
-      return <MisContent title="Интерфейс врача в МИС ЕЦП" />
+      return <MisContent title="Интерфейс ЕЦП.МИС — врач" />
     case 10:
       return <CompletionContent title="Завершение профосмотра у врача" />
     default:
