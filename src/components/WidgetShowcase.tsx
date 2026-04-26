@@ -5,6 +5,7 @@ import { Play } from 'lucide-react'
 interface WidgetImage {
   src: string
   className?: string
+  placement?: 'widget' | 'center'
 }
 
 interface WidgetShowcaseProps {
@@ -14,6 +15,7 @@ interface WidgetShowcaseProps {
   autoPlayDelay?: number
   pauseAtIndex?: number
   clickToAdvance?: boolean
+  autoAdvanceFirst?: boolean
 }
 
 export default function WidgetShowcase({
@@ -23,6 +25,7 @@ export default function WidgetShowcase({
   autoPlayDelay = 2500,
   pauseAtIndex,
   clickToAdvance = false,
+  autoAdvanceFirst = false,
 }: WidgetShowcaseProps) {
   const [current, setCurrent] = useState(0)
   const [phase, setPhase] = useState<'waiting' | 'playing' | 'paused' | 'done'>('waiting')
@@ -57,6 +60,16 @@ export default function WidgetShowcase({
     }
   }, [current, normalizedImages.length, interval, autoPlayDelay, phase, effectivePauseAt, clickToAdvance])
 
+  useEffect(() => {
+    if (!clickToAdvance || !autoAdvanceFirst || current !== 0 || normalizedImages.length <= 1) return
+
+    const timeout = window.setTimeout(() => {
+      setCurrent(1)
+    }, autoPlayDelay)
+
+    return () => window.clearTimeout(timeout)
+  }, [autoAdvanceFirst, autoPlayDelay, clickToAdvance, current, normalizedImages.length])
+
   const handleNext = () => {
     if (current < normalizedImages.length - 1) {
       setCurrent((prev) => prev + 1)
@@ -77,10 +90,30 @@ export default function WidgetShowcase({
 
   const isLast = current >= normalizedImages.length - 1
   const showClickHint = clickToAdvance && !isLast
-  const showRestartBtn = isLast
+  const showRestartBtn = isLast && !clickToAdvance
+  const isCurrentCentered = normalizedImages[current]?.placement === 'center'
 
   return (
     <div className="relative w-full max-w-6xl mx-auto rounded-2xl border border-slate-200 shadow-lg">
+      {showClickHint && (
+        <motion.div
+          className="flex items-center justify-end gap-2 px-4 pt-3 pb-1 -translate-x-12"
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+        >
+          <span className="text-xs text-slate-500 whitespace-nowrap">
+            Нажмите сюда
+          </span>
+          <motion.span
+            className="text-sm leading-none text-slate-500"
+            animate={{ y: [0, 4, 0] }}
+            transition={{ repeat: Infinity, duration: 0.9, ease: 'easeInOut' }}
+          >
+            ↓
+          </motion.span>
+        </motion.div>
+      )}
+
       <div className="relative w-full bg-slate-100" style={{ aspectRatio: '16 / 9' }}>
         <img
           src="./images/screens/widget-bg.png"
@@ -88,65 +121,62 @@ export default function WidgetShowcase({
           className="absolute inset-0 w-full h-full object-contain bg-slate-100"
         />
 
-        <div className="absolute inset-0 flex items-start justify-end pt-16 pr-4">
-          {showClickHint && (
-            <motion.div
-              className="absolute right-[-80px] top-20 flex items-center gap-2 z-10"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-            >
-              <motion.span
-                className="text-sm text-slate-500"
-                animate={{ x: [0, -4, 0] }}
-                transition={{ repeat: Infinity, duration: 0.9, ease: 'easeInOut' }}
-              >
-                ←
-              </motion.span>
-              <span className="text-xs text-slate-500 whitespace-nowrap">
-                Нажми сюда
-              </span>
-            </motion.div>
-          )}
+        {normalizedImages.map((img, index) => {
+          const isCentered = img.placement === 'center'
+          const isCurrentLast = index === normalizedImages.length - 1
+          const handleClick = () => {
+            if (clickToAdvance && isCurrentLast) {
+              handleRestart()
+              return
+            }
+            handleNext()
+          }
 
-          <div className="w-[42%] max-w-[460px] min-w-[220px] relative">
-            {normalizedImages.map((img, index) => (
-              <div
-                key={img.src}
-                className="transition-opacity duration-700 ease-in-out"
-                style={{
-                  opacity: index === current ? 1 : 0,
-                  pointerEvents: index === current ? 'auto' : 'none',
-                  position: index === current ? 'relative' : 'absolute',
-                  inset: 0,
-                }}
-              >
-                {clickToAdvance ? (
-                  <button
-                    onClick={handleNext}
-                    className="block w-full text-left"
-                    aria-label="Следующий скриншот"
-                  >
+          return (
+            <div
+              key={img.src}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                isCentered
+                  ? 'flex items-center justify-center p-4 sm:p-6 md:p-8'
+                  : 'flex items-start justify-end pt-3 pr-8 sm:pt-4 md:pt-7'
+              }`}
+              style={{
+                opacity: index === current ? 1 : 0,
+                pointerEvents: index === current ? 'auto' : 'none',
+              }}
+            >
+              <div className={isCentered ? 'w-[42%] max-w-[470px] min-w-[260px]' : 'w-[45%] max-w-[492px] min-w-[220px] relative'}>
+                <div className="relative">
+                  {clickToAdvance ? (
+                    <button
+                      onClick={handleClick}
+                      className="block w-full text-left"
+                      aria-label={isCurrentLast ? 'Вернуться к первому скриншоту' : 'Следующий скриншот'}
+                    >
+                      <img
+                        src={img.src}
+                        alt={`Виджет ${index + 1}`}
+                        className={`h-auto object-contain drop-shadow-2xl rounded-lg ${img.className || 'w-full'}`}
+                      />
+                    </button>
+                  ) : (
                     <img
                       src={img.src}
                       alt={`Виджет ${index + 1}`}
                       className={`h-auto object-contain drop-shadow-2xl rounded-lg ${img.className || 'w-full'}`}
                     />
-                  </button>
-                ) : (
-                  <img
-                    src={img.src}
-                    alt={`Виджет ${index + 1}`}
-                    className={`h-auto object-contain drop-shadow-2xl rounded-lg ${img.className || 'w-full'}`}
-                  />
-                )}
+                  )}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          )
+        })}
 
-        <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full">
-          {overlayLabel}
-        </div>
+        {!isCurrentCentered && (
+          <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full">
+            {overlayLabel}
+          </div>
+        )}
 
         {showRestartBtn && (
           <button

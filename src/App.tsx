@@ -4,7 +4,6 @@ import Hero from './components/Hero'
 import ProcessOverview from './components/ProcessOverview'
 import RolesInteractions from './components/RolesInteractions'
 import StepTimeline from './components/StepTimeline'
-import CasesSection from './components/CasesSection'
 import StepModal from './components/StepModal'
 import ImagePreloader from './components/ImagePreloader'
 
@@ -70,13 +69,12 @@ function App() {
   }, [])
 
   return (
-    <Layout>
+    <Layout onOpenStep={openStep}>
       <ImagePreloader />
       <Hero />
       <ProcessOverview onOpenStep={openStep} />
       <StepTimeline onOpenStep={openStep} />
       <RolesInteractions />
-      <CasesSection />
       <StepModal
         step={activeStep}
         onClose={closeStep}

@@ -2,13 +2,13 @@ import { useEffect } from 'react'
 
 // Список всех изображений для предзагрузки
 const IMAGES_TO_PRELOAD = [
-  '/images/manual/step-1-placeholder.svg',
-  '/images/manual/step-2-placeholder.svg',
-  '/images/manual/step-3-placeholder.svg',
-  '/images/manual/step-4-placeholder.svg',
-  '/images/manual/step-5-placeholder.svg',
-  '/images/manual/step-6-placeholder.svg',
-  '/images/manual/step-7-placeholder.svg',
+  '/images/manual/step-1.png',
+  '/images/manual/step-2.png',
+  '/images/manual/step-3.png',
+  '/images/manual/step-4.png',
+  '/images/manual/step-5.png',
+  '/images/manual/step-6.png',
+  '/images/manual/step-7.png',
   '/images/screens/step1-mp-1.png',
   '/images/screens/step1-mp-2.png',
   '/images/screens/step1-mp-3.png',
@@ -30,6 +30,7 @@ const IMAGES_TO_PRELOAD = [
   '/images/widgets/WidgetContent1.png',
   '/images/widgets/WidgetContent2.png',
   '/images/widgets/WidgetContent.png',
+  '/images/widgets/route-next-room.png',
 ]
 
 export default function ImagePreloader() {

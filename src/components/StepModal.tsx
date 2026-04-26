@@ -63,6 +63,13 @@ const widgetImages = [
   { src: '/images/widgets/WidgetContent.png', className: 'w-5/6 ml-auto' },
 ]
 
+const completionWidgetImages = [
+  ...widgetImages.slice(3),
+  { src: '/images/widgets/route-next-room.png', className: 'w-full', placement: 'center' as const },
+]
+
+const queueWidgetImages = widgetImages.slice(0, -1)
+
 const queueBenefits = [
   'Виджет всегда доступен поверх интерфейса МИС',
   'Один клик на вызов следующего пациента',
@@ -97,12 +104,27 @@ const tvBenefits = [
 ]
 
 const step4Slides = [
-  { src: '/images/step4/page-3.png', caption: 'Выбор пациента из потока в МИС ЕЦП' },
-  { src: '/images/step4/page-5.png', caption: 'Открытие карточки пациента для оформления' },
-  { src: '/images/step4/page-6.png', caption: 'Подбор и добавление услуг профосмотра' },
-  { src: '/images/step4/page-8.png', caption: 'Проверка состава оформляемых услуг' },
-  { src: '/images/step4/page-10.png', caption: 'Подтверждение оформления и сохранение в МИС' },
-  { src: '/images/step4/page-14.png', caption: 'Финальный экран завершения оформления' },
+  { src: '/images/step4/page-3.png', caption: 'Слайд 3' },
+  { src: '/images/step4/page-4.png', caption: 'Слайд 4' },
+  { src: '/images/step4/page-5.png', caption: 'Слайд 5' },
+  { src: '/images/step4/page-6.png', caption: 'Слайд 6' },
+  { src: '/images/step4/page-7.png', caption: 'Слайд 7' },
+  { src: '/images/step4/page-8.png', caption: 'Слайд 8' },
+  { src: '/images/step4/page-9.png', caption: 'Слайд 9' },
+  { src: '/images/step4/page-10.png', caption: 'Слайд 10' },
+  { src: '/images/step4/page-11.png', caption: 'Слайд 11' },
+  { src: '/images/step4/page-12.png', caption: 'Слайд 12' },
+  { src: '/images/step4/page-13.png', caption: 'Слайд 13' },
+  { src: '/images/step4/page-14.png', caption: 'Слайд 14' },
+]
+
+const medExamFunctions = [
+  'Определение доступных для пациента медосмотров исходя из пола, возраста и трудоустройства',
+  'Подписание в ЕЦП согласий на прохождение медосмотров (ДВН, ПВН) и перезачет услуг',
+  'Система отмечает одинаковые медицинские услуги в объединенных медосмотрах по данному пациенту',
+  'Система отмечает медицинские услуги, для которых в системе хранятся результаты с действующим сроком использования (например, флюорография)',
+  'Возможность пользовательской корректировки состава услуг в объединенном медосмотре',
+  'Отчет о стоимости, количестве и длительности услуг в объединенном медосмотре',
 ]
 
 const completionBenefits = [
@@ -174,6 +196,7 @@ function Carousel({
   imageClassName = 'h-full w-auto max-w-full object-contain mx-auto',
   overlayControls = false,
   autoPlayDelay = 2500,
+  showCaption = true,
 }: {
   slides: Slide[]
   frameMaxWidth?: number
@@ -183,6 +206,7 @@ function Carousel({
   imageClassName?: string
   overlayControls?: boolean
   autoPlayDelay?: number
+  showCaption?: boolean
 }) {
   const [current, setCurrent] = useState(0)
   const [isTransitionEnabled, setIsTransitionEnabled] = useState(true)
@@ -329,9 +353,11 @@ function Carousel({
         </div>
       )}
 
-      <p className="text-sm text-slate-500 text-center min-h-[48px] max-w-2xl flex items-start justify-center">
-        {slides[current]?.caption}
-      </p>
+      {showCaption && (
+        <p className="text-sm text-slate-500 text-center min-h-[48px] max-w-2xl flex items-start justify-center">
+          {slides[current]?.caption}
+        </p>
+      )}
     </div>
   )
 }
@@ -536,10 +562,11 @@ function QueueWidgetContent({ actor, customBenefits, customSideBenefits }: { act
       <div className="max-w-6xl mx-auto">
         <SectionHeader color="#E91E8C" title={`Виджет ${actorTitle} «ВнеОчереди» поверх МИС`} icon={<MonitorIcon />} />
         <WidgetShowcase
-          images={widgetImages}
+          images={queueWidgetImages}
           interval={3200}
           overlayLabel={`Виджет ${actorTitle} поверх МИС`}
           clickToAdvance
+          autoAdvanceFirst
         />
       </div>
 
@@ -591,8 +618,8 @@ function NotificationContent() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <BenefitsCard title="Мобильное приложение" color="#E91E8C" benefits={notificationBenefits} />
         <BenefitsCard title="Экран вызова (ТВ)" color="#3A9BD9" benefits={tvBenefits} />
+        <BenefitsCard title="Мобильное приложение" color="#E91E8C" benefits={notificationBenefits} />
       </div>
     </div>
   )
@@ -601,28 +628,38 @@ function NotificationContent() {
 function MisContent({ title }: { title: string }) {
   return (
     <div className="space-y-8">
-      <p className="text-slate-700 leading-relaxed max-w-4xl text-base">
-        Скриншоты на этом шаге показываются крупнее и собраны из PDF-материала по процессу оформления в МИС ЕЦП.
-      </p>
-
       <div className="max-w-[1180px] mx-auto">
         <SectionHeader color="#0052CC" title={title} icon={<DocumentIcon />} />
-        <Carousel slides={step4Slides} frameMaxWidth={1120} frameHeight={700} />
+        <Carousel slides={step4Slides} frameMaxWidth={1120} frameHeight={700} showCaption={false} />
+      </div>
+
+      <div className="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+        <h3 className="text-lg font-semibold text-slate-900 mb-5">Функции</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {medExamFunctions.map((item, index) => (
+            <div key={item} className="flex gap-3 rounded-xl bg-[#0052CC]/5 border border-[#0052CC]/15 p-4">
+              <div className="w-8 h-8 rounded-full bg-[#0052CC] text-white flex items-center justify-center flex-shrink-0 text-sm font-bold">
+                {index + 1}
+              </div>
+              <p className="text-sm leading-relaxed text-slate-700">{item}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
 }
 
-function CompletionContent({ title }: { title: string }) {
+function CompletionContent({ title, intro }: { title: string; intro: string }) {
   return (
     <div className="space-y-10">
       <p className="text-slate-700 leading-relaxed max-w-4xl text-base">
-        Для этого шага используются те же визуальные экраны, что и на шаге 2. Структура оставлена одинаковой, чтобы позже можно было быстро внести точечные корректировки.
+        {intro}
       </p>
 
       <div className="max-w-6xl mx-auto">
         <SectionHeader color="#E91E8C" title={title} icon={<MonitorIcon />} />
-        <WidgetShowcase images={widgetImages} interval={3200} overlayLabel={title} pauseAtIndex={2} />
+        <WidgetShowcase images={completionWidgetImages} overlayLabel={title} clickToAdvance />
       </div>
 
       <BenefitsCard title="Текущая версия экрана" color="#E91E8C" benefits={completionBenefits} />
@@ -909,7 +946,7 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Откройте административную панель ВнеОчереди</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-1-placeholder.svg" alt="Административная панель ВнеОчереди" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+              <img src="/images/manual/step-1.png" alt="Административная панель ВнеОчереди" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
             </div>
           </div>
 
@@ -920,7 +957,7 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Зайдите в раздел «Точки обслуживания»</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-2-placeholder.svg" alt="Раздел Точки обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+              <img src="/images/manual/step-2.png" alt="Раздел Точки обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
             </div>
           </div>
 
@@ -931,7 +968,7 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Выберите вашу точку обслуживания</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-3-placeholder.svg" alt="Выбор точки обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+              <img src="/images/manual/step-3.png" alt="Выбор точки обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
             </div>
           </div>
 
@@ -942,7 +979,7 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Нажмите на пациента → «Перенаправить» → выберите очередь «Профосмотр»</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-4-placeholder.svg" alt="Перенаправление пациента" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+              <img src="/images/manual/step-4.png" alt="Перенаправление пациента" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
             </div>
           </div>
 
@@ -954,7 +991,7 @@ Content-Type: application/json
             </div>
             <div className="p-5">
               <p className="text-sm text-slate-600 mb-3">Можно выбрать готовый набор услуг из предустановленных заранее.</p>
-              <img src="/images/manual/step-5-placeholder.svg" alt="Выбор услуг" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+              <img src="/images/manual/step-5.png" alt="Выбор услуг" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
             </div>
           </div>
 
@@ -965,7 +1002,7 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Нажмите «Записать» — откроется окно с первым кабинетом маршрута</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-6-placeholder.svg" alt="Окно с кабинетом маршрута" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+              <img src="/images/manual/step-6.png" alt="Окно с кабинетом маршрута" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
             </div>
           </div>
 
@@ -976,7 +1013,7 @@ Content-Type: application/json
               <h4 className="text-sm font-semibold text-slate-900">Сообщите номер кабинета пациенту и завершите обслуживание</h4>
             </div>
             <div className="p-5">
-              <img src="/images/manual/step-7-placeholder.svg" alt="Завершение обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" style={{ minHeight: 200 }} />
+              <img src="/images/manual/step-7.png" alt="Завершение обслуживания" className="w-full rounded-lg border border-slate-200 bg-slate-100" />
             </div>
           </div>
         </div>
@@ -1011,7 +1048,12 @@ function renderStepContent(step: number) {
     case 4:
       return <MisContent title="Интерфейс ЕЦП.МИС" />
     case 5:
-      return <CompletionContent title="Завершение обслуживания в регистратуре" />
+      return (
+        <CompletionContent
+          title="Завершение обслуживания в регистратуре"
+          intro="После оформления услуг регистратор завершает обслуживание с помощью виджета «ВнеОчереди». Система определяет следующий кабинет для пациента и показывает информацию на экране. Регистратор сообщает пациенту следующий кабинет."
+        />
+      )
     case 6:
       return <IntegrationContent />
     case 7:
@@ -1021,7 +1063,12 @@ function renderStepContent(step: number) {
     case 9:
       return <MisContent title="Интерфейс ЕЦП.МИС" />
     case 10:
-      return <CompletionContent title="Завершение профосмотра у врача" />
+      return (
+        <CompletionContent
+          title="Завершение профосмотра у врача"
+          intro="После осмотра врач завершает обслуживание с помощью виджета «ВнеОчереди». Система определяет следующий кабинет для пациента и показывает информацию на экране. Врач сообщает пациенту следующий кабинет."
+        />
+      )
     default:
       return null
   }

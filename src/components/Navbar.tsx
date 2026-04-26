@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 
-const navLinks = [
+const navLinks: Array<{ href?: string; label: string; step?: number }> = [
   { href: '#hero', label: 'Главная' },
   { href: '#process', label: 'Схема' },
   { href: '#timeline', label: 'Этапы' },
   { href: '#roles', label: 'Роли и задачи' },
-  { href: '#cases', label: 'Интерфейсы' },
+  { label: 'Интеграция', step: 6 },
 ]
 
-export default function Navbar() {
+interface NavbarProps {
+  onOpenStep?: (step: number) => void
+}
+
+export default function Navbar({ onOpenStep }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -19,9 +23,17 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, link: typeof navLinks[number]) => {
     e.preventDefault()
     setMenuOpen(false)
+    if (link.step) {
+      onOpenStep?.(link.step)
+      return
+    }
+
+    if (!link.href) return
+
+    const href = link.href
     const el = document.querySelector(href)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -37,7 +49,7 @@ export default function Navbar() {
       }`}
     >
       <div className="container-wide flex items-center justify-between h-16 md:h-20 px-4 sm:px-6 lg:px-8">
-        <a href="#hero" onClick={(e) => handleClick(e, '#hero')} className="flex items-center gap-2.5">
+        <a href="#hero" onClick={(e) => handleClick(e, navLinks[0])} className="flex items-center gap-2.5">
           <img src="./images/yamal-checkup-logo.svg" alt="Logo" className="h-8 w-auto object-contain" />
           <span className="font-display text-xl font-bold text-slate-900">
             Ямальский чек-ап
@@ -47,9 +59,9 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleClick(e, link.href)}
+              key={link.href || link.label}
+              href={link.href || '#'}
+              onClick={(e) => handleClick(e, link)}
               className="relative type-nav text-slate-600 hover:text-slate-900 transition-colors"
             >
               {link.label}
@@ -71,9 +83,9 @@ export default function Navbar() {
           <div className="container-wide flex flex-col py-4 gap-1">
             {navLinks.map((link) => (
               <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleClick(e, link.href)}
+                key={link.href || link.label}
+                href={link.href || '#'}
+                onClick={(e) => handleClick(e, link)}
                 className="type-nav px-3 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors"
               >
                 {link.label}
