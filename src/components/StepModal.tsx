@@ -55,20 +55,30 @@ const terminalBenefits = [
   'Вызов пациента отобразится на экране вызова (ТВ)',
 ]
 
-const widgetImages = [
-  { src: '/images/widgets/Widget0.png', className: 'w-2/5 ml-auto' },
-  { src: '/images/widgets/WidgetContent1.png', className: 'w-5/6 ml-auto' },
-  { src: '/images/widgets/WidgetContent2.png', className: 'w-5/6 ml-auto' },
-  { src: '/images/widgets/agentCompact.png', className: 'w-2/5 ml-auto' },
-  { src: '/images/widgets/WidgetContent.png', className: 'w-5/6 ml-auto' },
-]
+const getWidgetFolder = (actor: 'регистратор' | 'врач') => (
+  actor === 'регистратор' ? 'registrar' : 'doctor'
+)
 
-const completionWidgetImages = [
-  ...widgetImages.slice(3),
-  { src: '/images/widgets/route-next-room.png', className: 'w-full', placement: 'center' as const },
-]
+const getQueueWidgetImages = (actor: 'регистратор' | 'врач') => {
+  const folder = getWidgetFolder(actor)
 
-const queueWidgetImages = widgetImages.slice(0, -1)
+  return [
+    { src: `/images/widgets/${folder}/1.png`, className: 'w-2/5 ml-auto' },
+    { src: `/images/widgets/${folder}/2.png`, className: 'w-5/6 ml-auto' },
+    { src: `/images/widgets/${folder}/3.png`, className: 'w-5/6 ml-auto' },
+    { src: `/images/widgets/${folder}/4.png`, className: 'w-2/5 ml-auto' },
+  ]
+}
+
+const getCompletionWidgetImages = (actor: 'регистратор' | 'врач') => {
+  const folder = getWidgetFolder(actor)
+
+  return [
+    { src: `/images/widgets/${folder}/4.png`, className: 'w-2/5 ml-auto' },
+    { src: `/images/widgets/${folder}/5.png`, className: 'w-5/6 ml-auto' },
+    { src: '/images/widgets/route-next-room.png', className: 'w-full', placement: 'center' as const },
+  ]
+}
 
 const queueBenefits = [
   'Виджет всегда доступен поверх интерфейса МИС',
@@ -552,6 +562,7 @@ function QueueWidgetContent({ actor, customBenefits, customSideBenefits }: { act
   const actorTitle = actor === 'регистратор' ? 'регистратора' : 'врача'
   const roleTitle = actor === 'регистратор' ? 'Регистратор' : 'Врач'
   const target = actor === 'регистратор' ? 'в окно' : 'в кабинет'
+  const queueWidgetImages = getQueueWidgetImages(actor)
 
   return (
     <div className="space-y-10">
@@ -650,7 +661,9 @@ function MisContent({ title }: { title: string }) {
   )
 }
 
-function CompletionContent({ title, intro }: { title: string; intro: string }) {
+function CompletionContent({ title, intro, actor }: { title: string; intro: string; actor: 'регистратор' | 'врач' }) {
+  const completionWidgetImages = getCompletionWidgetImages(actor)
+
   return (
     <div className="space-y-10">
       <p className="text-slate-700 leading-relaxed max-w-4xl text-base">
@@ -1097,6 +1110,7 @@ function renderStepContent(step: number) {
         <CompletionContent
           title="Завершение обслуживания в регистратуре"
           intro="После оформления услуг регистратор завершает обслуживание с помощью виджета «ВнеОчереди». Система определяет следующий кабинет для пациента и показывает информацию на экране. Регистратор сообщает пациенту следующий кабинет."
+          actor="регистратор"
         />
       )
     case 6:
@@ -1112,6 +1126,7 @@ function renderStepContent(step: number) {
         <CompletionContent
           title="Завершение профосмотра у врача"
           intro="После осмотра врач завершает обслуживание с помощью виджета «ВнеОчереди». Система определяет следующий кабинет для пациента и показывает информацию на экране. Врач сообщает пациенту следующий кабинет."
+          actor="врач"
         />
       )
     default:
