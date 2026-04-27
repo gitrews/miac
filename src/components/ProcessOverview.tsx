@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react'
+import type { RoleDetailId } from './RoleDetailModal'
 
 interface ProcessOverviewProps {
   onOpenStep: (step: number) => void
+  onOpenRole: (role: RoleDetailId) => void
 }
 
-export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
+export default function ProcessOverview({ onOpenStep, onOpenRole }: ProcessOverviewProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -16,12 +18,19 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
       if (g) {
         const step = parseInt(g.getAttribute('data-step') || '0', 10)
         if (step > 0) onOpenStep(step)
+        return
+      }
+
+      const role = (e.target as HTMLElement).closest('g[data-role]')
+      if (role) {
+        const roleId = role.getAttribute('data-role') as RoleDetailId | null
+        if (roleId) onOpenRole(roleId)
       }
     }
 
     container.addEventListener('click', handleClick)
     return () => container.removeEventListener('click', handleClick)
-  }, [onOpenStep])
+  }, [onOpenRole, onOpenStep])
 
   const svgHTML = `<svg viewBox="0 0 886 762" preserveAspectRatio="xMinYMin meet" style="width:100%;height:auto;display:block">
 <defs><linearGradient id="intGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0052CC"/><stop offset="100%" stop-color="#E91E8C"/></linearGradient></defs>
@@ -30,22 +39,26 @@ export default function ProcessOverview({ onOpenStep }: ProcessOverviewProps) {
     font-family: var(--font-sans);
   }
   g[data-step] rect,
-  g[data-step] text {
+  g[data-step] text,
+  g[data-role] rect,
+  g[data-role] text {
     transition: transform 0.18s ease, filter 0.18s ease, stroke 0.18s ease;
   }
-  g[data-step] > rect:first-child {
+  g[data-step] > rect:first-child,
+  g[data-role] > rect:first-child {
     transform-box: fill-box;
     transform-origin: center;
   }
-  g[data-step]:hover > rect:first-child {
+  g[data-step]:hover > rect:first-child,
+  g[data-role]:hover > rect:first-child {
     transform: translateY(-1px);
     filter: drop-shadow(0 4px 6px rgba(15, 23, 42, 0.12));
     stroke: rgba(148, 163, 184, 0.45);
   }
 </style>
-<g opacity="1"><rect x="283" y="2" width="188" height="36" rx="8" fill="#E91E8C12" stroke="#E91E8C35" stroke-width="1"/><text x="377" y="25" text-anchor="middle" fill="#E91E8C" font-size="12" font-weight="700">Пациент</text></g>
-<g opacity="1"><rect x="493" y="2" width="188" height="36" rx="8" fill="#2EC4B612" stroke="#2EC4B635" stroke-width="1"/><text x="587" y="25" text-anchor="middle" fill="#2EC4B6" font-size="12" font-weight="700">Регистратор</text></g>
-<g opacity="1"><rect x="693" y="2" width="188" height="36" rx="8" fill="#3A9BD912" stroke="#3A9BD935" stroke-width="1"/><text x="787" y="25" text-anchor="middle" fill="#3A9BD9" font-size="12" font-weight="700">Врач</text></g>
+<g opacity="1" data-role="patient" style="cursor:pointer"><rect x="283" y="2" width="188" height="36" rx="8" fill="#E91E8C12" stroke="#E91E8C35" stroke-width="1"/><text x="377" y="25" text-anchor="middle" fill="#E91E8C" font-size="12" font-weight="700" style="pointer-events:none">Пациент</text></g>
+<g opacity="1" data-role="registrar" style="cursor:pointer"><rect x="493" y="2" width="188" height="36" rx="8" fill="#2EC4B612" stroke="#2EC4B635" stroke-width="1"/><text x="587" y="25" text-anchor="middle" fill="#2EC4B6" font-size="12" font-weight="700" style="pointer-events:none">Регистратор</text></g>
+<g opacity="1" data-role="doctor" style="cursor:pointer"><rect x="693" y="2" width="188" height="36" rx="8" fill="#3A9BD912" stroke="#3A9BD935" stroke-width="1"/><text x="787" y="25" text-anchor="middle" fill="#3A9BD9" font-size="12" font-weight="700" style="pointer-events:none">Врач</text></g>
 <g><rect x="0" y="58" width="44" height="346" rx="6" fill="#F0FDF9" stroke="#2EC4B630" stroke-width="1"/><text x="22" y="235" text-anchor="middle" fill="#2EC4B6" font-size="9" font-weight="700" transform="rotate(-90, 22, 235)">РЕГИСТРАТУРА</text></g>
 <g><rect x="0" y="408" width="44" height="346" rx="6" fill="#EFF6FF" stroke="#3A9BD930" stroke-width="1"/><text x="22" y="581" text-anchor="middle" fill="#3A9BD9" font-size="9" font-weight="700" transform="rotate(-90, 22, 581)">ПРОФОСМОТР</text></g>
 <g opacity="1">

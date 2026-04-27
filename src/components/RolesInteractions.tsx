@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { UserCheck, Stethoscope, Users, Monitor, Database } from 'lucide-react'
+import { ArrowRight, UserCheck, Stethoscope, Users, Monitor, Database } from 'lucide-react'
+import type { RoleDetailId } from './RoleDetailModal'
 
 const roles = [
   {
@@ -82,14 +83,26 @@ const roles = [
 const firstRow = roles.slice(0, 3)
 const secondRow = roles.slice(3)
 
-function RoleCard({ role, index }: { role: typeof roles[number]; index: number }) {
-  return (
-    <motion.div
-      className={`relative rounded-2xl border ${role.borderColor} bg-slate-50/50 p-6 lg:p-8 hover:shadow-lg transition-shadow`}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-    >
+function isDetailRole(id: string): id is RoleDetailId {
+  return id === 'patient' || id === 'registrar' || id === 'doctor' || id === 'vneocheredi' || id === 'ecp'
+}
+
+function RoleCard({
+  role,
+  index,
+  onOpenRole,
+}: {
+  role: typeof roles[number]
+  index: number
+  onOpenRole?: (role: RoleDetailId) => void
+}) {
+  const roleId = isDetailRole(role.id) ? role.id : null
+  const canOpen = roleId !== null
+  const cardClass = `relative rounded-2xl border ${role.borderColor} bg-slate-50/50 p-6 lg:p-8 hover:shadow-lg transition-all text-left ${
+    canOpen ? 'cursor-pointer hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300' : ''
+  }`
+  const content = (
+    <>
       <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${role.color} mb-5`}>
         <role.icon size={24} />
       </div>
@@ -103,11 +116,49 @@ function RoleCard({ role, index }: { role: typeof roles[number]; index: number }
           </li>
         ))}
       </ul>
+      {canOpen && (
+        <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-900">
+          Подробнее о роли
+          <ArrowRight size={16} />
+        </div>
+      )}
+    </>
+  )
+
+  if (canOpen) {
+    return (
+      <motion.button
+        type="button"
+        onClick={() => {
+          if (roleId) onOpenRole?.(roleId)
+        }}
+        className={cardClass}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.08 }}
+      >
+        {content}
+      </motion.button>
+    )
+  }
+
+  return (
+    <motion.div
+      className={cardClass}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+    >
+      {content}
     </motion.div>
   )
 }
 
-export default function RolesInteractions() {
+interface RolesInteractionsProps {
+  onOpenRole?: (role: RoleDetailId) => void
+}
+
+export default function RolesInteractions({ onOpenRole }: RolesInteractionsProps) {
   return (
     <section id="roles" className="section bg-slate-50 px-4 sm:px-6">
       <div className="container-wide">
@@ -125,13 +176,13 @@ export default function RolesInteractions() {
         <div className="space-y-6 md:space-y-8">
           <div className="grid lg:grid-cols-3 gap-6 lg:gap-6">
             {firstRow.map((role, index) => (
-              <RoleCard key={role.id} role={role} index={index} />
+              <RoleCard key={role.id} role={role} index={index} onOpenRole={onOpenRole} />
             ))}
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-6 max-w-5xl mx-auto">
             {secondRow.map((role, index) => (
-              <RoleCard key={role.id} role={role} index={index + firstRow.length} />
+              <RoleCard key={role.id} role={role} index={index + firstRow.length} onOpenRole={onOpenRole} />
             ))}
           </div>
         </div>
