@@ -5,7 +5,8 @@
 - Production worktree: `/root/projects/miac` on branch `main`.
 - Development worktree: `/root/projects/miac-dev` on branch `dev`.
 - The production site is served from `/var/www/miac/dist` by Caddy for `https://yamiac.ru/`.
-- The development site is served from `/var/www/miac-dev/dist` by Caddy for `https://dev.yamiac.ru/`.
+- The development site is served from `/var/www/miac-dev/dist` by Caddy for `http://dev.yamiac.ru/`.
+- `dev.yamiac.ru` is intentionally HTTP-only until DNS is configured; after DNS points to this server, switch the Caddy site label from `http://dev.yamiac.ru` to `dev.yamiac.ru` to enable automatic HTTPS.
 - Do not edit `/var/www/miac/dist` or `/var/www/miac-dev/dist` directly. They are deploy outputs.
 
 ## Updating Production
@@ -53,10 +54,10 @@ Development backups are stored in:
 After deployment, verify the dev site:
 
 ```bash
-curl -I https://dev.yamiac.ru/
+curl -I http://dev.yamiac.ru/
 ```
 
-Expected result after DNS is configured: `HTTP/2 200`.
+Expected result after DNS is configured: `HTTP/1.1 200 OK`.
 
 ## Development Flow
 
