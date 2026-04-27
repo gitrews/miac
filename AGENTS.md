@@ -2,13 +2,15 @@
 
 ## Project Paths
 
-- Work on the project in `/root/projects/miac`.
-- The live site is served from `/var/www/miac/dist` by Caddy for `https://yamiac.ru/`.
-- Do not edit `/var/www/miac/dist` directly. It is deploy output.
+- Production worktree: `/root/projects/miac` on branch `main`.
+- Development worktree: `/root/projects/miac-dev` on branch `dev`.
+- The production site is served from `/var/www/miac/dist` by Caddy for `https://yamiac.ru/`.
+- The development site is served from `/var/www/miac-dev/dist` by Caddy for `https://dev.yamiac.ru/`.
+- Do not edit `/var/www/miac/dist` or `/var/www/miac-dev/dist` directly. They are deploy outputs.
 
-## Updating The Site
+## Updating Production
 
-Use the deploy script from the working repository:
+Deploy production from `main`:
 
 ```bash
 cd /root/projects/miac
@@ -17,7 +19,7 @@ npm run deploy
 
 `npm run deploy` runs the production build, creates a backup of the current live `dist`, and syncs the new build into `/var/www/miac/dist`.
 
-Backups are stored in:
+Production backups are stored in:
 
 ```bash
 /var/www/miac/.deploy-backups/
@@ -31,9 +33,36 @@ curl -I https://yamiac.ru/
 
 Expected result: `HTTP/2 200`.
 
+## Updating Development
+
+Deploy development from `dev`:
+
+```bash
+cd /root/projects/miac-dev
+npm run deploy:dev
+```
+
+`npm run deploy:dev` runs the production build for the dev branch, creates a backup of the current dev `dist`, and syncs the new build into `/var/www/miac-dev/dist`.
+
+Development backups are stored in:
+
+```bash
+/var/www/miac-dev/.deploy-backups/
+```
+
+After deployment, verify the dev site:
+
+```bash
+curl -I https://dev.yamiac.ru/
+```
+
+Expected result after DNS is configured: `HTTP/2 200`.
+
 ## Development Flow
 
-- Make source changes only in `/root/projects/miac`.
+- Make feature/source changes on branch `dev` in `/root/projects/miac-dev`.
+- Merge `dev` into `main` only when changes are ready for production.
 - Run `npm run build` before deploying when you want to verify build output without updating the live site.
-- Run `npm run deploy` only when the changes are ready to publish.
-- Commit project changes from `/root/projects/miac`; do not use `/var/www/miac` as the working repo.
+- Run `npm run deploy:dev` to publish the current `dev` branch to the dev stand.
+- Run `npm run deploy` only from `main` when changes are ready to publish to production.
+- Commit project changes from `/root/projects/miac` or `/root/projects/miac-dev`; do not use `/var/www/miac` or `/var/www/miac-dev` as working repos.

@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "deploy": "bash scripts/deploy.sh",
+    "deploy:dev": "DEPLOY_DIR=/var/www/miac-dev/dist BACKUP_ROOT=/var/www/miac-dev/.deploy-backups bash scripts/deploy.sh",
     "preview": "vite preview"
   },
   "dependencies": {
