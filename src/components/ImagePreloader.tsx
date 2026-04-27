@@ -35,6 +35,7 @@ const IMAGES_TO_PRELOAD = [
   '/images/widgets/doctor/3.png',
   '/images/widgets/doctor/4.png',
   '/images/widgets/doctor/5.png',
+  '/images/widgets/completion-final.png',
   '/images/widgets/route-next-room.png',
 ]
 

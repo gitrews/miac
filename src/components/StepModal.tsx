@@ -76,7 +76,7 @@ const getCompletionWidgetImages = (actor: 'регистратор' | 'врач')
   return [
     { src: `/images/widgets/${folder}/4.png`, className: 'w-2/5 ml-auto' },
     { src: `/images/widgets/${folder}/5.png`, className: 'w-5/6 ml-auto' },
-    { src: '/images/widgets/route-next-room.png', className: 'w-full', placement: 'center' as const },
+    { src: '/images/widgets/completion-final.png', className: 'w-full', placement: 'center' as const },
   ]
 }
 
