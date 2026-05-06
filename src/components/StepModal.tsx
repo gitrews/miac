@@ -147,7 +147,7 @@ const completionBenefits = [
 const integrationSteps = [
   { label: '1. Настройка интеграции', desc: 'МИС получает список мест, очередей и услуг через POST /api/integration/places.' },
   { label: '2. Создание или обновление пациента', desc: 'МИС создаёт или обновляет пациента в системе «ВнеОчереди». Возвращается customerId.' },
-  { label: '3. Запись в очередь', desc: 'МИС отправляет customerId, место, очередь и список услуг. Система создаёт позицию в очереди.' },
+  { label: '3. Запись в очередь', desc: 'МИС отправляет customerId, оператора, место, очередь и список услуг. Система создаёт позицию в очереди.' },
 ]
 
 const integrationBenefits = [
@@ -907,6 +907,7 @@ Content-Type: application/json
         <ul className="space-y-1.5 text-xs text-slate-600">
           <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
           <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента, полученный на шаге 2.</li>
+          <li><code className="text-[#2EC4B6] font-mono">operator</code> — ФИО оператора в МИС.</li>
           <li><code className="text-[#2EC4B6] font-mono">placeId</code> — идентификатор места (кабинета), фиксированный для клиники. Предоставляется командой «ВнеОчереди» или получается через метод POST /api/integration/places.</li>
           <li><code className="text-[#2EC4B6] font-mono">lineId</code> — идентификатор очереди, фиксированный для клиники. Предоставляется командой «ВнеОчереди» или получается через метод POST /api/integration/places.</li>
           <li><code className="text-[#2EC4B6] font-mono">services</code> — массив услуг. Каждая услуга содержит <code className="bg-slate-100 px-1 rounded">serviceId</code> — название или идентификатор услуги, может быть использовано название услуги из МИС.</li>
@@ -928,6 +929,7 @@ Content-Type: application/json
 {
   "accessKey": "your-access-key",
   "customerId": "0c52c445020145b40760d99f12000000",
+  "operator": "Петров Пётр Петрович",
   "placeId": "8ca734a1-f3b4-4b9e-a9d4-838dfbf9008b",
   "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1",
   "services": [
