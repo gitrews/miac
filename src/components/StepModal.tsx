@@ -147,7 +147,7 @@ const completionBenefits = [
 const integrationSteps = [
   { label: '1. Настройка интеграции', desc: 'МИС получает список мест, очередей и услуг через POST /api/integration/places.' },
   { label: '2. Создание или обновление пациента', desc: 'МИС создаёт или обновляет пациента в системе «ВнеОчереди». Возвращается customerId.' },
-  { label: '3. Запись в очередь', desc: 'МИС отправляет customerId, оператора и список услуг. Система создаёт позицию в очереди.' },
+  { label: '3. Запись в очередь', desc: 'МИС отправляет customerId, место, очередь и список услуг. Система создаёт позицию в очереди.' },
 ]
 
 const integrationBenefits = [
@@ -786,13 +786,27 @@ Content-Type: application/json
   "places": [
     {
       "placeId": "8ca734a1-f3b4-4b9e-a9d4-838dfbf9008b",
-      "name": "Кабинет №1",
+      "name": "ГБУЗ \\"СОКБ\\" г. Салехард ул. Мира 39/6",
+      "city": "Салехард",
+      "address": "ул. Мира 39/6",
+      "openTime": "08:00",
+      "closeTime": "20:00",
+      "latitude": 66.529844,
+      "longitude": 66.614507,
+      "tags": [],
       "lines": [
         {
           "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1",
-          "name": "Основная очередь",
+          "name": "Профосмотр",
+          "openTime": "08:00",
+          "closeTime": "20:00",
+          "isActive": true,
           "services": [
-            { "serviceId": "Терапевт", "name": "Приём терапевта" }
+            {
+              "serviceId": "Терапевт",
+              "name": "Приём терапевта",
+              "maxUnits": 1
+            }
           ]
         }
       ]
@@ -801,6 +815,20 @@ Content-Type: application/json
 }`}
           </pre>
         </div>
+      </div>
+
+      <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: 'rgba(0,82,204,0.08)', border: '1px solid rgba(0,82,204,0.25)' }}>
+        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'rgba(0,82,204,0.15)' }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0052CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </div>
+        <p className="text-sm text-slate-700 leading-relaxed">
+          <span className="font-semibold" style={{ color: '#0052CC' }}>Примечание.{' '}</span>
+          Метод можно вызвать один раз для получения placeId и lineId, а затем использовать эти параметры в запросе POST /api/integration/line/join без повторного вызова POST /api/integration/places.
+        </p>
       </div>
 
       <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 2. Создание или обновление пациента</h3>
@@ -815,6 +843,8 @@ Content-Type: application/json
           <li><code className="text-[#2EC4B6] font-mono">person.middleName</code> — отчество пациента.</li>
           <li><code className="text-[#2EC4B6] font-mono">person.lastName</code> — фамилия пациента.</li>
           <li><code className="text-[#2EC4B6] font-mono">person.phone</code> — номер телефона (необязательно).</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.email</code> — email пациента (необязательно).</li>
+          <li><code className="text-[#2EC4B6] font-mono">person.companyName</code> — организация пациента (необязательно).</li>
         </ul>
       </div>
 
@@ -833,7 +863,9 @@ Content-Type: application/json
     "firstName": "Иван",
     "middleName": "Иванович",
     "lastName": "Иванов",
-    "phone": "+79991234567"
+    "phone": "+79991234567",
+    "email": "svist@test.com",
+    "companyName": "ООО Общество"
   }
 }`}
           </pre>
@@ -875,12 +907,14 @@ Content-Type: application/json
         <ul className="space-y-1.5 text-xs text-slate-600">
           <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
           <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента, полученный на шаге 2.</li>
-          <li><code className="text-[#2EC4B6] font-mono">operator</code> — ФИО оператора, строка.</li>
           <li><code className="text-[#2EC4B6] font-mono">placeId</code> — идентификатор места (кабинета), фиксированный для клиники. Предоставляется командой «ВнеОчереди» или получается через метод POST /api/integration/places.</li>
           <li><code className="text-[#2EC4B6] font-mono">lineId</code> — идентификатор очереди, фиксированный для клиники. Предоставляется командой «ВнеОчереди» или получается через метод POST /api/integration/places.</li>
           <li><code className="text-[#2EC4B6] font-mono">services</code> — массив услуг. Каждая услуга содержит <code className="bg-slate-100 px-1 rounded">serviceId</code> — название или идентификатор услуги, может быть использовано название услуги из МИС.</li>
+          <li><code className="text-[#2EC4B6] font-mono">customerComment</code> — комментарий пациента (необязательно).</li>
+          <li><code className="text-[#2EC4B6] font-mono">staffComment</code> — комментарий сотрудника (необязательно).</li>
           <li><code className="text-[#2EC4B6] font-mono">deviceType</code> — тип устройства. <code className="bg-slate-100 px-1 rounded">Browser</code> для записи из МИС.</li>
           <li><code className="text-[#2EC4B6] font-mono">priority</code> — флаг приоритетной записи. <code className="bg-slate-100 px-1 rounded">false</code> по умолчанию.</li>
+          <li><code className="text-[#2EC4B6] font-mono">additionalFields</code> — дополнительные поля в свободном формате (необязательно).</li>
         </ul>
       </div>
 
@@ -894,15 +928,21 @@ Content-Type: application/json
 {
   "accessKey": "your-access-key",
   "customerId": "0c52c445020145b40760d99f12000000",
-  "operator": "Петров Пётр Петрович",
   "placeId": "8ca734a1-f3b4-4b9e-a9d4-838dfbf9008b",
   "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1",
   "services": [
-    { "serviceId": "Забор биоматериала" },
-    { "serviceId": "Терапевт" }
+    { "serviceId": "Общий анализ мочи" },
+    { "serviceId": "Прием (осмотр) врача - нарколога" },
+    { "serviceId": "Прием (осмотр) врача - кардиолога" },
+    { "serviceId": "Прием (осмотр) врача - гематолога" }
   ],
+  "customerComment": "комментарий пациента",
+  "staffComment": "комментарий сотрудника",
   "deviceType": "Browser",
-  "priority": false
+  "priority": false,
+  "additionalFields": {
+    "Диагноз": "Здоров"
+  }
 }`}
           </pre>
         </div>
@@ -916,25 +956,26 @@ Content-Type: application/json
 Content-Type: application/json
 
 {
-  "positionId": "pos-123456789",
-  "queueNumber": 42,
-  "estimatedWaitTime": 15
+  "appointment": {
+    "id": "10761"
+  },
+  "success": true
 }`}
           </pre>
         </div>
       </div>
 
-            <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: 'rgba(233,30,140,0.08)', border: '1px solid rgba(233,30,140,0.25)' }}>
-        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'rgba(233,30,140,0.15)' }}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E91E8C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <div className="rounded-xl p-5 flex items-start gap-3" style={{ backgroundColor: 'rgba(0,82,204,0.08)', border: '1px solid rgba(0,82,204,0.25)' }}>
+        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: 'rgba(0,82,204,0.15)' }}>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0052CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="8" x2="12" y2="12" />
             <line x1="12" y1="16" x2="12.01" y2="16" />
           </svg>
         </div>
         <p className="text-sm text-slate-700 leading-relaxed">
-          <span className="font-semibold" style={{ color: '#E91E8C' }}>Важно!{' '}</span>
-          Для полноценной интеграции МИС и ЭО необходимо обсудить с командой ВнеОчереди соответствие справочников услуг МИС и ЭО, а также передачу идентификатора регистратора.
+          <span className="font-semibold" style={{ color: '#0052CC' }}>Примечание.{' '}</span>
+          Если передаются идентификаторы услуг МИС, то в настройках очереди для каждой услуги должны быть заданы алиасы — названия услуг из МИС.
         </p>
       </div>
 
@@ -949,7 +990,13 @@ Content-Type: application/json
           <div className="px-5 py-5 space-y-6 bg-white border-t border-slate-200">
             <div>
               <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/line/todayPositions</h4>
-              <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной линии.</p>
+              <p className="text-xs text-slate-600 mb-3">Возвращает список позиций (талонов) в указанной очереди и месте за текущую дату.</p>
+              <h5 className="text-xs font-semibold text-slate-500 mb-1">Параметры запроса</h5>
+              <ul className="space-y-1.5 text-xs text-slate-600 mb-3">
+                <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
+                <li><code className="text-[#2EC4B6] font-mono">placeId</code> — идентификатор места обслуживания.</li>
+                <li><code className="text-[#2EC4B6] font-mono">lineId</code> — идентификатор очереди.</li>
+              </ul>
               <h5 className="text-xs font-semibold text-slate-500 mb-1">Пример запроса</h5>
               <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto mb-3">
                 <pre className="text-xs text-slate-300 font-mono leading-relaxed">
@@ -958,6 +1005,7 @@ Content-Type: application/json
 
 {
   "accessKey": "your-access-key",
+  "placeId": "8ca734a1-f3b4-4b9e-a9d4-838dfbf9008b",
   "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1"
 }`}
                 </pre>
@@ -971,10 +1019,20 @@ Content-Type: application/json
 {
   "positions": [
     {
-      "positionId": "pos-123456789",
-      "queueNumber": 42,
-      "status": "waiting",
-      "customerName": "Иванов И.И."
+      "positionId": 9906,
+      "placeId": "8ca734a1-f3b4-4b9e-a9d4-838dfbf9008b",
+      "placeName": "ГБУЗ \\"СОКБ\\" г. Салехард ул. Мира 39/6",
+      "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1",
+      "lineName": "Профосмотр",
+      "customerName": "Иванов Иван Иванович",
+      "additionalFields": {},
+      "serviceName": "Периодический профосмотр",
+      "units": 1,
+      "creationTimeUtc": "2024-01-12T02:34:00.8054432",
+      "servicePoint": "Окно № 3",
+      "operatorName": "Регистратор 3",
+      "callTimeUtc": "2024-01-12T02:58:41.4932386",
+      "serviceStartTimeUtc": "2024-01-12T02:59:14.832917"
     }
   ]
 }`}
