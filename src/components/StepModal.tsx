@@ -145,8 +145,9 @@ const completionBenefits = [
 ]
 
 const integrationSteps = [
-  { label: '1. Создание или обновление пациента', desc: 'МИС создаёт или обновляет пациента в системе «ВнеОчереди». Возвращается customerId.' },
-  { label: '2. Запись в очередь', desc: 'МИС отправляет customerId и список услуг. Система создаёт позицию в очереди.' },
+  { label: '1. Настройка интеграции', desc: 'МИС получает список мест, очередей и услуг через POST /api/integration/places.' },
+  { label: '2. Создание или обновление пациента', desc: 'МИС создаёт или обновляет пациента в системе «ВнеОчереди». Возвращается customerId.' },
+  { label: '3. Запись в очередь', desc: 'МИС отправляет customerId, оператора и список услуг. Система создаёт позицию в очереди.' },
 ]
 
 const integrationBenefits = [
@@ -739,16 +740,70 @@ function IntegrationContent() {
           </li>
           <li className="flex items-start gap-2">
             <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: '#2EC4B6' }} />
-            <span><strong>Идентификаторы места, очереди и услуг</strong> (placeId, lineId, serviceId) — фиксированы для конкретной клиники</span>
+            <span><strong>Идентификаторы места, очереди и услуг</strong> (placeId, lineId, serviceId) — предоставляются командой «ВнеОчереди» или получаются через метод POST /api/integration/places.</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: '#2EC4B6' }} />
-            <span>Два API-вызова: создание пациента и запись в очередь.</span>
+            <span>Три API-вызова: получение справочников интеграции, создание пациента и запись в очередь.</span>
           </li>
         </ul>
       </div>
 
-      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 1. Создание или обновление пациента</h3>
+      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 1. Настройка интеграции</h3>
+
+      <div className="mt-2">
+        <p className="text-sm text-slate-600 mb-4">
+          Метод возвращает список мест обслуживания, очередей и услуг, зарегистрированных на сервере. Используется при первоначальной настройке, чтобы получить placeId, lineId и serviceId для последующей записи пациента в очередь.
+        </p>
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Параметры запроса</h4>
+        <ul className="space-y-1.5 text-xs text-slate-600">
+          <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
+        </ul>
+      </div>
+
+      <div className="mt-2">
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример запроса</h4>
+        <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-6 overflow-x-auto">
+          <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+{`POST /api/integration/places
+Content-Type: application/json
+
+{
+  "accessKey": "your-access-key"
+}`}
+          </pre>
+        </div>
+      </div>
+
+      <div className="mt-2">
+        <h4 className="text-sm font-semibold text-slate-700 mb-2">Пример ответа</h4>
+        <div className="rounded-xl bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
+          <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+{`HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "places": [
+    {
+      "placeId": "8ca734a1-f3b4-4b9e-a9d4-838dfbf9008b",
+      "name": "Кабинет №1",
+      "lines": [
+        {
+          "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1",
+          "name": "Основная очередь",
+          "services": [
+            { "serviceId": "Терапевт", "name": "Приём терапевта" }
+          ]
+        }
+      ]
+    }
+  ]
+}`}
+          </pre>
+        </div>
+      </div>
+
+      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 2. Создание или обновление пациента</h3>
 
       <div className="mt-2">
         <h4 className="text-sm font-semibold text-slate-700 mb-2">Параметры запроса</h4>
@@ -813,16 +868,17 @@ Content-Type: application/json
         </p>
       </div>
 
-      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 2. Запись в очередь</h3>
+      <h3 className="text-sm font-semibold text-[#2EC4B6] mb-2">Шаг 3. Запись в очередь</h3>
 
       <div className="mt-2">
         <h4 className="text-sm font-semibold text-slate-700 mb-2">Параметры запроса</h4>
         <ul className="space-y-1.5 text-xs text-slate-600">
           <li><code className="text-[#2EC4B6] font-mono">accessKey</code> — ключ доступа для аутентификации в API.</li>
-          <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента, полученный на шаге 1.</li>
-          <li><code className="text-[#2EC4B6] font-mono">placeId</code> — идентификатор места (кабинета), фиксированный для клиники. Представляется командой ВнеОчереди.</li>
-          <li><code className="text-[#2EC4B6] font-mono">lineId</code> — идентификатор очереди, фиксированный для клиники. Представляется командой ВнеОчереди.</li>
-          <li><code className="text-[#2EC4B6] font-mono">services</code> — массив услуг. Каждая услуга содержит <code className="bg-slate-100 px-1 rounded">serviceId</code> — название или идентификатор услуги. Представляется командой ВнеОчереди.</li>
+          <li><code className="text-[#2EC4B6] font-mono">customerId</code> — идентификатор пациента, полученный на шаге 2.</li>
+          <li><code className="text-[#2EC4B6] font-mono">operator</code> — ФИО оператора, строка.</li>
+          <li><code className="text-[#2EC4B6] font-mono">placeId</code> — идентификатор места (кабинета), фиксированный для клиники. Предоставляется командой «ВнеОчереди» или получается через метод POST /api/integration/places.</li>
+          <li><code className="text-[#2EC4B6] font-mono">lineId</code> — идентификатор очереди, фиксированный для клиники. Предоставляется командой «ВнеОчереди» или получается через метод POST /api/integration/places.</li>
+          <li><code className="text-[#2EC4B6] font-mono">services</code> — массив услуг. Каждая услуга содержит <code className="bg-slate-100 px-1 rounded">serviceId</code> — название или идентификатор услуги, может быть использовано название услуги из МИС.</li>
           <li><code className="text-[#2EC4B6] font-mono">deviceType</code> — тип устройства. <code className="bg-slate-100 px-1 rounded">Browser</code> для записи из МИС.</li>
           <li><code className="text-[#2EC4B6] font-mono">priority</code> — флаг приоритетной записи. <code className="bg-slate-100 px-1 rounded">false</code> по умолчанию.</li>
         </ul>
@@ -838,6 +894,7 @@ Content-Type: application/json
 {
   "accessKey": "your-access-key",
   "customerId": "0c52c445020145b40760d99f12000000",
+  "operator": "Петров Пётр Петрович",
   "placeId": "8ca734a1-f3b4-4b9e-a9d4-838dfbf9008b",
   "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1",
   "services": [
@@ -890,48 +947,6 @@ Content-Type: application/json
             </svg>
           </summary>
           <div className="px-5 py-5 space-y-6 bg-white border-t border-slate-200">
-
-            <div>
-              <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/places</h4>
-              <p className="text-xs text-slate-600 mb-3">Возвращает список мест, очередей (линий) и услуг, зарегистрированных на сервере. Используется при первоначальной настройке для получения идентификаторов.</p>
-              <h5 className="text-xs font-semibold text-slate-500 mb-1">Пример запроса</h5>
-              <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto mb-3">
-                <pre className="text-xs text-slate-300 font-mono leading-relaxed">
-{`POST /api/integration/places
-Content-Type: application/json
-
-{
-  "accessKey": "your-access-key"
-}`}
-                </pre>
-              </div>
-              <h5 className="text-xs font-semibold text-slate-500 mb-1">Пример ответа</h5>
-              <div className="rounded-lg bg-[#0F172A] border border-slate-700 p-4 overflow-x-auto">
-                <pre className="text-xs text-slate-300 font-mono leading-relaxed">
-{`HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "places": [
-    {
-      "placeId": "8ca734a1-f3b4-4b9e-a9d4-838dfbf9008b",
-      "name": "Кабинет №1",
-      "lines": [
-        {
-          "lineId": "427a81a3-1a32-068c-a8a7-e3fe533e2fd1",
-          "name": "Основная очередь",
-          "services": [
-            { "serviceId": "Терапевт", "name": "Приём терапевта" }
-          ]
-        }
-      ]
-    }
-  ]
-}`}
-                </pre>
-              </div>
-            </div>
-
             <div>
               <h4 className="text-sm font-semibold text-[#2EC4B6] mb-2">POST /api/integration/line/todayPositions</h4>
               <p className="text-xs text-slate-600 mb-3">Возвращает текущую очередь на приём для конкретной линии.</p>
